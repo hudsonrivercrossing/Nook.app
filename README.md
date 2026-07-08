@@ -34,6 +34,8 @@ Nook is currently an unsigned community build. Install it only from this release
 
 ## Updates
 
-This repo also hosts the public updater files used by Nook for future in-app updates.
+Nook 0.1.7 and newer can check for updates in the app: open `More` > `About Nook` > `Check for updates`.
+
+If the in-app update cannot install automatically, download the newest DMG here, quit Nook, drag the new `Nook.app` into `Applications`, and choose Replace.
 
 Source code and updater private keys are not stored here.
