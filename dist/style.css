@@ -54,7 +54,6 @@ h1 { font-size: clamp(32px, 4.2vw, 46px); line-height: 1.22; letter-spacing: -0.
   .button:hover { background: #3A3C3B; }
 }
 .button:active { transform: scale(0.97); }
-.hero-note { margin: 16px 0 0; font-size: 13px; color: var(--muted); font-variant-numeric: tabular-nums; }
 
 /* The board illustration: Nook's canvas in miniature (code-built, not a screenshot) */
 .board {

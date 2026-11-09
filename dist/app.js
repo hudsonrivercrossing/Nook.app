@@ -4,7 +4,6 @@
     headline: 'A calm place for the few<br>projects that matter.',
     lede: 'Boards for your Mac. Your files, your folder.',
     download: 'Download for Mac',
-    requirements: '1.0 · macOS 15 or later',
     boardLabel: 'A Nook board: a region with a few notes and a checklist, a link card beside it, an arrow joining them',
     crumbHome: 'Home', crumbBoard: 'Kyoto trip', region: 'Day 2',
     card1: '7:00 at Fushimi Inari, before the crowds.', card2: 'Lunch at Nishiki, then Kiyomizu-dera.',
