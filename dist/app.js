@@ -14,10 +14,6 @@
     f1: 'Paste a link. It becomes a card.',
     f2: 'Regions, columns and arrows sort it out.',
     f3: 'No account, no data collected. Keep it in Dropbox for every Mac.',
-    installTitle: 'Install',
-    step1: 'Open Nook.dmg and drag Nook into Applications.',
-    step2: 'The first open is blocked: go to System Settings › Privacy &amp; Security and click Open Anyway.',
-    step3: 'To update, download the new version and replace it. Your boards stay put.',
     title: 'Nook — a calm place', lang: 'en', toggle: '中文', toggleLabel: '切换到中文'
   };
 
