@@ -74,38 +74,70 @@ h1 { font-size: clamp(32px, 4.2vw, 46px); line-height: 1.22; letter-spacing: -0.
 }
 .crumb { position: absolute; top: 9px; left: 74px; font-size: 12px; color: var(--muted); background: rgba(250, 249, 246, 0.8); padding: 2px 10px; border-radius: 999px; }
 .crumb b { color: var(--ink); font-weight: 600; }
-.canvas, .crumb b { transition: opacity 120ms ease-out; }
-.board.swap .canvas, .board.swap .crumb b { opacity: 0; }
-.canvas { /* region, arrow, link card: one row that keeps its proportions at any width */
-  position: absolute; inset: 58px 24px auto 24px;
-  display: grid; grid-template-columns: minmax(0, 1.2fr) 52px minmax(0, 0.85fr); align-items: start;
-}
-.region {
-  position: relative; padding: 30px 10px 10px;
-  border-radius: 14px; background: rgba(111, 130, 112, 0.05); border: 1px dashed rgba(111, 130, 112, 0.55);
-  display: grid; gap: 8px;
-}
-.region-title { position: absolute; top: 8px; left: 12px; display: flex; align-items: center; gap: 6px; font-size: 11px; font-weight: 600; color: var(--sage); }
-.region-title i { width: 7px; height: 7px; border-radius: 2px; background: var(--sage); }
+/* Three scenes, each its own layout; one is on at a time */
+.pane { position: absolute; inset: 58px 24px 70px; visibility: hidden; }
+.pane.on { visibility: visible; }
+.pane.leaving { visibility: visible; opacity: 0; transition: opacity 120ms ease-in; }
 .card { background: var(--card); border-radius: 6px; box-shadow: var(--card-shadow); font-size: 12.5px; line-height: 1.55; }
 .card.text { padding: 9px 11px; }
-.card.list { padding: 8px 11px; }
-.card.list p { margin: 0; display: flex; align-items: center; gap: 7px; }
 .box { width: 12px; height: 12px; border-radius: 3px; border: 1.2px solid var(--sage); display: inline-grid; place-items: center; font-size: 9px; line-height: 1; color: var(--sage); flex: none; }
-.done span:last-child { text-decoration: line-through; color: var(--muted); }
-.arrow { width: 100%; height: 70px; margin-top: 104px; overflow: visible; }
+.arrow { overflow: visible; }
 .arrow path { fill: none; stroke: #7A7D78; stroke-width: 1.4; stroke-linecap: round; stroke-linejoin: round; }
-.card.link { margin-top: 58px; overflow: hidden; }
-.media { height: 112px; background: linear-gradient(135deg, #C9A27E, #8E5B3E 55%, #5E3A2A); display: grid; place-items: center; }
-.glyph { width: 34px; height: 34px; border-radius: 50%; background: rgba(255, 255, 255, 0.92); position: relative; }
+.glyph { width: 34px; height: 34px; border-radius: 50%; background: rgba(255, 255, 255, 0.92); position: relative; flex: none; }
 .glyph::after { content: ""; position: absolute; left: 13px; top: 10px; border-left: 11px solid var(--ink); border-top: 7px solid transparent; border-bottom: 7px solid transparent; }
-[data-scene="project"] .media { background: linear-gradient(135deg, #D9DEE0, #A9B9BF 55%, #6F8A94); }
-[data-scene="project"] .glyph { background: none; }
-[data-scene="project"] .glyph::after { content: "Aa"; position: static; border: 0; display: grid; place-items: center; height: 100%; font: 600 26px/1 Georgia, "Times New Roman", serif; color: rgba(255, 255, 255, 0.95); }
-[data-scene="reading"] .media { background: linear-gradient(135deg, #C8D2C4, #8FA28E 55%, #5D705E); }
-.meta { padding: 8px 11px 10px; display: grid; gap: 2px; }
+.meta { display: grid; gap: 2px; min-width: 0; }
 .meta b { font-weight: 500; font-size: 12.5px; }
 .meta span { font: 10px ui-monospace, "SF Mono", Menlo, monospace; color: var(--muted); letter-spacing: 0.3px; }
+
+/* Trip: a sage region (a note, a checklist), an arrow to a video */
+.pane.trip { display: grid; grid-template-columns: minmax(0, 1.2fr) 52px minmax(0, 0.85fr); align-items: start; }
+.region { position: relative; display: grid; gap: 8px; padding: 30px 10px 10px; border-radius: 14px; background: rgba(111, 130, 112, 0.05); border: 1px dashed rgba(111, 130, 112, 0.55); }
+.region-title { position: absolute; top: 8px; left: 12px; display: flex; align-items: center; gap: 6px; font-size: 11px; font-weight: 600; color: var(--sage); }
+.region-title i { width: 7px; height: 7px; border-radius: 2px; background: var(--sage); }
+.card.list { padding: 8px 11px; }
+.card.list p { margin: 0; display: flex; align-items: center; gap: 7px; }
+.done span:last-child { text-decoration: line-through; color: var(--muted); }
+.trip .arrow { width: 100%; height: 70px; margin-top: 72px; }
+.card.video { margin-top: 40px; overflow: hidden; }
+.card.video .media { height: 112px; display: grid; place-items: center; background: linear-gradient(135deg, #C9A27E, #8E5B3E 55%, #5E3A2A); }
+.card.video .meta { padding: 8px 11px 10px; }
+
+/* Project: two columns, an arrow from To do to Done */
+.pane.project { display: grid; grid-template-columns: minmax(0, 1fr) 56px minmax(0, 1fr); align-items: start; }
+.column { display: grid; gap: 8px; padding: 10px; border-radius: 14px; background: var(--well); }
+.column-title { font-size: 11px; font-weight: 600; color: var(--muted); padding: 0 2px 2px; }
+.done-card { display: flex; align-items: center; gap: 7px; }
+.done-card span:last-child { text-decoration: line-through; color: var(--muted); }
+.project .arrow { width: 100%; height: 70px; margin-top: 36px; }
+.card.shot { height: 86px; padding: 10px; display: grid; gap: 6px; align-content: start; background: linear-gradient(#FAF9F6, #F1EFEA); }
+.card.shot span { height: 6px; border-radius: 3px; background: rgba(30, 32, 31, 0.14); }
+.card.shot span:first-child { height: 26px; border-radius: 4px; background: rgba(111, 138, 148, 0.35); }
+.card.shot span:last-child { width: 60%; }
+
+/* Reading: a quote, a book cover, an arrow to a playlist */
+.pane.reading { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.8fr); grid-template-rows: auto auto; gap: 10px 24px; }
+.card.quote { grid-column: 1; align-self: start; padding: 18px 16px; font: 500 19px/1.4 Georgia, "Songti SC", "Hiragino Mincho ProN", serif; letter-spacing: 0.2px; }
+.card.cover { grid-column: 2; grid-row: 1 / span 2; justify-self: center; width: 118px; height: 168px; padding: 14px 12px; display: flex; flex-direction: column; justify-content: space-between; color: #F4F1EA; background: linear-gradient(160deg, #5D705E, #3E4E40); box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.06), 0 8px 18px -6px rgba(0, 0, 0, 0.3); border-radius: 4px 6px 6px 4px; }
+.card.cover b { font: 600 17px/1.25 Georgia, "Songti SC", "Hiragino Mincho ProN", serif; }
+.card.cover span { font-size: 9.5px; letter-spacing: 0.6px; opacity: 0.8; }
+.reading .arrow { position: absolute; left: 36%; top: 92px; width: 120px; height: 70px; }
+.card.music { grid-column: 1; align-self: end; display: flex; align-items: center; gap: 10px; padding: 9px; background: #2E3B33; color: #F4F1EA; }
+.card.music .art { width: 42px; height: 42px; border-radius: 4px; flex: none; background: linear-gradient(135deg, #C8D2C4, #8FA28E 55%, #5D705E); }
+.card.music .meta { flex: 1; }
+.card.music .meta b { color: #F4F1EA; }
+.card.music .meta span { color: rgba(244, 241, 234, 0.65); }
+.card.music .glyph { width: 28px; height: 28px; }
+.card.music .glyph::after { left: 11px; top: 8px; border-left-width: 9px; border-top-width: 6px; border-bottom-width: 6px; }
+
+/* Entering: cards rise in turn (45ms apart, 280ms ease-out), then the arrow draws (320ms) */
+.pane.on [data-a] { animation: card-in 280ms var(--ease-out) both; animation-delay: calc(var(--i, 0) * 45ms); }
+.pane.on .arrow path { stroke-dasharray: 1; animation: draw 320ms var(--ease-out) both; animation-delay: 200ms; }
+.pane.on .arrow path + path { animation-delay: 420ms; animation-duration: 120ms; }
+@keyframes card-in { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+@keyframes draw { from { stroke-dashoffset: 1; } to { stroke-dashoffset: 0; } }
+html.played .pane.on.first [data-a], html.played .pane.on.first .arrow path { animation: none; }
+@media (prefers-reduced-motion: reduce) { .pane.on [data-a], .pane.on .arrow path { animation: none; } .pane.leaving { transition: none; } }
+
 .pill {
   position: absolute; bottom: 18px; left: 50%; transform: translateX(-50%);
   display: flex; gap: 14px; padding: 11px 18px; border-radius: 999px; background: rgba(30, 32, 31, 0.92);
@@ -121,9 +153,40 @@ h1 { font-size: clamp(32px, 4.2vw, 46px); line-height: 1.22; letter-spacing: -0.
 .tabs button[aria-selected="true"] { color: var(--ink); background: rgba(30, 32, 31, 0.07); font-weight: 500; }
 @media (hover: hover) and (pointer: fine) { .tabs button:hover { color: var(--ink); } }
 
-/* Features */
-.features { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; padding: 48px 0; border-top: 1px solid var(--hairline); }
-.features p { margin: 0; font-size: 16px; text-wrap: pretty; }
+/* Collect, Arrange, Yours: a verb, one line, and a small drawing in the board's own vocabulary */
+.features { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; padding: 64px 0 72px; border-top: 1px solid var(--hairline); }
+.features h2 { font-size: 17px; font-weight: 600; letter-spacing: -0.1px; margin: 20px 0 6px; }
+.features p { margin: 0; color: var(--muted); font-size: 15px; line-height: 1.6; text-wrap: pretty; max-width: 22em; }
+.sketch {
+  position: relative; height: 132px; border-radius: 12px; background: rgba(250, 249, 246, 0.45);
+  box-shadow: inset 0 0 0 1px var(--hairline); overflow: hidden; display: grid; place-items: center;
+}
+/* Collect: a link card lifted over the dashed spot it will land on */
+.sketch .target { position: absolute; width: 96px; height: 76px; border-radius: 6px; border: 1.2px dashed rgba(30, 32, 31, 0.28); background: rgba(30, 32, 31, 0.03); transform: translate(10px, 8px); }
+.mini-card {
+  position: relative; width: 96px; height: 76px; border-radius: 6px; background: var(--card); overflow: hidden;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.05), 0 6px 14px rgba(0, 0, 0, 0.12); transform: translate(-6px, -6px) rotate(-3deg);
+  display: grid; grid-template-rows: 42px auto auto; gap: 5px; padding-bottom: 8px;
+}
+.mini-media { background: linear-gradient(135deg, #C9A27E, #8E5B3E 55%, #5E3A2A); }
+.mini-line { height: 5px; margin: 0 8px; border-radius: 3px; background: rgba(30, 32, 31, 0.55); }
+.mini-line.short { width: 40%; background: rgba(30, 32, 31, 0.22); }
+/* Arrange: a sage region holding two notes, an arrow to a third */
+.sketch.arrange { grid-template-columns: auto 52px auto; place-content: center; align-items: center; gap: 2px; }
+.mini-region { display: grid; gap: 6px; padding: 18px 8px 8px; border-radius: 10px; border: 1px dashed rgba(111, 130, 112, 0.55); background: rgba(111, 130, 112, 0.06); position: relative; }
+.mini-region::before { content: ""; position: absolute; top: 7px; left: 9px; width: 6px; height: 6px; border-radius: 2px; background: var(--sage); }
+.mini-note { display: block; width: 64px; height: 20px; border-radius: 4px; background: var(--card); box-shadow: var(--card-shadow); }
+.mini-note.solo { width: 56px; height: 34px; }
+.sketch.arrange svg { width: 52px; height: 36px; overflow: visible; }
+.sketch.arrange path { fill: none; stroke: #7A7D78; stroke-width: 1.4; stroke-linecap: round; stroke-linejoin: round; }
+/* Yours: the workspace as Finder shows it */
+.finder { display: grid; gap: 3px; padding: 10px 14px; border-radius: 8px; background: var(--card); box-shadow: var(--card-shadow); min-width: 168px; }
+.row { display: flex; align-items: center; gap: 7px; font: 11px/1.5 ui-monospace, "SF Mono", Menlo, monospace; color: var(--ink); }
+.row.sub { padding-left: 16px; color: var(--muted); }
+.row::before { content: ""; width: 12px; height: 9px; border-radius: 2px; flex: none; }
+.row.folder::before { background: #8FB3C9; box-shadow: inset 0 2px 0 rgba(255, 255, 255, 0.35); }
+.row.file::before { width: 9px; height: 11px; background: #fff; box-shadow: inset 0 0 0 1px rgba(30, 32, 31, 0.25); }
+
 .footer { display: flex; justify-content: space-between; padding: 24px 0 40px; font-size: 13px; color: var(--muted); border-top: 1px solid var(--hairline); }
 .footer a { text-decoration: none; }
 @media (hover: hover) and (pointer: fine) { .footer a:hover { color: var(--ink); } }
@@ -133,17 +196,21 @@ h1 { font-size: clamp(32px, 4.2vw, 46px); line-height: 1.22; letter-spacing: -0.
 .scene.intro { animation-delay: 90ms; }
 html.played .intro { animation: none; }
 @keyframes rise { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
-@media (prefers-reduced-motion: reduce) { .intro { animation: none; } .button, .canvas, .crumb b { transition: none; } }
+@media (prefers-reduced-motion: reduce) { .intro { animation: none; } .button { transition: none; } }
 
 @media (max-width: 860px) {
   .hero { grid-template-columns: 1fr; gap: 40px; padding: 40px 0 56px; }
-  .features { grid-template-columns: 1fr; gap: 28px; }
+  .features { grid-template-columns: 1fr; gap: 40px; padding: 48px 0 56px; }
+  .features p { max-width: none; }
   .board { height: 400px; }
 }
 @media (max-width: 520px) {
-  .board { height: 500px; }
-  .canvas { grid-template-columns: 1fr; gap: 16px; }
-  .arrow { display: none; }
-  .card.link { margin-top: 0; display: grid; grid-template-columns: 96px 1fr; }
-  .media { height: auto; min-height: 72px; }
+  .board { height: 520px; }
+  .pane.trip, .pane.project { grid-template-columns: 1fr; gap: 12px; }
+  .pane .arrow { display: none; }
+  .card.video { margin-top: 0; display: grid; grid-template-columns: 96px 1fr; }
+  .card.video .media { height: auto; min-height: 72px; }
+  .pane.reading { grid-template-columns: 1fr 110px; }
+  .card.cover { width: 100px; height: 146px; }
+  .card.quote { font-size: 16px; padding: 14px 12px; }
 }

@@ -1,62 +1,86 @@
-// Four languages (the browser's by default, remembered once chosen) and three board scenes the visitor switches
-// between (never on their own: motion follows the visitor). The entrance plays once per visit.
+// Four languages (the browser's by default, remembered once chosen) and three board scenes, each its own layout.
+// A scene changes only when the visitor picks one (motion follows the visitor): the old one fades out, the new one's
+// cards rise in turn and its arrow draws. The page's entrance plays once per visit.
 (() => {
   const T = {
     zh: {
       lang: 'zh-CN', title: 'Nook — 一处安静的地方', langLabel: '语言',
       headline: '一处安静的地方，<br>留给少数重要的项目。', lede: 'Mac 上的白板，文件归你。', download: '下载 macOS 版',
-      f1: '粘贴链接，就是一张卡片。', f2: '区域、栏和箭头，把东西理清楚。', f3: '没有账号，不收集数据。放进 Dropbox，多台 Mac 一起用。',
-      trip: '旅行', project: '项目', reading: '阅读', scenes: '示例白板',
-      boardLabel: s => `一块 Nook 白板「${s.board}」：一个区域里有几张卡片和一张清单，旁边是一张链接卡片，箭头把它们连起来`,
-      scene: {
-        trip: { home: '主页', board: '京都之旅', region: '第二天', card1: '7:00 去伏见稻荷，人还少。', card2: '午饭锦市场，下午清水寺。', todo1: '订好民宿', todo2: 'JR Pass', todo3: '晚上：岚山竹林', link: '秋天的京都：枫叶地图', kind: 'VIDEO · YouTube' },
-        project: { home: '主页', board: '新 app', region: '本周', card1: '首页只留一个下载按钮。', card2: '周五前写好发布说明。', todo1: '截图', todo2: '打包 DMG', todo3: '发布 1.0', link: '排版的十个细节', kind: 'WEB · 文章' },
-        reading: { home: '主页', board: '读书', region: '专注', card1: '少一些，深一些。', card2: '早上先读书，再看手机。', todo1: '《深度工作》', todo2: '《瓦尔登湖》', todo3: '整理读书笔记', link: '清晨专注歌单', kind: 'MUSIC · Spotify' }
+      v1t: '收集', v1: '粘贴链接、拖入图片，就是一张卡片。', v2t: '整理', v2: '区域、栏和箭头，让关系一目了然。', v3t: '归你', v3: '白板是你文件夹里的普通文件。没有账号，不收集数据。',
+      trip: '旅行', project: '项目', reading: '阅读', scenes: '示例白板', home: '主页',
+      boards: { trip: '京都之旅', project: '新 app', reading: '读书' },
+      labels: {
+        trip: '一块旅行白板：「第二天」区域里有一张便签和一张清单，箭头连到一段 YouTube 视频',
+        project: '一块项目白板：「要做」和「完成」两栏卡片，箭头从要做指向完成',
+        reading: '一块读书白板：一句摘录，箭头连到一本书的封面；下面是一个歌单'
+      },
+      s: {
+        'trip.region': '第二天', 'trip.note': '7:00 伏见稻荷，赶在人多之前。', 'trip.todo1': '订民宿', 'trip.todo2': 'JR Pass', 'trip.todo3': '岚山竹林', 'trip.link': '秋天的京都',
+        'project.todo': '要做', 'project.a': '首页文案', 'project.b': '打包 DMG', 'project.done': '完成', 'project.c': '截图',
+        'reading.quote': '少一些，深一些。', 'reading.book': '瓦尔登湖', 'reading.music': '清晨专注'
       }
     },
     en: {
       lang: 'en', title: 'Nook — a calm place', langLabel: 'Language',
       headline: 'A calm place for the few<br>projects that matter.', lede: 'Boards for your Mac. Your files, your folder.', download: 'Download for Mac',
-      f1: 'Paste a link. It becomes a card.', f2: 'Regions, columns and arrows sort it out.', f3: 'No account, no data collected. Keep it in Dropbox for every Mac.',
-      trip: 'Trip', project: 'Project', reading: 'Reading', scenes: 'Example boards',
-      boardLabel: s => `A Nook board, “${s.board}”: a region with a few cards and a checklist, a link card beside it, an arrow joining them`,
-      scene: {
-        trip: { home: 'Home', board: 'Kyoto trip', region: 'Day 2', card1: '7:00 at Fushimi Inari, before the crowds.', card2: 'Lunch at Nishiki, then Kiyomizu-dera.', todo1: 'Book the ryokan', todo2: 'JR Pass', todo3: 'Evening: bamboo grove', link: 'Kyoto in autumn: a maple map', kind: 'VIDEO · YouTube' },
-        project: { home: 'Home', board: 'New app', region: 'This week', card1: 'One download button on the homepage.', card2: 'Release notes by Friday.', todo1: 'Screenshots', todo2: 'Build the DMG', todo3: 'Ship 1.0', link: 'Ten details of good typography', kind: 'WEB · Article' },
-        reading: { home: 'Home', board: 'Reading', region: 'Focus', card1: 'Fewer things, deeper.', card2: 'Read before the phone in the morning.', todo1: 'Deep Work', todo2: 'Walden', todo3: 'Sort the notes', link: 'Morning focus playlist', kind: 'MUSIC · Spotify' }
+      v1t: 'Collect', v1: 'Paste a link or drop an image. It becomes a card.', v2t: 'Arrange', v2: 'Regions, columns and arrows show how things relate.', v3t: 'Yours', v3: 'Boards are plain files in your folder. No account, no tracking.',
+      trip: 'Trip', project: 'Project', reading: 'Reading', scenes: 'Example boards', home: 'Home',
+      boards: { trip: 'Kyoto trip', project: 'New app', reading: 'Reading' },
+      labels: {
+        trip: 'A trip board: a “Day 2” region with a note and a checklist, an arrow to a YouTube video',
+        project: 'A project board: “To do” and “Done” columns of cards, an arrow from one to the other',
+        reading: 'A reading board: a quote with an arrow to a book cover, and a playlist below'
+      },
+      s: {
+        'trip.region': 'Day 2', 'trip.note': '7:00 Fushimi Inari, before the crowds.', 'trip.todo1': 'Book the ryokan', 'trip.todo2': 'JR Pass', 'trip.todo3': 'Bamboo grove', 'trip.link': 'Kyoto in autumn',
+        'project.todo': 'To do', 'project.a': 'Homepage copy', 'project.b': 'Build the DMG', 'project.done': 'Done', 'project.c': 'Screenshots',
+        'reading.quote': 'Fewer things, deeper.', 'reading.book': 'Walden', 'reading.music': 'Morning focus'
       }
     },
     es: {
       lang: 'es', title: 'Nook — un lugar tranquilo', langLabel: 'Idioma',
       headline: 'Un lugar tranquilo<br>para lo que importa.', lede: 'Tableros para tu Mac. Tus archivos, tu carpeta.', download: 'Descargar para Mac',
-      f1: 'Pega un enlace. Se convierte en una tarjeta.', f2: 'Regiones, columnas y flechas lo ordenan.', f3: 'Sin cuenta y sin recopilar datos. En Dropbox, para todos tus Mac.',
-      trip: 'Viaje', project: 'Proyecto', reading: 'Lectura', scenes: 'Tableros de ejemplo',
-      boardLabel: s => `Un tablero de Nook, «${s.board}»: una región con algunas tarjetas y una lista, una tarjeta de enlace al lado y una flecha que las une`,
-      scene: {
-        trip: { home: 'Inicio', board: 'Viaje a Kioto', region: 'Día 2', card1: 'A las 7:00 en Fushimi Inari, sin gente.', card2: 'Comida en Nishiki y luego Kiyomizu-dera.', todo1: 'Reservar el ryokan', todo2: 'JR Pass', todo3: 'Noche: bosque de bambú', link: 'Kioto en otoño: mapa de arces', kind: 'VIDEO · YouTube' },
-        project: { home: 'Inicio', board: 'App nueva', region: 'Esta semana', card1: 'Un solo botón de descarga en la portada.', card2: 'Notas de la versión antes del viernes.', todo1: 'Capturas', todo2: 'Crear el DMG', todo3: 'Publicar la 1.0', link: 'Diez detalles de buena tipografía', kind: 'WEB · Artículo' },
-        reading: { home: 'Inicio', board: 'Lectura', region: 'Enfoque', card1: 'Menos cosas, más a fondo.', card2: 'Por la mañana, leer antes que el móvil.', todo1: 'Deep Work', todo2: 'Walden', todo3: 'Ordenar las notas', link: 'Lista para concentrarse', kind: 'MUSIC · Spotify' }
+      v1t: 'Reúne', v1: 'Pega un enlace o suelta una imagen. Se convierte en una tarjeta.', v2t: 'Ordena', v2: 'Regiones, columnas y flechas muestran cómo se relacionan las cosas.', v3t: 'Tuyo', v3: 'Los tableros son archivos normales en tu carpeta. Sin cuenta, sin rastreo.',
+      trip: 'Viaje', project: 'Proyecto', reading: 'Lectura', scenes: 'Tableros de ejemplo', home: 'Inicio',
+      boards: { trip: 'Viaje a Kioto', project: 'App nueva', reading: 'Lectura' },
+      labels: {
+        trip: 'Un tablero de viaje: una región «Día 2» con una nota y una lista, y una flecha hacia un vídeo de YouTube',
+        project: 'Un tablero de proyecto: columnas «Por hacer» y «Hecho», con una flecha de una a otra',
+        reading: 'Un tablero de lectura: una cita con una flecha hacia la portada de un libro, y una lista de música debajo'
+      },
+      s: {
+        'trip.region': 'Día 2', 'trip.note': '7:00 Fushimi Inari, antes que la gente.', 'trip.todo1': 'Reservar el ryokan', 'trip.todo2': 'JR Pass', 'trip.todo3': 'Bosque de bambú', 'trip.link': 'Kioto en otoño',
+        'project.todo': 'Por hacer', 'project.a': 'Textos de la portada', 'project.b': 'Crear el DMG', 'project.done': 'Hecho', 'project.c': 'Capturas',
+        'reading.quote': 'Menos cosas, más a fondo.', 'reading.book': 'Walden', 'reading.music': 'Enfoque matinal'
       }
     },
     ja: {
       lang: 'ja', title: 'Nook — 静かな場所', langLabel: '言語',
       headline: '大切なことのための、<br>静かな場所。', lede: 'Mac のためのボード。ファイルは、あなたのフォルダに。', download: 'Mac 版をダウンロード',
-      f1: 'リンクを貼ると、カードになる。', f2: 'リージョン、カラム、矢印で整理する。', f3: 'アカウント不要、データ収集なし。Dropbox に置けば、どの Mac でも。',
-      trip: '旅', project: 'プロジェクト', reading: '読書', scenes: 'ボードの例',
-      boardLabel: s => `Nook のボード「${s.board}」：リージョンにカードとチェックリスト、その横にリンクカード、矢印でつながっている`,
-      scene: {
-        trip: { home: 'ホーム', board: '京都旅行', region: '2日目', card1: '7:00 伏見稲荷へ。まだ人が少ない。', card2: '昼は錦市場、午後は清水寺。', todo1: '旅館を予約', todo2: 'JR パス', todo3: '夜：嵐山の竹林', link: '秋の京都：紅葉マップ', kind: 'VIDEO · YouTube' },
-        project: { home: 'ホーム', board: '新しいアプリ', region: '今週', card1: 'トップはダウンロードボタンだけ。', card2: 'リリースノートは金曜までに。', todo1: 'スクリーンショット', todo2: 'DMG を作る', todo3: '1.0 をリリース', link: '良いタイポグラフィの十の細部', kind: 'WEB · 記事' },
-        reading: { home: 'ホーム', board: '読書', region: '集中', card1: '少なく、深く。', card2: '朝はスマホより先に本を。', todo1: '大事なことに集中する', todo2: 'ウォールデン 森の生活', todo3: 'メモを整理する', link: '朝の集中プレイリスト', kind: 'MUSIC · Spotify' }
+      v1t: '集める', v1: 'リンクを貼る、画像を置く。それがカードになる。', v2t: '整える', v2: 'リージョン、カラム、矢印で、つながりが見える。', v3t: '手元に', v3: 'ボードはフォルダの中の普通のファイル。アカウント不要、追跡なし。',
+      trip: '旅', project: 'プロジェクト', reading: '読書', scenes: 'ボードの例', home: 'ホーム',
+      boards: { trip: '京都旅行', project: '新しいアプリ', reading: '読書' },
+      labels: {
+        trip: '旅のボード：「2日目」のリージョンにメモとチェックリスト、矢印の先に YouTube 動画',
+        project: 'プロジェクトのボード：「やること」と「完了」のカラム、矢印でつながっている',
+        reading: '読書のボード：引用から本の表紙へ矢印、その下にプレイリスト'
+      },
+      s: {
+        'trip.region': '2日目', 'trip.note': '7:00 伏見稲荷、混む前に。', 'trip.todo1': '旅館を予約', 'trip.todo2': 'JR パス', 'trip.todo3': '竹林の小径', 'trip.link': '秋の京都',
+        'project.todo': 'やること', 'project.a': 'トップの文章', 'project.b': 'DMG を作る', 'project.done': '完了', 'project.c': 'スクリーンショット',
+        'reading.quote': '少なく、深く。', 'reading.book': '森の生活', 'reading.music': '朝の集中'
       }
     }
   };
 
   const select = document.getElementById('language');
   const board = document.getElementById('board');
+  const title = document.getElementById('board-title');
+  const panes = Object.fromEntries([...board.querySelectorAll('[data-pane]')].map(p => [p.dataset.pane, p]));
   const tabs = [...document.querySelectorAll('.tabs [data-scene]')];
   const tablist = document.querySelector('.tabs');
   const reduce = matchMedia('(prefers-reduced-motion: reduce)');
+  const EXIT_MS = 120;
   let lang = 'zh', scene = 'trip', swapTimer = 0;
 
   function pickLanguage() {
@@ -65,26 +89,28 @@
     return wanted.find(l => T[l]) || 'en';
   }
 
-  function fillScene() {
-    const s = T[lang].scene[scene];
-    board.querySelectorAll('[data-s]').forEach(n => { n.textContent = s[n.dataset.s]; });
-    board.dataset.scene = scene;
-    board.setAttribute('aria-label', T[lang].boardLabel(s));
+  function labelBoard() {
+    title.textContent = T[lang].boards[scene];
+    board.setAttribute('aria-label', T[lang].labels[scene]);
   }
 
   function render() {
     const t = T[lang];
     document.querySelectorAll('[data-t]').forEach(n => { if (t[n.dataset.t] != null) n.innerHTML = t[n.dataset.t]; });
+    board.querySelectorAll('[data-s]').forEach(n => { n.textContent = t.s[n.dataset.s]; });
     document.documentElement.lang = t.lang;
     document.title = t.title;
     tablist.setAttribute('aria-label', t.scenes);
     select.value = lang;
-    fillScene();
+    labelBoard();
   }
 
-  // A scene the visitor picked: a quick crossfade (none under reduced motion).
+  // The visitor picked a scene: the old one fades out (120ms), then the new one's cards rise in turn and its arrow
+  // draws (CSS, on `.on`). Under reduced motion the swap is instant.
   function show(next) {
     if (next === scene) return;
+    const from = panes[scene], to = panes[next];
+    from.classList.remove('first');
     scene = next;
     tabs.forEach(b => {
       const on = b.dataset.scene === scene;
@@ -92,9 +118,15 @@
       b.tabIndex = on ? 0 : -1;
     });
     clearTimeout(swapTimer);
-    if (reduce.matches) { fillScene(); return; }
-    board.classList.add('swap');
-    swapTimer = setTimeout(() => { fillScene(); board.classList.remove('swap'); }, 120);
+    Object.values(panes).forEach(p => { if (p !== from) p.classList.remove('on', 'leaving'); });
+    const enter = () => {
+      from.classList.remove('on', 'leaving');
+      to.classList.add('on');
+      labelBoard();
+    };
+    if (reduce.matches) { enter(); return; }
+    from.classList.add('leaving');
+    swapTimer = setTimeout(enter, EXIT_MS);
   }
 
   tabs.forEach(b => {

@@ -12,7 +12,7 @@
 <title>Nook — 一处安静的地方</title>
 <link rel="icon" href="assets/favicon.png">
 <link rel="preload" as="image" href="assets/nook-icon.png">
-<link rel="stylesheet" href="style.css?v=1.0.2">
+<link rel="stylesheet" href="style.css?v=1.0.4">
 </head>
 <body>
 <header class="header wrap">
@@ -42,25 +42,51 @@
     </div>
 
     <figure class="scene intro">
-      <div class="board" id="board" data-scene="trip" role="img" aria-label="">
-        <div class="crumb"><span data-s="home">主页</span> / <b data-s="board">京都之旅</b></div>
-        <div class="canvas">
-          <div class="region">
-            <div class="region-title"><i></i><span data-s="region">第二天</span></div>
-            <div class="card text" data-s="card1">7:00 去伏见稻荷，人还少。</div>
-            <div class="card text" data-s="card2">午饭锦市场，下午清水寺。</div>
-            <div class="card list">
-              <p class="done"><span class="box">✓</span><span data-s="todo1">订好民宿</span></p>
-              <p><span class="box"></span><span data-s="todo2">JR Pass</span></p>
-              <p><span class="box"></span><span data-s="todo3">晚上：岚山竹林</span></p>
+      <div class="board" id="board" role="img" aria-label="">
+        <div class="crumb"><span data-t="home">主页</span> / <b id="board-title">京都之旅</b></div>
+
+        <div class="pane trip on first" data-pane="trip">
+          <div class="region" data-a style="--i:0">
+            <div class="region-title"><i></i><span data-s="trip.region">第二天</span></div>
+            <div class="card text" data-a style="--i:1" data-s="trip.note">7:00 伏见稻荷，赶在人多之前。</div>
+            <div class="card list" data-a style="--i:2">
+              <p class="done"><span class="box">✓</span><span data-s="trip.todo1">订民宿</span></p>
+              <p><span class="box"></span><span data-s="trip.todo2">JR Pass</span></p>
+              <p><span class="box"></span><span data-s="trip.todo3">岚山竹林</span></p>
             </div>
           </div>
-          <svg class="arrow" viewBox="0 0 120 70" aria-hidden="true"><path d="M4 60 C 50 60, 70 12, 112 12"/><path d="M104 6 L114 12 L104 18"/></svg>
-          <div class="card link">
+          <svg class="arrow" viewBox="0 0 120 70" aria-hidden="true"><path pathLength="1" d="M4 60 C 50 60, 70 12, 112 12"/><path pathLength="1" d="M104 6 L114 12 L104 18"/></svg>
+          <div class="card link video" data-a style="--i:3">
             <div class="media"><span class="glyph"></span></div>
-            <div class="meta"><b data-s="link">秋天的京都：枫叶地图</b><span data-s="kind">VIDEO · YouTube</span></div>
+            <div class="meta"><b data-s="trip.link">秋天的京都</b><span>VIDEO · YouTube</span></div>
           </div>
         </div>
+
+        <div class="pane project" data-pane="project">
+          <div class="column" data-a style="--i:0">
+            <div class="column-title" data-s="project.todo">要做</div>
+            <div class="card text" data-a style="--i:1" data-s="project.a">首页文案</div>
+            <div class="card text" data-a style="--i:2" data-s="project.b">打包 DMG</div>
+          </div>
+          <svg class="arrow" viewBox="0 0 120 70" aria-hidden="true"><path pathLength="1" d="M4 30 C 40 30, 70 30, 112 30"/><path pathLength="1" d="M104 24 L114 30 L104 36"/></svg>
+          <div class="column" data-a style="--i:3">
+            <div class="column-title" data-s="project.done">完成</div>
+            <div class="card text done-card" data-a style="--i:4"><span class="box">✓</span><span data-s="project.c">截图</span></div>
+            <div class="card shot" data-a style="--i:5"><span></span><span></span><span></span></div>
+          </div>
+        </div>
+
+        <div class="pane reading" data-pane="reading">
+          <div class="card quote" data-a style="--i:0" data-s="reading.quote">少一些，深一些。</div>
+          <div class="card cover" data-a style="--i:1"><b data-s="reading.book">瓦尔登湖</b><span>H. D. Thoreau</span></div>
+          <svg class="arrow" viewBox="0 0 120 70" aria-hidden="true"><path pathLength="1" d="M6 10 C 30 40, 70 58, 112 58"/><path pathLength="1" d="M104 52 L114 58 L104 64"/></svg>
+          <div class="card music" data-a style="--i:2">
+            <span class="art"></span>
+            <span class="meta"><b data-s="reading.music">清晨专注</b><span>MUSIC · Spotify</span></span>
+            <span class="glyph"></span>
+          </div>
+        </div>
+
         <div class="pill" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
       </div>
       <div class="tabs" role="tablist" aria-label="示例白板">
@@ -72,9 +98,35 @@
   </section>
 
   <section class="features wrap">
-    <p data-t="f1">粘贴链接，就是一张卡片。</p>
-    <p data-t="f2">区域、栏和箭头，把东西理清楚。</p>
-    <p data-t="f3">没有账号，不收集数据。放进 Dropbox，多台 Mac 一起用。</p>
+    <article>
+      <div class="sketch collect" aria-hidden="true">
+        <span class="target"></span>
+        <span class="mini-card"><span class="mini-media"></span><span class="mini-line"></span><span class="mini-line short"></span></span>
+      </div>
+      <h2 data-t="v1t">收集</h2>
+      <p data-t="v1">粘贴链接、拖入图片，就是一张卡片。</p>
+    </article>
+    <article>
+      <div class="sketch arrange" aria-hidden="true">
+        <span class="mini-region"><span class="mini-note"></span><span class="mini-note"></span></span>
+        <svg viewBox="0 0 60 40"><path d="M2 30 C 24 30, 34 10, 54 10"/><path d="M48 5 L56 10 L48 15"/></svg>
+        <span class="mini-note solo"></span>
+      </div>
+      <h2 data-t="v2t">整理</h2>
+      <p data-t="v2">区域、栏和箭头，让关系一目了然。</p>
+    </article>
+    <article>
+      <div class="sketch keep" aria-hidden="true">
+        <span class="finder">
+          <span class="row folder">Nook</span>
+          <span class="row folder sub">boards</span>
+          <span class="row folder sub">assets</span>
+          <span class="row file sub">workspace.json</span>
+        </span>
+      </div>
+      <h2 data-t="v3t">归你</h2>
+      <p data-t="v3">白板是你文件夹里的普通文件。没有账号，不收集数据。</p>
+    </article>
   </section>
 </main>
 
@@ -82,6 +134,6 @@
   <span>Nook 1.0.0</span>
   <a href="https://github.com/hudsonrivercrossing/Nook.app">GitHub</a>
 </footer>
-<script src="app.js?v=1.0.2"></script>
+<script src="app.js?v=1.0.4"></script>
 </body>
 </html>
