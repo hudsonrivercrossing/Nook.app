@@ -1,7 +1,40 @@
 // Field notes: each board in a post is built in front of the reader, the first time it is mostly on screen, with
 // Nook's own tools (the toolbar button is pressed, then what it makes appears). Replay builds it again. Under reduced
-// motion the finished board shows at once.
+// motion the finished board shows at once. A step at a negative time is already on the board when the build starts
+// (the second board of a post picks up where the first one ended).
 (() => {
+  // The finished Kyoto board, for posts whose boards end on it (⌘K opens it).
+  const TRIP = [
+    [-1, 'add', '.trip .region, .trip .note1, .trip .note2, .trip .list, .trip .place, .trip .video'],
+    [-1, 'type', '.trip .note1, .trip .note2'], [-1, 'load', '.trip .place, .trip .video'], [-1, 'tick', '.trip .t2'],
+    [-1, 'wire', '.trip .video', '.trip .place']
+  ];
+  const RESEARCH = [
+    [200, 'tool', 'text'], [350, 'add', '.lit'], [400, 'type', '.lit'],
+    [2300, 'tool', 'link'], [2450, 'add', '.web'], [3450, 'load', '.web'],
+    [3900, 'tool', 'text'], [4050, 'add', '.question'], [4100, 'type', '.question'],
+    [5900, 'tool', 'text'], [6050, 'add', '.field'], [6100, 'type', '.field'],
+    [7900, 'tool', 'connect'], [8050, 'wire', '.field', '.lit']
+  ];
+  const already = steps => steps.filter(s => s[1] !== 'tool').map(s => [-1, ...s.slice(1)]);
+  const FILMS = [
+    [200, 'tool', 'link'], [350, 'add', '.f1'], [1300, 'load', '.f1'],
+    [1700, 'tool', 'link'], [1850, 'add', '.f2'], [2800, 'load', '.f2'],
+    [3200, 'tool', 'link'], [3350, 'add', '.f3'], [4300, 'load', '.f3'],
+    [4700, 'tool', 'link'], [4850, 'add', '.f4'], [5800, 'load', '.f4'],
+    [6300, 'tool', 'region'], [6450, 'add', '.nolan']
+  ];
+  const BOOK = [
+    [200, 'tool', 'link'], [350, 'add', '.book'], [1550, 'load', '.book'],
+    [2300, 'tool', 'region'], [2450, 'add', '.region'], [3400, 'add', '.hl2']
+  ];
+  const DAY = [
+    [200, 'tool', 'region'], [350, 'add', '.region'],
+    [1500, 'tool', 'text'], [1650, 'add', '.note1'], [1700, 'type', '.note1'],
+    [3500, 'tool', 'text'], [3650, 'add', '.note2'], [3700, 'type', '.note2'],
+    [5500, 'tool', 'text'], [5650, 'add', '.list'], [6600, 'tick', '.t2']
+  ];
+
   const STORY = {
     paste: [
       [300, 'tool', 'link'], [450, 'add', '.l1'], [1350, 'load', '.l1'],
@@ -16,16 +49,43 @@
       [4200, 'tool', 'text'], [4350, 'add', '.fridge'], [4400, 'type', '.fridge'],
       [6300, 'tool', 'connect'], [6450, 'wire', '.fridge', '.listing'],
       [7900, 'lift', '.mover'], [8050, 'move', '.mover', '.c2 .column-title'], [8950, 'tick', '.mover']
+    ],
+    day: DAY,
+    links: [
+      ...already(DAY),
+      [300, 'tool', 'link'], [450, 'add', '.place'], [1450, 'load', '.place'],
+      [1900, 'tool', 'link'], [2050, 'add', '.video'], [3050, 'load', '.video'],
+      [3500, 'tool', 'connect'], [3650, 'wire', '.video', '.place']
+    ],
+    research: RESEARCH,
+    search: [
+      ...already(RESEARCH),
+      [600, 'palette', 'open'], [800, 'type', '.query'], [1900, 'palette', 'found'],
+      [3300, 'palette', 'chosen'], [3500, 'open', '.trip', '.trip .note2', 'Trip · Kyoto']
+    ],
+    book: BOOK,
+    own: [
+      ...already(BOOK),
+      [300, 'tool', 'text'], [450, 'add', '.own'], [500, 'type', '.own'],
+      [2600, 'tool', 'connect'], [2750, 'wire', '.hl2', '.own']
+    ],
+    films: FILMS,
+    note: [
+      ...already(FILMS),
+      [300, 'tool', 'text'], [450, 'add', '.cnote'], [500, 'type', '.cnote'],
+      [2600, 'tool', 'connect'], [2750, 'wire', '.cnote', '.f1']
     ]
   };
-  const reduce = matchMedia('(prefers-reduced-motion: reduce)');
+  const motion = matchMedia('(prefers-reduced-motion: reduce)');
+  const still = new URLSearchParams(location.search).has('still');   // ?still: every board finished (for checking)
+  const reduce = { get matches() { return still || motion.matches; } };
 
   function layoutWire(pane, fromSel, toSel) {   // a soft curve from one card's facing edge to the other's, label at the middle
     const box = pane.getBoundingClientRect();
     const r = s => { const q = pane.querySelector(s).getBoundingClientRect(); return { l: q.left - box.left, t: q.top - box.top, r: q.right - box.left, b: q.bottom - box.top }; };
     const a = r(fromSel), b = r(toSel);
     const ac = [(a.l + a.r) / 2, (a.t + a.b) / 2], bc = [(b.l + b.r) / 2, (b.t + b.b) / 2];
-    const across = b.l > a.r || b.r < a.l;
+    const across = (b.l > a.r || b.r < a.l) && Math.abs(bc[0] - ac[0]) > Math.abs(bc[1] - ac[1]) * 0.6;
     const axis = across ? 0 : 1, sign = Math.sign(across ? bc[0] - ac[0] : bc[1] - ac[1]) || 1;
     let p0, p3;
     if (across) {
@@ -38,12 +98,12 @@
     const span = Math.max(14, Math.abs(p3[axis] - p0[axis]) / 2);
     const c1 = [...p0], c2 = [...p3];
     c1[axis] += sign * span; c2[axis] -= sign * span;
-    const [wire, head] = pane.querySelectorAll('.wires path');
+    const [wire, head] = pane.querySelectorAll(':scope > .wires path');
     wire.setAttribute('d', `M${p0} C${c1} ${c2} ${p3}`);
     const back = axis === 0 ? [-sign * 7, 0] : [0, -sign * 7], side = axis === 0 ? [0, 5] : [5, 0];
     head.setAttribute('d', `M${p3[0] + back[0] - side[0]},${p3[1] + back[1] - side[1]} L${p3} L${p3[0] + back[0] + side[0]},${p3[1] + back[1] + side[1]}`);
     const mid = [0, 1].map(i => 0.125 * p0[i] + 0.375 * c1[i] + 0.375 * c2[i] + 0.125 * p3[i]);
-    const label = pane.querySelector('.wire-label');
+    const label = pane.querySelector(':scope > .wire-label');
     label.style.left = mid[0] + 'px';
     label.style.top = mid[1] + 'px';
     pane.dataset.wire = `${fromSel}|${toSel}`;
@@ -78,13 +138,15 @@
   }
 
   document.querySelectorAll('.demo').forEach(figure => {
-    const board = figure.querySelector('.board'), pill = board.querySelector('.pill');
+    const board = figure.querySelector('.board'), pill = board.querySelector('.pill'), stage = board.querySelector('.stage');
     const story = STORY[figure.dataset.demo];
-    const blank = board.querySelector('.pane').outerHTML;   // the empty board, to start again from
+    const blank = stage.innerHTML;   // the board as it starts, to start again from
     let timers = [];
+    const paneOf = el => el.closest('.pane');
 
-    function act([, action, a, b], instant) {
-      const pane = board.querySelector('.pane'), all = s => pane.querySelectorAll(s);
+    function act([, action, a, b, c], instant) {
+      const all = s => stage.querySelectorAll(s);
+      const pane = stage.querySelector('.pane:not(.away)');
       switch (action) {
         case 'tool': {
           if (instant) return;
@@ -99,11 +161,33 @@
         case 'type': all(a).forEach(n => type(n, instant, timers)); return;
         case 'lift': if (!instant) pane.querySelector(a).classList.add('lifted'); return;
         case 'move': move(pane, a, b, instant); return;
-        case 'wire':
-          layoutWire(pane, a, b);
-          pane.querySelector('.wires').classList.add('draw');
-          pane.querySelector('.wire-label').classList.add('labelled');
+        case 'wire': {
+          const host = paneOf(stage.querySelector(a));
+          layoutWire(host, a, b);
+          host.querySelector(':scope > .wires').classList.add('draw');
+          host.querySelector(':scope > .wire-label').classList.add('labelled');
           return;
+        }
+        case 'palette':
+          if (instant && a === 'chosen') return;
+          pane.querySelector('.palette').classList.add(a);
+          if (a === 'open') pane.classList.add('searching');
+          return;
+        case 'open': {   // ⌘K's result is picked: its board opens, finished, with the found card selected
+          if (instant) return;
+          pane.querySelector('.palette').classList.add('leave');
+          timers.push(setTimeout(() => {
+            const there = stage.querySelector(a);
+            pane.classList.add('away');
+            there.classList.add('on', 'arriving', 'instant');
+            TRIP.forEach(x => act(x, true));
+            stage.querySelector(b).classList.add('picked');
+            stage.querySelector('.crumb b').textContent = c;
+            requestAnimationFrame(() => requestAnimationFrame(() => there.classList.remove('instant')));
+            timers.push(setTimeout(() => there.classList.remove('arriving'), 260));
+          }, 160));
+          return;
+        }
       }
     }
 
@@ -111,39 +195,41 @@
       timers.forEach(clearTimeout);
       timers = [];
       pill.querySelectorAll('.press').forEach(n => n.classList.remove('press'));
-      board.querySelector('.pane').outerHTML = blank;
+      stage.innerHTML = blank;
     }
 
-    function finish() {
-      reset();
-      const pane = board.querySelector('.pane');
-      pane.classList.add('instant');
-      story.forEach(x => act(x, true));
-      requestAnimationFrame(() => requestAnimationFrame(() => pane.classList.remove('instant')));
+    function setUp(instant) {   // steps already on the board, then (instantly) everything if `instant`
+      const panes = stage.querySelectorAll('.pane');
+      panes.forEach(p => p.classList.add('instant'));
+      story.filter(x => instant || x[0] < 0).forEach(x => act(x, true));
+      requestAnimationFrame(() => requestAnimationFrame(() => panes.forEach(p => p.classList.remove('instant'))));
     }
+
+    function finish() { reset(); setUp(true); }
 
     function play() {
       if (reduce.matches) { finish(); return; }
       reset();
+      setUp(false);
       void board.offsetWidth;
-      timers = story.map(x => setTimeout(() => act(x, false), x[0]));
+      timers.push(...story.filter(x => x[0] >= 0).map(x => setTimeout(() => act(x, false), x[0])));
     }
 
     function replay() {   // the board on screen fades out first, so starting over doesn't read as a glitch
       if (reduce.matches) { finish(); return; }
       timers.forEach(clearTimeout);
       timers = [];
-      board.querySelector('.pane').classList.add('out');
-      timers.push(setTimeout(play, 160));
+      stage.classList.add('out');
+      timers.push(setTimeout(() => { stage.classList.remove('out'); play(); }, 160));
     }
 
     figure.querySelector('.replay').addEventListener('click', replay);
     addEventListener('resize', () => {
-      const pane = board.querySelector('.pane');
-      if (pane.dataset.wire) layoutWire(pane, ...pane.dataset.wire.split('|'));
+      stage.querySelectorAll('.pane[data-wire]').forEach(p => { if (!p.classList.contains('away')) layoutWire(p, ...p.dataset.wire.split('|')); });
     });
 
     if (reduce.matches || !('IntersectionObserver' in window)) { finish(); return; }
+    setUp(false);   // until it plays, the board shows what was already there
     const watch = new IntersectionObserver(([entry]) => {
       if (!entry.isIntersecting) return;
       watch.disconnect();
