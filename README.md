@@ -29,8 +29,3 @@ macOS 15 or later · Apple silicon and Intel
 ```sh
 shasum -a 256 -c Nook.dmg.sha256
 ```
-
-## 旧版本 · Earlier versions
-
-0.1.x 是 Nook 早期的网页版（Tauri），与 1.0 是两个不同的 app。
-0.1.x were Nook's earlier web-based (Tauri) builds, a different app from 1.0.
