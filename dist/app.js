@@ -36,7 +36,7 @@
     },
     en: {
       lang: 'en', title: 'Nook — a calm place', langLabel: 'Language', blog: 'Blog',
-      headline: 'A calm place for the few<br>projects that matter.', lede: 'Visual boards for your Mac, kept in a folder you choose.', download: 'Download for Mac',
+      headline: 'A calm place for the few<br>projects that matter.', lede: 'A board for each thing you’re in the middle of. On your Mac, in a folder you own.', download: 'Download for Mac',
       v1t: 'Collect', v1: 'Paste a link or drop an image. It becomes a card.', v2t: 'Arrange', v2: 'Regions, columns and arrows show how things relate.', v3t: 'Yours', v3: 'Boards are plain files in your folder. No account, no tracking.',
       sk1: 'Kyoto in autumn', sk2r: 'Day 2', sk2a: 'Watch first', sk2c: 'To do', sk3t: 'Kyoto',
       trip: 'Trip', moving: 'Planning', research: 'Research', reading: 'Reading', collection: 'Collection', scenes: 'Example boards', home: 'Home',
