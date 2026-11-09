@@ -7,7 +7,7 @@
   const T = {
     zh: {
       lang: 'zh-CN', title: 'Nook — 一处安静的地方', langLabel: '语言', blog: '博客',
-      headline: '一处安静的地方，<br>留给少数重要的项目。', lede: 'Mac 上的白板，文件归你。', download: '下载 macOS 版',
+      headline: '一处安静的地方，<br>留给少数重要的项目。', lede: '手头的每件事，各有一块白板。', download: '下载 macOS 版',
       v1t: '收集', v1: '粘贴链接、拖入图片，就是一张卡片。', v2t: '整理', v2: '区域、栏和箭头，让关系一目了然。', v3t: '归你', v3: '白板是你文件夹里的普通文件。没有账号，不收集数据。',
       sk1: '秋天的京都', sk2r: '第二天', sk2a: '去之前先看', sk2c: '要办', sk3t: '京都',
       trip: '旅行', moving: '规划', research: '研究', reading: '读书', collection: '收藏', scenes: '示例白板', home: '主页',
