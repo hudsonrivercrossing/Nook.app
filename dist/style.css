@@ -1,5 +1,6 @@
 /* Nook's own Linen palette (Nook/Theme/Theme.swift): ground, card, ink, muted text, hairline, region hues. */
 :root {
+  --content: "Nook WenKai", "PingFang SC", "Hiragino Sans GB", serif;   /* the app's font: WenKai; English and Spanish set Ysabeau below */
   --ground: #EAE8E3;   /* the app's Linen ground: the board illustration's window */
   --page: oklch(0.968 0.005 85);   /* lighter than the ground, same warm hue: the window sits on paper */
   --card: #FAF9F6;
@@ -23,14 +24,15 @@
 /* English and Spanish page text in Ysabeau Office (variable 1–1000; SIL OFL 1.1, assets/fonts/OFL-Ysabeau.txt), subset to
    this page's Latin text. The boards and the feature drawings stay in WenKai in every language, as the app's cards are. */
 @font-face { font-family: "Nook Ysabeau"; src: url("assets/fonts/ysabeau-office.woff2") format("woff2"); font-weight: 1 1000; font-display: swap; }
-html:lang(en) body, html:lang(es) body { font-family: "Nook Ysabeau", "Nook WenKai", "PingFang SC", "Hiragino Sans GB", serif; }
+
 html:lang(en) h1, html:lang(es) h1 { font-weight: 560; letter-spacing: -0.5px; line-height: 1.15; }
 html:lang(en) .brand, html:lang(es) .brand { font-weight: 600; }
 html:lang(en) .features h2, html:lang(es) .features h2 { font-weight: 620; }
 html:lang(en) .button, html:lang(es) .button { font-weight: 560; }
-html:lang(en) .lede, html:lang(es) .lede { font-size: 19px; }
-.board, .sketch { font-family: "Nook WenKai", "PingFang SC", "Hiragino Sans GB", serif; }
+
+
 html { font-synthesis: none; }
+html:lang(en), html:lang(es) { --content: "Nook Ysabeau", "Nook WenKai", "PingFang SC", "Hiragino Sans GB", serif; }
 
 * { box-sizing: border-box; }
 html { -webkit-text-size-adjust: 100%; }
@@ -38,19 +40,19 @@ body {
   margin: 0;
   background: var(--page);
   color: var(--ink);
-  font: 16px/1.6 "Nook WenKai", "PingFang SC", "Hiragino Sans GB", serif;
+  font: 16px/1.6 var(--content);
   -webkit-font-smoothing: antialiased;
 }
 a { color: inherit; }
 .wrap { width: min(1080px, calc(100% - 48px)); margin: 0 auto; }
 
 /* Header */
-.header { display: flex; align-items: center; justify-content: space-between; height: 72px; }
-.brand { display: flex; align-items: center; gap: 10px; text-decoration: none; font-weight: 500; font-size: 18px; letter-spacing: 0; }
-.brand img { display: block; border-radius: 7px; }
+.header { display: flex; align-items: center; justify-content: space-between; height: 80px; }
+.brand { display: flex; align-items: center; gap: 12px; text-decoration: none; font-weight: 500; font-size: 22px; letter-spacing: -0.01em; }
+.brand img { display: block; border-radius: 9px; }
 .language select {
   appearance: none; -webkit-appearance: none;
-  font: inherit; font-size: 14px; font-weight: 500; color: var(--muted);
+  font: inherit; font-size: 15px; font-weight: 500; color: var(--muted);
   padding: 6px 26px 6px 10px; border-radius: 8px; border: 0; cursor: pointer;
   background: no-repeat right 9px center / 9px 6px
     url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 9 6'%3E%3Cpath d='M1 1l3.5 3.5L8 1' fill='none' stroke='%235F625C' stroke-width='1.4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
@@ -64,11 +66,11 @@ a { color: inherit; }
 
 /* Hero */
 .hero { display: grid; grid-template-columns: 1fr 1.05fr; gap: 56px; align-items: center; padding: 72px 0 88px; }
-h1 { font-size: clamp(32px, 4.2vw, 46px); line-height: 1.3; letter-spacing: 0; margin: 0 0 20px; font-weight: 500; text-wrap: balance; }
-.lede { font-size: 18px; color: var(--muted); margin: 0 0 32px; max-width: 30em; text-wrap: pretty; }
+h1 { font-size: clamp(34px, 4.4vw, 52px); line-height: 1.3; letter-spacing: 0; margin: 0 0 20px; font-weight: 500; text-wrap: balance; }
+.lede { font-size: 20px; color: var(--muted); margin: 0 0 32px; max-width: 30em; text-wrap: pretty; }
 .button {
-  display: inline-flex; align-items: center; gap: 8px; height: 44px; padding: 0 22px; border-radius: 999px;
-  background: var(--ink); color: #fff; text-decoration: none; font-weight: 500; font-size: 15px;
+  display: inline-flex; align-items: center; gap: 8px; height: 48px; padding: 0 24px; border-radius: 999px;
+  background: var(--ink); color: #fff; text-decoration: none; font-weight: 500; font-size: 16px;
   transition: background-color 150ms ease-out, transform 150ms ease-out;
 }
 @media (hover: hover) and (pointer: fine) {
@@ -96,7 +98,7 @@ h1 { font-size: clamp(32px, 4.2vw, 46px); line-height: 1.3; letter-spacing: 0; m
 .pane { position: absolute; inset: 56px 22px 70px; visibility: hidden; }
 .pane.on { visibility: visible; }
 .pane.leaving { visibility: visible; opacity: 0; transition: opacity 120ms ease-in; }
-.card { background: var(--card); border-radius: 6px; box-shadow: var(--card-shadow); font: 12.5px/1.55 "Nook WenKai", "PingFang SC", "Hiragino Sans GB", serif; }
+.card { background: var(--card); border-radius: 6px; box-shadow: var(--card-shadow); font: 12.5px/1.55 var(--content); }
 .card.text { padding: 8px 10px; min-height: 35px; }
 .box { width: 12px; height: 12px; border-radius: 3px; border: 1.2px solid var(--sage); display: inline-grid; place-items: center; font-size: 9px; line-height: 1; color: var(--sage); flex: none; }
 .meta { display: grid; gap: 2px; min-width: 0; }
@@ -122,7 +124,7 @@ h1 { font-size: clamp(32px, 4.2vw, 46px); line-height: 1.3; letter-spacing: 0; m
 .pending { transition-duration: 320ms; }
 .pending .well { background: var(--well); display: grid; place-items: center; }
 .pending .well .glyph { opacity: 0.3; }
-.pending .url { padding: 0 10px; font: 10px "Nook WenKai", "PingFang SC", "Hiragino Sans GB", serif; color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.pending .url { padding: 0 10px; font: 10px var(--content); color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .pending .skel { height: 6px; margin: 0 10px; width: 55%; border-radius: 3px; background: linear-gradient(90deg, rgba(30, 32, 31, 0.07), rgba(30, 32, 31, 0.15), rgba(30, 32, 31, 0.07)); background-size: 200% 100%; animation: shimmer 900ms linear infinite; }
 .loaded .pending .skel { animation: none; }
 @keyframes shimmer { from { background-position: 100% 0; } to { background-position: -100% 0; } }
@@ -139,7 +141,7 @@ h1 { font-size: clamp(32px, 4.2vw, 46px); line-height: 1.3; letter-spacing: 0; m
 .wires.draw .head { transition-delay: 600ms; transition-duration: 200ms; }
 .wire-label {
   position: absolute; z-index: 2; transform: translate(-50%, -50%) scale(0.9); opacity: 0;
-  font: 11px/1 "Nook WenKai", "PingFang SC", "Hiragino Sans GB", serif; color: var(--ink); white-space: nowrap;
+  font: 11px/1 var(--content); color: var(--ink); white-space: nowrap;
   padding: 4px 8px; border-radius: 999px; background: var(--card); box-shadow: 0 0 0 1px var(--hairline);
   transition: opacity 260ms ease-out 680ms, transform 320ms var(--ease-out) 680ms;
 }
@@ -148,7 +150,7 @@ h1 { font-size: clamp(32px, 4.2vw, 46px); line-height: 1.3; letter-spacing: 0; m
 /* Trip: a region (two notes, a checklist) beside a video and a place */
 .pane.trip { display: grid; grid-template-columns: minmax(0, 1.12fr) minmax(0, 0.88fr); gap: 28px; align-items: start; }
 .region { position: relative; display: grid; gap: 7px; padding: 28px 9px 9px; border-radius: 14px; background: rgba(111, 130, 112, 0.05); border: 1px dashed rgba(111, 130, 112, 0.55); }
-.region-title { position: absolute; top: 8px; left: 11px; display: flex; align-items: center; gap: 6px; font: 600 10.5px "Nook WenKai", "PingFang SC", "Hiragino Sans GB", serif; color: var(--sage); }
+.region-title { position: absolute; top: 8px; left: 11px; display: flex; align-items: center; gap: 6px; font: 600 10.5px var(--content); color: var(--sage); }
 .region-title i { width: 7px; height: 7px; border-radius: 2px; background: var(--sage); }
 .card.list { padding: 7px 10px; display: grid; gap: 1px; }
 .card.list p { margin: 0; display: flex; align-items: center; gap: 7px; }
@@ -164,10 +166,10 @@ h1 { font-size: clamp(32px, 4.2vw, 46px); line-height: 1.3; letter-spacing: 0; m
 .place .pin { position: absolute; left: 50%; top: 42%; width: 12px; height: 12px; border-radius: 50% 50% 50% 0; background: #C8553D; transform: translate(-50%, -50%) rotate(-45deg); box-shadow: 0 1px 2px rgba(0, 0, 0, 0.25); }
 
 /* Moving: To do and Done columns beside a floor plan and a child board */
-.pane.moving { display: grid; grid-template-columns: minmax(0, 1.45fr) minmax(0, 0.55fr); gap: 14px; align-items: start; }
+.pane.moving { display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, 0.7fr); gap: 14px; align-items: start; }
 .columns { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; align-items: start; }
 .column { display: grid; gap: 7px; padding: 9px; border-radius: 14px; background: var(--well); }
-.column-title { font: 600 10.5px "Nook WenKai", "PingFang SC", "Hiragino Sans GB", serif; color: var(--muted); padding: 0 2px 1px; }
+.column-title { font: 600 10.5px var(--content); color: var(--muted); padding: 0 2px 1px; }
 .mover, .done-card { display: flex; align-items: center; gap: 7px; }
 .done-card > span:last-child { text-decoration: line-through; color: var(--muted); }
 .mover { position: relative; z-index: 3; }
@@ -176,18 +178,24 @@ h1 { font-size: clamp(32px, 4.2vw, 46px); line-height: 1.3; letter-spacing: 0; m
 .slot { height: 0; margin-bottom: -7px; transition: height 250ms cubic-bezier(0.65, 0, 0.35, 1); }
 .pane.moving .side { gap: 10px; }
 .card.plan { padding: 8px; display: grid; gap: 6px; }
-.floor { position: relative; height: 92px; border-radius: 3px; background: #FDFCFA; border: 2px solid #3E403F; }
-.floor i { position: absolute; border: 1.2px solid #3E403F; }
-.floor .r1 { left: -2px; top: -2px; width: 55%; height: 58%; }
-.floor .r2 { right: -2px; top: -2px; width: 47%; height: 40%; }
-.floor .r3 { right: -2px; bottom: -2px; width: 47%; height: 62%; border-top-style: dashed; }
-.floor .r4 { left: 18%; bottom: -2px; width: 22%; height: 0; border-width: 0 0 4px; border-color: #FDFCFA; }
-.plan .caption { font: 9.5px "Nook WenKai", "PingFang SC", "Hiragino Sans GB", serif; color: var(--muted); }
-.boardcard { padding: 7px; display: grid; gap: 4px; }
-.boardcard .mini { height: 38px; border-radius: 4px; background: var(--ground); display: grid; grid-template-columns: repeat(4, 1fr); gap: 3px; padding: 5px; }
-.boardcard .mini i { border-radius: 2px; background: var(--card); box-shadow: 0 0 0 0.5px rgba(0, 0, 0, 0.08); }
-.boardcard b { font-weight: 500; }
-.boardcard > span:last-child { font: 9.5px "Nook WenKai", "PingFang SC", "Hiragino Sans GB", serif; color: var(--muted); }
+.floor { display: block; width: 100%; height: auto; border-radius: 2px; background: #FDFCFA; }
+.floor .room-tint { fill: rgba(111, 130, 112, 0.07); }
+.floor .walls { fill: none; stroke: #3E403F; stroke-width: 3; stroke-linejoin: miter; stroke-linecap: square; }
+.floor .gap { fill: none; stroke: #FDFCFA; stroke-width: 4; }
+.floor .window { fill: none; stroke: #3E403F; stroke-width: 0.8; }
+.floor .door { fill: none; stroke: #8E918A; stroke-width: 0.8; }
+.floor .furniture { fill: none; stroke: #B9B7B1; stroke-width: 0.8; }
+.floor .fridge rect { fill: rgba(111, 130, 112, 0.22); stroke: var(--sage); stroke-width: 1; }
+.floor .fridge .dim { fill: none; stroke: var(--sage); stroke-width: 0.8; }
+.floor .fridge text { fill: var(--sage); font: 600 8px var(--content); text-anchor: middle; }
+.plan .caption, .bc-meta { font: 11px var(--content); color: var(--muted); }
+.boardcard { padding: 7px 7px 8px; display: grid; gap: 5px; }
+.boardcard .mini { display: block; width: 100%; height: auto; }
+.mini .mg { fill: var(--ground); }
+.mini .mr { fill: rgba(111, 130, 112, 0.08); stroke: rgba(111, 130, 112, 0.55); stroke-width: 0.8; stroke-dasharray: 2.5 2; }
+.mini .mc { fill: var(--card); stroke: rgba(0, 0, 0, 0.07); stroke-width: 0.5; }
+.mini .mi { fill: #C9A27E; }
+.bc-title { font-weight: 500; line-height: 1.35; }
 
 /* Research: literature and question; the source and a field plan; an arrow; ⌘K across boards */
 .pane.research { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 76px; align-items: start; }
@@ -196,7 +204,7 @@ h1 { font-size: clamp(32px, 4.2vw, 46px); line-height: 1.3; letter-spacing: 0; m
 .web-head { display: flex; align-items: center; gap: 6px; opacity: 0; transition: opacity 200ms ease-out; }
 .loaded .web-head { opacity: 1; }
 .favicon { width: 16px; height: 16px; border-radius: 3px; background: #fff; box-shadow: 0 0 0 1px var(--hairline); display: grid; place-items: center; font: 600 10px Georgia, serif; }
-.web-head .url { font: 9.5px "Nook WenKai", "PingFang SC", "Hiragino Sans GB", serif; color: var(--muted); }
+.web-head .url { font: 9.5px var(--content); color: var(--muted); }
 .card.web .meta { opacity: 0; transition: opacity 200ms ease-out; }
 .card.web .pending { grid-template-rows: 1fr auto; padding: 12px 0; }
 .palette {
@@ -208,16 +216,27 @@ h1 { font-size: clamp(32px, 4.2vw, 46px); line-height: 1.3; letter-spacing: 0; m
 /* Searching: the board behind steps back so the results read */
 .pane.research .stack, .pane.research .wires, .pane.research .wire-label { transition: opacity 160ms ease-out; }
 .pane.research.searching .stack, .pane.research.searching .wires, .pane.research.searching .wire-label { opacity: 0.3; }
-.field-row { display: flex; align-items: center; gap: 8px; padding: 7px 9px; font: 13px "Nook WenKai", "PingFang SC", "Hiragino Sans GB", serif; border-bottom: 1px solid var(--hairline); min-height: 34px; }
+.field-row { display: flex; align-items: center; gap: 8px; padding: 7px 9px; font: 13px var(--content); border-bottom: 1px solid var(--hairline); min-height: 34px; }
 .lens { width: 10px; height: 10px; border: 1.6px solid var(--muted); border-radius: 50%; position: relative; flex: none; }
 .lens::after { content: ""; position: absolute; width: 5px; height: 1.6px; background: var(--muted); right: -5px; bottom: -2px; transform: rotate(45deg); }
 .caret { display: inline-block; width: 1.5px; height: 14px; background: var(--ink); animation: blink 900ms steps(1) infinite; }
 @keyframes blink { 50% { opacity: 0; } }
-.result { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-top: 4px; padding: 7px 9px; border-radius: 6px; font: 12px/1.4 "Nook WenKai", "PingFang SC", "Hiragino Sans GB", serif; opacity: 0; transition: opacity 160ms ease-out, background-color 160ms ease-out; }
+.result { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-top: 4px; padding: 7px 9px; border-radius: 6px; font: 12px/1.4 var(--content); opacity: 0; transition: opacity 160ms ease-out, background-color 160ms ease-out; }
 .result .what { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.result .where { flex: none; font: 10.5px "Nook WenKai", "PingFang SC", "Hiragino Sans GB", serif; color: var(--muted); }
+.result .where { flex: none; font: 10.5px var(--content); color: var(--muted); }
 .palette.found .result { opacity: 1; }
-.palette.found .result.there { background: rgba(30, 32, 31, 0.08); }
+.palette.found .result.there { background: rgba(30, 32, 31, 0.07); }
+.result mark { background: rgba(111, 130, 112, 0.24); color: inherit; border-radius: 3px; padding: 0 1px; }
+.result kbd { flex: none; font: 11px var(--content); color: var(--muted); padding: 0 5px; border-radius: 4px; box-shadow: 0 0 0 1px var(--hairline); background: var(--card); }
+.result.here kbd { display: none; }
+.result { transition: opacity 160ms ease-out, background-color 160ms ease-out, transform 120ms ease-out; }
+.palette.chosen .result.there { background: rgba(30, 32, 31, 0.13); transform: scale(0.98); }
+.palette.leave { opacity: 0; transform: translateX(-50%) scale(0.98); transition: opacity 160ms ease-in, transform 160ms ease-in; }
+/* ⌘K opened the trip board: the found note is selected, as Nook selects it */
+.pane.away { visibility: hidden !important; }
+.pane.arriving { animation: arrive 240ms ease-out; }
+@keyframes arrive { from { opacity: 0; } }
+.card.picked { box-shadow: 0 0 0 2px var(--sage), var(--card-shadow); transition: box-shadow 240ms ease-out; }
 
 /* Reading: the book from Goodreads (its real cover, from Open Library), highlights, the reader's own line */
 .card.book { position: relative; overflow: hidden; display: flex; gap: 10px; padding: 9px; }
@@ -235,7 +254,7 @@ h1 { font-size: clamp(32px, 4.2vw, 46px); line-height: 1.3; letter-spacing: 0; m
 .pane.reading { display: grid; grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.08fr); gap: 92px; align-items: start; }
 .card.cover { width: 112px; height: 156px; padding: 13px 11px; display: flex; flex-direction: column; justify-content: space-between; color: #F4F1EA; background: linear-gradient(160deg, #3F5560, #24323A); box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.06), 0 8px 18px -6px rgba(0, 0, 0, 0.3); border-radius: 4px 6px 6px 4px; }
 .card.cover b { font-size: 14px; line-height: 1.3; font-weight: 500; }
-.card.cover span { font: 8.5px "Nook WenKai", "PingFang SC", "Hiragino Sans GB", serif; letter-spacing: 0.4px; opacity: 0.8; }
+.card.cover span { font: 8.5px var(--content); letter-spacing: 0.4px; opacity: 0.8; }
 .card.hl { border-left: 2.5px solid rgba(111, 130, 112, 0.7); padding-left: 10px; }
 .reading .region { background: rgba(111, 138, 148, 0.05); border-color: rgba(111, 138, 148, 0.55); }
 .reading .region-title { color: var(--slate); }
@@ -274,7 +293,7 @@ h1 { font-size: clamp(32px, 4.2vw, 46px); line-height: 1.3; letter-spacing: 0; m
 }
 .tabs { display: flex; justify-content: center; gap: 4px; margin-top: 14px; }
 .tabs button {
-  font: inherit; font-size: 13px; color: var(--muted); background: none; border: 0; cursor: pointer;
+  font: inherit; font-size: 14px; color: var(--muted); background: none; border: 0; cursor: pointer;
   padding: 5px 12px; border-radius: 999px; transition: color 150ms ease-out, background-color 150ms ease-out;
 }
 .tabs button[aria-selected="true"] { color: var(--ink); background: rgba(30, 32, 31, 0.07); font-weight: 500; }
@@ -292,8 +311,8 @@ h1 { font-size: clamp(32px, 4.2vw, 46px); line-height: 1.3; letter-spacing: 0; m
 
 /* Collect, Arrange, Yours: a verb, one line, and the act itself drawn in the board's own vocabulary */
 .features { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; padding: 64px 0 72px; border-top: 1px solid var(--hairline); }
-.features h2 { font-size: 18px; font-weight: 500; margin: 18px 0 6px; }
-.features p { margin: 0; color: var(--muted); font-size: 15px; line-height: 1.65; text-wrap: pretty; max-width: 22em; }
+.features h2 { font-size: 20px; font-weight: 500; margin: 20px 0 6px; }
+.features p { margin: 0; color: var(--muted); font-size: 16px; line-height: 1.6; text-wrap: pretty; max-width: 22em; }
 .sketch {
   position: relative; height: 176px; border-radius: 14px; overflow: hidden; background: var(--ground);
   box-shadow: inset 0 0 0 1px var(--hairline);
@@ -329,28 +348,34 @@ h1 { font-size: clamp(32px, 4.2vw, 46px); line-height: 1.3; letter-spacing: 0; m
 .sk-link svg { width: 64px; height: 30px; overflow: visible; }
 .sk-label { position: absolute; top: -14px; left: 50%; transform: translateX(-50%); white-space: nowrap; font-size: 9.5px; padding: 3px 6px; border-radius: 999px; background: var(--card); box-shadow: 0 0 0 1px var(--hairline); transition: transform 260ms var(--ease-out); }
 
-/* Yours: the workspace in Finder, and a peek inside a board's file */
-.finder { position: absolute; left: 18px; top: 16px; width: 62%; border-radius: 8px; overflow: hidden; background: var(--card); box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.06), 0 6px 14px -6px rgba(0, 0, 0, 0.16); }
-.fbar { display: flex; align-items: center; gap: 4px; padding: 6px 8px; border-bottom: 1px solid var(--hairline); font-size: 9.5px; color: var(--muted); }
+/* Yours: the workspace folder, its boards as plain documents (Dropbox keeps them in sync) */
+.finder { position: absolute; inset: 16px 18px; border-radius: 9px; overflow: hidden; background: var(--card); box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.06), 0 6px 14px -6px rgba(0, 0, 0, 0.16); }
+.fbar { display: flex; align-items: center; gap: 4px; padding: 7px 9px; border-bottom: 1px solid var(--hairline); font-size: 11px; color: var(--muted); }
 .fbar i { width: 6px; height: 6px; border-radius: 50%; background: #D7D5D0; }
-.fbar span { margin-left: 6px; }
-.frow { display: flex; align-items: center; gap: 7px; padding: 3px 10px; font-size: 11px; }
-.frow.sub { padding-left: 26px; color: var(--muted); }
-.frow:last-child { padding-bottom: 8px; }
-.ficon { flex: none; border-radius: 2px; }
-.ficon.folder { width: 12px; height: 9px; background: #8FB3C9; box-shadow: inset 0 2px 0 rgba(255, 255, 255, 0.35); }
-.ficon.file { width: 9px; height: 11px; background: #fff; box-shadow: inset 0 0 0 1px rgba(30, 32, 31, 0.25); }
-.json { position: absolute; right: 16px; bottom: 14px; margin: 0; padding: 8px 10px; border-radius: 6px; background: #2E302F; color: #E9E6DF;
-  font: 9.5px/1.5 ui-monospace, "SF Mono", Menlo, monospace; box-shadow: 0 8px 18px -6px rgba(0, 0, 0, 0.3); transition: transform 260ms var(--ease-out); }
-.json span { color: #B9D0B4; }
+.fbar .ficon { margin-left: 8px; }
+.ficon.folder { flex: none; width: 13px; height: 10px; border-radius: 2px; background: #8FB3C9; box-shadow: inset 0 2px 0 rgba(255, 255, 255, 0.35); }
+.files { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; padding: 20px 10px 0; }
+.doc { display: grid; justify-items: center; gap: 7px; min-width: 0; }
+.thumb { position: relative; width: 58px; height: 44px; border-radius: 5px; background: var(--ground); box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.07), 0 3px 6px -3px rgba(0, 0, 0, 0.2);
+  transition: transform 260ms var(--ease-out); }
+.thumb i { position: absolute; border-radius: 1.5px; background: var(--card); box-shadow: 0 0 0 0.5px rgba(0, 0, 0, 0.08); }
+.thumb i:nth-child(1) { left: 6px; top: 6px; width: 20px; height: 12px; }
+.thumb i:nth-child(2) { left: 30px; top: 6px; width: 22px; height: 20px; }
+.thumb i:nth-child(3) { left: 6px; top: 22px; width: 20px; height: 15px; }
+.thumb.t1 i:nth-child(2) { background: linear-gradient(135deg, #C9A27E, #8E5B3E); }
+.thumb.t2 i:nth-child(1), .thumb.t2 i:nth-child(3) { background: var(--well); }
+.thumb.t3 i:nth-child(3) { background: #fff; box-shadow: 0 0 0 0.8px rgba(111, 130, 112, 0.6); }
+.thumb::after { content: "✓"; position: absolute; right: -4px; bottom: -4px; width: 12px; height: 12px; border-radius: 50%; background: var(--sage); color: #fff;
+  font: 700 7.5px/12px var(--content); text-align: center; box-shadow: 0 0 0 1.5px var(--card); }
+.doc .name { max-width: 100%; font-size: 11.5px; line-height: 1.3; text-align: center; text-wrap: balance; overflow-wrap: break-word; }
 
 /* A little response under the pointer, never on its own */
 @media (hover: hover) and (pointer: fine) {
   .features article:hover .sk-card { transform: translate(-4px, -4px); box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.05), 0 14px 26px -8px rgba(0, 0, 0, 0.22); }
   .features article:hover .sk-label { transform: translateX(-50%) translateY(-2px); }
-  .features article:hover .json { transform: translate(-4px, -4px); }
+  .features article:hover .doc:nth-child(2) .thumb { transform: translateY(-4px); }
 }
-@media (prefers-reduced-motion: reduce) { .sk-card, .sk-label, .json { transition: none; } }
+@media (prefers-reduced-motion: reduce) { .sk-card, .sk-label, .thumb { transition: none; } }
 
 .footer { display: flex; justify-content: space-between; padding: 24px 0 40px; font-size: 13px; color: var(--muted); border-top: 1px solid var(--hairline); }
 .footer a { text-decoration: none; }
@@ -373,6 +398,8 @@ html.played .intro { animation: none; }
   .board { height: 660px; }
   .pane.trip, .pane.moving, .pane.research, .pane.reading { grid-template-columns: 1fr; gap: 12px; }
   .pane.trip .side { gap: 40px; }
+  .pane.moving { align-content: start; }
+  .pane.moving .side { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); align-items: start; }
   .card.cover { width: 92px; height: 128px; }
   .films { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .films .nolan { width: calc(100% + 16px); bottom: auto; height: calc(50% + 30px); }

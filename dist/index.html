@@ -13,12 +13,12 @@
 <link rel="icon" href="assets/favicon.png">
 <link rel="preload" as="image" href="assets/nook-icon.png">
 <link rel="preload" as="font" type="font/woff2" href="assets/fonts/wenkai-screen.woff2" crossorigin>
-<link rel="stylesheet" href="style.css?v=1.6.0">
+<link rel="stylesheet" href="style.css?v=1.7.0">
 </head>
 <body>
 <header class="header wrap">
   <a class="brand" href="#" aria-label="Nook">
-    <img src="assets/nook-icon.png" width="32" height="32" alt="">
+    <img src="assets/nook-icon.png" width="40" height="40" alt="">
     <span>Nook</span>
   </a>
   <label class="language">
@@ -91,10 +91,34 @@
           </div>
           <div class="side">
             <div class="card plan step">
-              <div class="floor"><i class="r1"></i><i class="r2"></i><i class="r3"></i><i class="r4"></i></div>
+              <svg class="floor" viewBox="0 0 140 92" aria-hidden="true">
+                <rect class="room-tint" x="79" y="41" width="57" height="47"/>
+                <g class="furniture">
+                  <rect x="8" y="8" width="26" height="34" rx="2"/><path d="M8 15h26"/>
+                  <rect x="7" y="55" width="12" height="28" rx="5"/><circle cx="27" cy="58" r="3.5"/>
+                  <rect x="82" y="7" width="34" height="8" rx="1"/><circle cx="90" cy="11" r="2"/><circle cx="98" cy="11" r="2"/>
+                  <rect x="98" y="77" width="32" height="8" rx="2.5"/><rect x="103" y="58" width="20" height="12" rx="1.5"/>
+                </g>
+                <g class="fridge"><rect x="120" y="7" width="13" height="11" rx="1"/><path class="dim" d="M120 23h13M120 21v4M133 21v4"/><text x="126.5" y="32">62</text></g>
+                <path class="walls" d="M3 3H137V89H3Z M78 3V50 M78 62V89 M3 50H40 M52 50H78 M34 50V89 M78 40H96 M108 40H137"/>
+                <path class="gap" d="M48 89H62 M20 3H50 M137 55V78 M100 3H118"/>
+                <path class="window" d="M20 2H50M20 4H50 M136 55V78M138 55V78"/>
+                <path class="door" d="M40 50A12 12 0 0 1 52 62M52 50V62 M78 50A12 12 0 0 0 90 62M78 62H90 M96 40A12 12 0 0 0 108 52M108 40V52 M48 89A14 14 0 0 1 62 75M62 89V75"/>
+              </svg>
               <span class="caption" data-s="moving.plan"></span>
             </div>
-            <div class="card boardcard step"><span class="mini"><i></i><i></i><i></i><i></i></span><b data-s="moving.boardCard"></b><span data-s="moving.boardMeta"></span></div>
+            <div class="card boardcard step">
+              <svg class="mini" viewBox="0 0 140 52" aria-hidden="true">
+                <rect class="mg" x="0" y="0" width="140" height="52" rx="5"/>
+                <rect class="mr" x="7" y="7" width="58" height="38" rx="5"/>
+                <rect class="mc" x="12" y="15" width="22" height="12" rx="1.5"/><rect class="mc" x="38" y="15" width="22" height="20" rx="1.5"/><rect class="mc" x="12" y="30" width="22" height="9" rx="1.5"/>
+                <rect class="mi" x="74" y="7" width="30" height="22" rx="1.5"/>
+                <rect class="mc" x="108" y="7" width="25" height="13" rx="1.5"/><rect class="mc" x="108" y="24" width="25" height="9" rx="1.5"/>
+                <rect class="mc" x="74" y="37" width="30" height="9" rx="1.5"/>
+              </svg>
+              <b class="bc-title" data-s="moving.boardCard"></b>
+              <span class="bc-meta" data-s="moving.boardMeta"></span>
+            </div>
           </div>
         </div>
 
@@ -115,8 +139,8 @@
           </div>
           <div class="palette" aria-hidden="true">
             <div class="field-row"><span class="lens"></span><span class="query" data-type="research.query"></span><span class="caret"></span></div>
+            <div class="result there"><span class="what" data-s="trip.note2"></span><span class="where" data-s="trip.board"></span><kbd>↵</kbd></div>
             <div class="result here"><span class="what" data-s="research.field"></span><span class="where" data-s="research.board"></span></div>
-            <div class="result there"><span class="what" data-s="trip.note2"></span><span class="where" data-s="trip.board"></span></div>
           </div>
         </div>
 
@@ -212,16 +236,13 @@
     <article>
       <div class="sketch keep" aria-hidden="true">
         <div class="finder">
-          <div class="fbar"><i></i><i></i><i></i><span>Dropbox › Nook</span></div>
-          <div class="frow"><span class="ficon folder"></span>boards</div>
-          <div class="frow sub"><span class="ficon file"></span>board.json</div>
-          <div class="frow"><span class="ficon folder"></span>assets</div>
-          <div class="frow"><span class="ficon file"></span>workspace.json</div>
+          <div class="fbar"><i></i><i></i><i></i><span class="ficon folder"></span><span>Dropbox › Nook</span></div>
+          <div class="files">
+            <span class="doc"><span class="thumb t1"><i></i><i></i><i></i></span><span class="name" data-sb="trip.board"></span></span>
+            <span class="doc"><span class="thumb t2"><i></i><i></i><i></i></span><span class="name" data-sb="moving.board"></span></span>
+            <span class="doc"><span class="thumb t3"><i></i><i></i><i></i></span><span class="name" data-sb="research.board"></span></span>
+          </div>
         </div>
-        <pre class="json">{
-  "title": "<span data-t="sk3t">京都</span>",
-  "cards": [ … ]
-}</pre>
       </div>
       <h2 data-t="v3t">归你</h2>
       <p data-t="v3">白板是你文件夹里的普通文件。没有账号，不收集数据。</p>
@@ -233,6 +254,6 @@
   <span>Nook 1.0.0</span>
   <a href="https://github.com/hudsonrivercrossing/Nook.app">GitHub</a>
 </footer>
-<script src="app.js?v=1.6.0"></script>
+<script src="app.js?v=1.7.0"></script>
 </body>
 </html>

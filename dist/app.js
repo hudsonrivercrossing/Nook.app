@@ -14,7 +14,7 @@
       labels: {
         trip: '旅行白板“京都”：“第二天 · 东山 → 锦市场”区域里有两张便签，旁边是一张行程清单；右边是清水寺的地点卡片和一段 YouTube 视频，箭头从视频指向清水寺，写着“去之前先看”',
         moving: '规划白板“搬家”：“要办”和“办完”两栏、户型图和一块“新公寓 · 布置”白板；然后“订搬家公司”被拖到办完并打勾',
-        research: '研究白板“第三空间”：Oldenburg 的文献便签、维基百科“Third place”、研究问题和锦市场的田野计划，箭头写着“例子？”；⌘K 搜“锦市场”，在旅行白板里找到午饭那张便签',
+        research: '研究白板“第三空间”：Oldenburg 的文献便签、维基百科“Third place”、研究问题和锦市场的田野计划，箭头写着“例子？”；⌘K 搜“锦市场”，打开旅行白板里午饭那张便签',
         reading: '读书白板“禅与摩托车维修艺术”：Goodreads 书页加载出封面；“划线”区域里有书中的两句话，箭头从“卡住不该被回避”指向自己的话“论文第三章卡了两周。也许理解就要来了。”，写着“说的是我”',
         collection: '收藏白板“烧脑电影”：依次粘贴《盗梦空间》《记忆碎片》《禁闭岛》《消失的爱人》，海报逐一加载；“诺兰”区域圈出前两部；便签“《盗梦空间》结尾：陀螺到底倒没倒？”，箭头指向《盗梦空间》，写着“再看一遍”'
       },
@@ -25,7 +25,7 @@
         'trip.todo1': '订旅馆', 'trip.todo2': 'JR Pass', 'trip.todo3': '岚山竹林', 'trip.place': '清水寺', 'trip.placeKind': 'PLACE · 东山区',
         'trip.video': '秋天的京都：枫叶地图', 'trip.arrow': '去之前先看',
         'moving.board': '规划 · 搬家', 'moving.todo': '要办', 'moving.done': '办完', 'moving.m1': '订搬家公司', 'moving.m2': '改地址：银行、快递',
-        'moving.m3': '买冰箱：位置宽 62 cm', 'moving.d1': '签租约', 'moving.plan': '户型图', 'moving.boardCard': '新公寓 · 布置', 'moving.boardMeta': '8 张卡片',
+        'moving.m3': '买冰箱：位置宽 62\u00a0cm', 'moving.d1': '签租约', 'moving.plan': '户型图', 'moving.boardCard': '新公寓 · 布置', 'moving.boardMeta': '8 张卡片',
         'research.board': '研究 · 第三空间', 'research.lit': 'Oldenburg（1989）：家与工作场所之外的“第三空间”',
         'research.question': '研究问题：旅行者能进入当地的第三空间吗？', 'research.field': '锦市场：去的时候看店主怎么招呼熟客和游客。',
         'research.arrow': '例子？', 'research.query': '锦市场',
@@ -36,14 +36,14 @@
     },
     en: {
       lang: 'en', title: 'Nook — a calm place', langLabel: 'Language',
-      headline: 'A calm place for the few<br>projects that matter.', lede: 'Boards for your Mac. Your files, your folder.', download: 'Download for Mac',
+      headline: 'A calm place for the few<br>projects that matter.', lede: 'Visual boards for your Mac, kept in a folder you choose.', download: 'Download for Mac',
       v1t: 'Collect', v1: 'Paste a link or drop an image. It becomes a card.', v2t: 'Arrange', v2: 'Regions, columns and arrows show how things relate.', v3t: 'Yours', v3: 'Boards are plain files in your folder. No account, no tracking.',
       sk1: 'Kyoto in autumn', sk2r: 'Day 2', sk2a: 'Watch first', sk2c: 'To do', sk3t: 'Kyoto',
       trip: 'Trip', moving: 'Planning', research: 'Research', reading: 'Reading', collection: 'Collection', scenes: 'Example boards', home: 'Home',
       labels: {
         trip: 'A trip board, Kyoto: a “Day 2 · Higashiyama → Nishiki” region with two notes, and a trip checklist beside it; on the right a place card for Kiyomizu-dera and a YouTube video, with an arrow from the video to the temple reading “Watch before going”',
         moving: 'A planning board, The move: To do and Done columns, a floor plan and a “New flat · Layout” board; then “Book the movers” is dragged to Done and ticked',
-        research: 'A research board, Third places: an Oldenburg note, the Wikipedia page “Third place”, the research question and a field plan for Nishiki, with an arrow reading “Example?”; ⌘K searches “Nishiki” and finds the lunch note on the trip board',
+        research: 'A research board, Third places: an Oldenburg note, the Wikipedia page “Third place”, the research question and a field plan for Nishiki, with an arrow reading “Example?”; ⌘K searches “Nishiki” and opens the lunch note on the trip board',
         reading: 'A reading board, Zen and the Art of Motorcycle Maintenance: the Goodreads page loads its cover; a Highlights region holds two passages, and an arrow from “Stuckness shouldn’t be avoided” to the reader’s note “Two weeks stuck on chapter 3 of the thesis” reads “That’s me”',
         collection: 'A collection board, Mind-benders: Inception, Memento, Shutter Island and Gone Girl pasted one by one, their posters loading; a “Nolan” region around the first two; a note “Inception’s ending: did the top fall?” with an arrow to Inception reading “Watch again”'
       },
@@ -54,7 +54,7 @@
         'trip.todo1': 'Book the ryokan', 'trip.todo2': 'JR Pass', 'trip.todo3': 'Bamboo grove', 'trip.place': 'Kiyomizu-dera', 'trip.placeKind': 'PLACE · Higashiyama',
         'trip.video': 'Kyoto in autumn: a maple map', 'trip.arrow': 'Watch before going',
         'moving.board': 'Planning · The move', 'moving.todo': 'To do', 'moving.done': 'Done', 'moving.m1': 'Book the movers', 'moving.m2': 'Change address: bank, deliveries',
-        'moving.m3': 'Buy a fridge: the gap is 62 cm', 'moving.d1': 'Sign the lease', 'moving.plan': 'Floor plan', 'moving.boardCard': 'New flat · Layout', 'moving.boardMeta': '8 cards',
+        'moving.m3': 'Buy a fridge: the gap is 62\u00a0cm', 'moving.d1': 'Sign the lease', 'moving.plan': 'Floor plan', 'moving.boardCard': 'New flat · Layout', 'moving.boardMeta': '8 cards',
         'research.board': 'Research · Third places', 'research.lit': 'Oldenburg (1989): the “third place” beyond home and work',
         'research.question': 'Question: can travellers enter a local third place?', 'research.field': 'Nishiki: when I’m there, watch how stallholders greet regulars and tourists.',
         'research.arrow': 'Example?', 'research.query': 'Nishiki',
@@ -65,14 +65,14 @@
     },
     es: {
       lang: 'es', title: 'Nook — un lugar tranquilo', langLabel: 'Idioma',
-      headline: 'Un lugar tranquilo<br>para lo que importa.', lede: 'Tableros para tu Mac. Tus archivos, tu carpeta.', download: 'Descargar para Mac',
+      headline: 'Un lugar tranquilo<br>para lo que importa.', lede: 'Tableros visuales para tu Mac, guardados en una carpeta que elijas.', download: 'Descargar para Mac',
       v1t: 'Reúne', v1: 'Pega un enlace o suelta una imagen. Se convierte en una tarjeta.', v2t: 'Ordena', v2: 'Regiones, columnas y flechas muestran cómo se relacionan las cosas.', v3t: 'Tuyo', v3: 'Los tableros son archivos normales en tu carpeta. Sin cuenta, sin rastreo.',
       sk1: 'Kioto en otoño', sk2r: 'Día 2', sk2a: 'Verlo antes', sk2c: 'Por hacer', sk3t: 'Kioto',
       trip: 'Viaje', moving: 'Planes', research: 'Investigación', reading: 'Lectura', collection: 'Colección', scenes: 'Tableros de ejemplo', home: 'Inicio',
       labels: {
         trip: 'Un tablero de viaje, Kioto: una región «Día 2 · Higashiyama → Nishiki» con dos notas y, al lado, la lista del viaje; a la derecha, una tarjeta de lugar de Kiyomizu-dera y un vídeo de YouTube, con una flecha del vídeo al templo que dice «Verlo antes de ir»',
         moving: 'Un tablero de planes, La mudanza: columnas Por hacer y Hecho, un plano y un tablero «Piso nuevo · Distribución»; después, «Reservar la mudanza» pasa a Hecho y se marca',
-        research: 'Un tablero de investigación, Terceros lugares: una nota sobre Oldenburg, la página de Wikipedia «Third place», la pregunta de investigación y un plan de campo para Nishiki, con una flecha que dice «¿Ejemplo?»; ⌘K busca «Nishiki» y encuentra la nota del almuerzo en el tablero del viaje',
+        research: 'Un tablero de investigación, Terceros lugares: una nota sobre Oldenburg, la página de Wikipedia «Third place», la pregunta de investigación y un plan de campo para Nishiki, con una flecha que dice «¿Ejemplo?»; ⌘K busca «Nishiki» y abre la nota del almuerzo en el tablero del viaje',
         reading: 'Un tablero de lectura, Zen y el arte del mantenimiento de la motocicleta: la página de Goodreads carga su portada; una región de subrayados con dos pasajes y una flecha de «No hay que evitar quedarse atascado» a la nota «Dos semanas atascado en el capítulo 3 de la tesis» que dice «Ese soy yo»',
         collection: 'Un tablero de colección, Películas que te vuelan la cabeza: Origen, Memento, Shutter Island y Perdida pegadas una a una, cargando sus carteles; una región «Nolan» alrededor de las dos primeras; una nota «Final de Origen: ¿cayó la peonza?» con una flecha a Origen que dice «Volver a verla»'
       },
@@ -83,7 +83,7 @@
         'trip.todo1': 'Reservar el ryokan', 'trip.todo2': 'JR Pass', 'trip.todo3': 'Bosque de bambú', 'trip.place': 'Kiyomizu-dera', 'trip.placeKind': 'PLACE · Higashiyama',
         'trip.video': 'Kioto en otoño: mapa de arces', 'trip.arrow': 'Verlo antes de ir',
         'moving.board': 'Planes · La mudanza', 'moving.todo': 'Por hacer', 'moving.done': 'Hecho', 'moving.m1': 'Reservar la mudanza', 'moving.m2': 'Cambiar la dirección: banco, envíos',
-        'moving.m3': 'Comprar nevera: hueco de 62 cm', 'moving.d1': 'Firmar el contrato', 'moving.plan': 'Plano', 'moving.boardCard': 'Piso nuevo · Distribución', 'moving.boardMeta': '8 tarjetas',
+        'moving.m3': 'Comprar nevera: hueco de 62\u00a0cm', 'moving.d1': 'Firmar el contrato', 'moving.plan': 'Plano', 'moving.boardCard': 'Piso nuevo · Distribución', 'moving.boardMeta': '8 tarjetas',
         'research.board': 'Investigación · Terceros lugares', 'research.lit': 'Oldenburg (1989): el «tercer lugar», más allá de casa y del trabajo',
         'research.question': 'Pregunta: ¿puede un viajero entrar en un tercer lugar local?', 'research.field': 'Nishiki: cuando vaya, ver cómo saludan los tenderos a habituales y turistas.',
         'research.arrow': '¿Ejemplo?', 'research.query': 'Nishiki',
@@ -94,14 +94,14 @@
     },
     ja: {
       lang: 'ja', title: 'Nook — 静かな場所', langLabel: '言語',
-      headline: '大切なことのための、<br>静かな場所。', lede: 'Mac のためのボード。ファイルは、あなたのフォルダに。', download: 'Mac 版をダウンロード',
+      headline: '大切なことのための、<br>静かな場所。', lede: 'Mac のためのビジュアルボード。ファイルは、あなたの選んだフォルダに。', download: 'Mac 版をダウンロード',
       v1t: '集める', v1: 'リンクを貼る、画像を置く。それがカードになる。', v2t: '整える', v2: 'リージョン、カラム、矢印で、つながりが見える。', v3t: '手元に', v3: 'ボードはフォルダの中の普通のファイル。アカウント不要、追跡なし。',
       sk1: '秋の京都', sk2r: '2日目', sk2a: '行く前に見る', sk2c: 'やること', sk3t: '京都',
       trip: '旅', moving: '計画', research: '研究', reading: '読書', collection: 'コレクション', scenes: 'ボードの例', home: 'ホーム',
       labels: {
         trip: '旅のボード「京都」：「2日目・東山 → 錦市場」のリージョンにメモ2枚、その横に旅のチェックリスト。右に清水寺の場所カードと YouTube 動画、動画から清水寺へ「行く前に見る」の矢印',
         moving: '計画のボード「引っ越し」：やること・完了の2カラム、間取り図と「新居・レイアウト」ボード。そのあと「引っ越し業者を予約」が完了へ移ってチェック',
-        research: '研究のボード「サードプレイス」：Oldenburg のメモ、Wikipedia「Third place」、問いと錦市場のフィールド計画、「例？」の矢印。⌘K で「錦市場」を探すと、旅のボードの昼食メモが見つかる',
+        research: '研究のボード「サードプレイス」：Oldenburg のメモ、Wikipedia「Third place」、問いと錦市場のフィールド計画、「例？」の矢印。⌘K で「錦市場」を探すと、旅のボードの昼食メモが開く',
         reading: '読書のボード「禅とオートバイ修理技術」：Goodreads のページが表紙を読み込む。ハイライトに2つの一節、「行き詰まりは避けるべきではない」から自分のメモ「論文の第3章で2週間止まっている」へ「これは私だ」の矢印',
         collection: 'コレクションのボード「考察したくなる映画」：『インセプション』『メメント』『シャッター アイランド』『ゴーン・ガール』を順に貼り、ポスターが読み込まれる。最初の2本を「ノーラン」のリージョンで囲む。メモ「『インセプション』のラスト：コマは倒れた？」から『インセプション』へ「もう一度観る」の矢印'
       },
@@ -112,7 +112,7 @@
         'trip.todo1': '旅館を予約', 'trip.todo2': 'JR パス', 'trip.todo3': '嵐山の竹林', 'trip.place': '清水寺', 'trip.placeKind': 'PLACE · 東山区',
         'trip.video': '秋の京都：紅葉マップ', 'trip.arrow': '行く前に見る',
         'moving.board': '計画・引っ越し', 'moving.todo': 'やること', 'moving.done': '完了', 'moving.m1': '引っ越し業者を予約', 'moving.m2': '住所変更：銀行、通販',
-        'moving.m3': '冷蔵庫を買う：幅 62 cm まで', 'moving.d1': '賃貸契約を結ぶ', 'moving.plan': '間取り図', 'moving.boardCard': '新居・レイアウト', 'moving.boardMeta': '8 枚のカード',
+        'moving.m3': '冷蔵庫を買う：幅 62\u00a0cm まで', 'moving.d1': '賃貸契約を結ぶ', 'moving.plan': '間取り図', 'moving.boardCard': '新居・レイアウト', 'moving.boardMeta': '8 枚のカード',
         'research.board': '研究・サードプレイス', 'research.lit': 'Oldenburg (1989)：家と職場の外にある「サードプレイス」',
         'research.question': '問い：旅行者は地元のサードプレイスに入れるか？', 'research.field': '錦市場：行ったら、店主が常連と観光客をどう迎えるか見る。',
         'research.arrow': '例？', 'research.query': '錦市場',
@@ -148,7 +148,8 @@
       [3900, 'tool', 'text'], [4050, 'add', '.question'], [4100, 'type', '.question'],
       [5900, 'tool', 'text'], [6050, 'add', '.field'], [6100, 'type', '.field'],
       [7900, 'tool', 'connect'], [8050, 'wire', '.field', '.lit'],
-      [9300, 'palette', 'open'], [9500, 'type', '.query'], [10500, 'palette', 'found']
+      [9300, 'palette', 'open'], [9500, 'type', '.query'], [10500, 'palette', 'found'],
+      [11700, 'palette', 'chosen'], [11900, 'open', 'trip', '.note2']
     ],
     reading: [
       [200, 'tool', 'link'], [350, 'add', '.book'], [1550, 'load', '.book'],
@@ -167,7 +168,7 @@
       [9400, 'tool', 'connect'], [9550, 'wire', '.cnote', '.f1']
     ]
   };
-  const STATE = ['in', 'loaded', 'ticked', 'draw', 'lifted', 'open', 'found', 'playing', 'moved', 'press', 'labelled', 'searching'];
+  const STATE = ['in', 'loaded', 'ticked', 'draw', 'lifted', 'open', 'found', 'playing', 'moved', 'press', 'labelled', 'searching', 'chosen', 'leave'];
 
   const select = document.getElementById('language');
   const board = document.getElementById('board');
@@ -187,7 +188,7 @@
   // motion.
   const ORDER = ['trip', 'moving', 'research', 'reading', 'collection'];
   const HOLD = 2600;
-  const TAIL = { wire: 1300, palette: 700, tick: 600, type: 1900, load: 600, add: 700 };
+  const TAIL = { wire: 1300, palette: 700, tick: 600, type: 1900, load: 600, add: 700, open: 2200 };
   const figure = document.querySelector('.scene');
   let autoplay = false, autoTimer = 0, autoStart = 0, autoLeft = 0;
   const holds = new Set();
@@ -346,14 +347,42 @@
         return;
       case 'lift': if (!instant) pane.querySelector('.mover').classList.add('lifted'); return;
       case 'move': moveCard(pane, instant); return;
-      case 'palette': pane.querySelector('.palette').classList.add(a); if (a === 'open') pane.classList.add('searching'); return;
+      case 'palette': if (instant && a === 'chosen') return; pane.querySelector('.palette').classList.add(a); if (a === 'open') pane.classList.add('searching'); return;
+      case 'open': if (!instant) openBoard(pane, a, b); return;
     }
+  }
+
+  // ⌘K's result is picked: the palette goes, the board it lives on opens finished, with the found card selected.
+  // The finished frame (reduced motion, ?still) stays on the search's results.
+  function openBoard(pane, name, card) {
+    pane.querySelector('.palette').classList.add('leave');
+    timers.push(setTimeout(() => {
+      const there = panes[name];
+      finish(there);
+      there.querySelector(card).classList.add('picked');
+      pane.classList.add('away');
+      there.classList.add('on', 'arriving');
+      timers.push(setTimeout(() => there.classList.remove('arriving'), 260));
+      board.dataset.at = name;
+      labelBoard();
+      relayoutWires();
+    }, 160));
+  }
+
+  function closeOpened() {   // a board ⌘K opened goes back to how it was
+    const name = board.dataset.at;
+    if (!name) return;
+    delete board.dataset.at;
+    panes[name].querySelectorAll('.picked').forEach(n => n.classList.remove('picked'));
+    if (name !== scene) panes[name].classList.remove('on', 'leaving');
+    Object.values(panes).forEach(p => p.classList.remove('away'));
   }
 
   // The board as it starts: nothing on it (the moved card back at the top of To do, typed text empty).
   function reset(pane) {
     timers.forEach(clearTimeout);
     timers = [];
+    if (board.dataset.at && board.dataset.at !== pane.dataset.pane) closeOpened();
     pane.querySelectorAll('.' + STATE.join(',.')).forEach(n => n.classList.remove(...STATE));
     pane.classList.remove('searching');
     pill.querySelectorAll('.press').forEach(n => n.classList.remove('press'));
@@ -388,7 +417,8 @@
   }
 
   function labelBoard() {
-    title.textContent = text(`${scene === 'collection' ? 'col' : scene}.board`);
+    const at = board.dataset.at || scene;
+    title.textContent = text(`${at === 'collection' ? 'col' : at}.board`);
     board.setAttribute('aria-label', T[lang].labels[scene]);
   }
 
@@ -397,12 +427,27 @@
     document.querySelectorAll('[data-t]').forEach(n => { if (t[n.dataset.t] != null) n.innerHTML = t[n.dataset.t]; });
     board.querySelectorAll('[data-s]').forEach(n => { n.textContent = text(n.dataset.s); });
     board.querySelectorAll('[data-type]').forEach(n => { if (n.textContent) n.textContent = text(n.dataset.type); });
+    document.querySelectorAll('[data-sb]').forEach(n => { n.textContent = text(n.dataset.sb).split(/\s*[·・]\s*/).pop(); });
+    markMatches();
     document.documentElement.lang = t.lang;
     document.title = t.title;
     tablist.setAttribute('aria-label', t.scenes);
     select.value = lang;
     labelBoard();
     relayoutWires();
+  }
+
+  // ⌘K's results show where the query matched.
+  function markMatches() {
+    const q = text('research.query');
+    board.querySelectorAll('.result .what').forEach(n => {
+      const full = n.textContent, i = full.indexOf(q);
+      if (i < 0) return;
+      n.textContent = '';
+      const mark = document.createElement('mark');
+      mark.textContent = q;
+      n.append(full.slice(0, i), mark, full.slice(i + q.length));
+    });
   }
 
   // Arrows already drawn follow their cards when the text or the width changes.
@@ -414,7 +459,7 @@
   // one builds.
   function show(next, auto = false) {
     if (!auto) stopAuto();   // the visitor picked: autoplay stops for good
-    const from = panes[scene], to = panes[next];
+    const from = board.dataset.at ? panes[board.dataset.at] : panes[scene], to = panes[next];
     if (next === scene) { play(to); return; }
     scene = next;
     tabs.forEach(b => {
@@ -427,6 +472,7 @@
     Object.values(panes).forEach(p => { if (p !== from) p.classList.remove('on', 'leaving'); });
     const enter = () => {
       from.classList.remove('on', 'leaving');
+      closeOpened();
       to.classList.add('on');
       labelBoard();
       play(to);
