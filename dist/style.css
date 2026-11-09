@@ -268,39 +268,67 @@ h1 { font-size: clamp(32px, 4.2vw, 46px); line-height: 1.3; letter-spacing: 0; m
 .tabs button[aria-selected="true"] { color: var(--ink); background: rgba(30, 32, 31, 0.07); font-weight: 500; }
 @media (hover: hover) and (pointer: fine) { .tabs button:hover { color: var(--ink); } }
 
-/* Collect, Arrange, Yours: a verb, one line, and a small drawing in the board's own vocabulary */
-.features { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; padding: 64px 0 72px; border-top: 1px solid var(--hairline); }
-.features h2 { font-size: 17px; font-weight: 500; letter-spacing: -0.1px; margin: 20px 0 6px; }
-.features p { margin: 0; color: var(--muted); font-size: 15px; line-height: 1.6; text-wrap: pretty; max-width: 22em; }
+/* Collect, Arrange, Yours: a verb, one line, and the act itself drawn in the board's own vocabulary */
+.features { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; padding: 64px 0 72px; border-top: 1px solid var(--hairline); }
+.features h2 { font-size: 18px; font-weight: 500; margin: 18px 0 6px; }
+.features p { margin: 0; color: var(--muted); font-size: 15px; line-height: 1.65; text-wrap: pretty; max-width: 22em; }
 .sketch {
-  position: relative; height: 132px; border-radius: 12px; background: rgba(250, 249, 246, 0.45);
-  box-shadow: inset 0 0 0 1px var(--hairline); overflow: hidden; display: grid; place-items: center;
+  position: relative; height: 176px; border-radius: 14px; overflow: hidden; background: var(--ground);
+  box-shadow: inset 0 0 0 1px var(--hairline);
 }
-/* Collect: a link card lifted over the dashed spot it will land on */
-.sketch .target { position: absolute; width: 96px; height: 76px; border-radius: 6px; border: 1.2px dashed rgba(30, 32, 31, 0.28); background: rgba(30, 32, 31, 0.03); transform: translate(10px, 8px); }
-.mini-card {
-  position: relative; width: 96px; height: 76px; border-radius: 6px; background: var(--card); overflow: hidden;
-  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.05), 0 6px 14px rgba(0, 0, 0, 0.12); transform: translate(-6px, -6px) rotate(-3deg);
-  display: grid; grid-template-rows: 42px auto auto; gap: 5px; padding-bottom: 8px;
+.sketch .sk-note { display: block; height: 22px; border-radius: 4px; background: var(--card); box-shadow: var(--card-shadow); }
+.sketch .sk-note.short { width: 70%; }
+.sketch .sk-title { display: flex; align-items: center; gap: 5px; font-size: 10px; font-weight: 500; color: var(--sage); }
+.sketch .sk-title i { width: 6px; height: 6px; border-radius: 2px; background: var(--sage); }
+.sketch .sk-title.plain { color: var(--muted); }
+.sketch svg path { fill: none; stroke: #7A7D78; stroke-width: 1.4; stroke-linecap: round; stroke-linejoin: round; }
+
+/* Collect: ⌘V and the pasted address, then the card it became */
+.paste { position: absolute; left: 18px; top: 18px; display: flex; align-items: center; gap: 8px; padding: 6px 10px 6px 6px; border-radius: 999px; background: var(--card); box-shadow: var(--card-shadow); }
+.key { font: 10px ui-monospace, "SF Mono", Menlo, monospace; padding: 2px 5px; border-radius: 4px; box-shadow: inset 0 0 0 1px rgba(30, 32, 31, 0.2); }
+.paste-url { font-size: 11px; color: var(--muted); }
+.collect .sk-arrow { position: absolute; left: 34px; top: 52px; width: 60px; height: 44px; overflow: visible; }
+.sk-card {
+  position: absolute; right: 20px; bottom: 16px; width: 150px; border-radius: 6px; overflow: hidden; background: var(--card);
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.05), 0 8px 18px -6px rgba(0, 0, 0, 0.18); transition: transform 260ms var(--ease-out), box-shadow 260ms var(--ease-out);
 }
-.mini-media { background: linear-gradient(135deg, #C9A27E, #8E5B3E 55%, #5E3A2A); }
-.mini-line { height: 5px; margin: 0 8px; border-radius: 3px; background: rgba(30, 32, 31, 0.55); }
-.mini-line.short { width: 40%; background: rgba(30, 32, 31, 0.22); }
-/* Arrange: a sage region holding two notes, an arrow to a third */
-.sketch.arrange { grid-template-columns: auto 52px auto; place-content: center; align-items: center; gap: 2px; }
-.mini-region { display: grid; gap: 6px; padding: 18px 8px 8px; border-radius: 10px; border: 1px dashed rgba(111, 130, 112, 0.55); background: rgba(111, 130, 112, 0.06); position: relative; }
-.mini-region::before { content: ""; position: absolute; top: 7px; left: 9px; width: 6px; height: 6px; border-radius: 2px; background: var(--sage); }
-.mini-note { display: block; width: 64px; height: 20px; border-radius: 4px; background: var(--card); box-shadow: var(--card-shadow); }
-.mini-note.solo { width: 56px; height: 34px; }
-.sketch.arrange svg { width: 52px; height: 36px; overflow: visible; }
-.sketch.arrange path { fill: none; stroke: #7A7D78; stroke-width: 1.4; stroke-linecap: round; stroke-linejoin: round; }
-/* Yours: the workspace as Finder shows it */
-.finder { display: grid; gap: 3px; padding: 10px 14px; border-radius: 8px; background: var(--card); box-shadow: var(--card-shadow); min-width: 168px; }
-.row { display: flex; align-items: center; gap: 7px; font: 11px/1.5 ui-monospace, "SF Mono", Menlo, monospace; color: var(--ink); }
-.row.sub { padding-left: 16px; color: var(--muted); }
-.row::before { content: ""; width: 12px; height: 9px; border-radius: 2px; flex: none; }
-.row.folder::before { background: #8FB3C9; box-shadow: inset 0 2px 0 rgba(255, 255, 255, 0.35); }
-.row.file::before { width: 9px; height: 11px; background: #fff; box-shadow: inset 0 0 0 1px rgba(30, 32, 31, 0.25); }
+.sk-media { display: grid; place-items: center; height: 62px; background: linear-gradient(135deg, #C9A27E, #8E5B3E 55%, #5E3A2A); }
+.sk-media i { width: 22px; height: 22px; border-radius: 50%; background: rgba(255, 255, 255, 0.92); position: relative; }
+.sk-media i::after { content: ""; position: absolute; left: 9px; top: 6.5px; border-left: 7px solid var(--ink); border-top: 4.5px solid transparent; border-bottom: 4.5px solid transparent; }
+.sk-meta { display: grid; gap: 1px; padding: 6px 8px 7px; }
+.sk-meta b { font-size: 11.5px; font-weight: 500; }
+.sk-meta span { font: 8.5px ui-monospace, "SF Mono", Menlo, monospace; color: var(--muted); }
+
+/* Arrange: a region and a column, an arrow with its label between them */
+.sketch.arrange { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 4px; padding: 0 16px; }
+.sk-region { display: grid; gap: 6px; padding: 10px 8px 8px; border-radius: 10px; border: 1px dashed rgba(111, 130, 112, 0.55); background: rgba(111, 130, 112, 0.06); }
+.sk-column { display: grid; gap: 6px; padding: 9px 8px 8px; border-radius: 10px; background: var(--well); }
+.sk-link { position: relative; width: 64px; display: grid; place-items: center; }
+.sk-link svg { width: 64px; height: 30px; overflow: visible; }
+.sk-label { position: absolute; top: -14px; left: 50%; transform: translateX(-50%); white-space: nowrap; font-size: 9.5px; padding: 3px 6px; border-radius: 999px; background: var(--card); box-shadow: 0 0 0 1px var(--hairline); transition: transform 260ms var(--ease-out); }
+
+/* Yours: the workspace in Finder, and a peek inside a board's file */
+.finder { position: absolute; left: 18px; top: 16px; width: 62%; border-radius: 8px; overflow: hidden; background: var(--card); box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.06), 0 6px 14px -6px rgba(0, 0, 0, 0.16); }
+.fbar { display: flex; align-items: center; gap: 4px; padding: 6px 8px; border-bottom: 1px solid var(--hairline); font-size: 9.5px; color: var(--muted); }
+.fbar i { width: 6px; height: 6px; border-radius: 50%; background: #D7D5D0; }
+.fbar span { margin-left: 6px; }
+.frow { display: flex; align-items: center; gap: 7px; padding: 3px 10px; font-size: 11px; }
+.frow.sub { padding-left: 26px; color: var(--muted); }
+.frow:last-child { padding-bottom: 8px; }
+.ficon { flex: none; border-radius: 2px; }
+.ficon.folder { width: 12px; height: 9px; background: #8FB3C9; box-shadow: inset 0 2px 0 rgba(255, 255, 255, 0.35); }
+.ficon.file { width: 9px; height: 11px; background: #fff; box-shadow: inset 0 0 0 1px rgba(30, 32, 31, 0.25); }
+.json { position: absolute; right: 16px; bottom: 14px; margin: 0; padding: 8px 10px; border-radius: 6px; background: #2E302F; color: #E9E6DF;
+  font: 9.5px/1.5 ui-monospace, "SF Mono", Menlo, monospace; box-shadow: 0 8px 18px -6px rgba(0, 0, 0, 0.3); transition: transform 260ms var(--ease-out); }
+.json span { color: #B9D0B4; }
+
+/* A little response under the pointer, never on its own */
+@media (hover: hover) and (pointer: fine) {
+  .features article:hover .sk-card { transform: translate(-4px, -4px); box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.05), 0 14px 26px -8px rgba(0, 0, 0, 0.22); }
+  .features article:hover .sk-label { transform: translateX(-50%) translateY(-2px); }
+  .features article:hover .json { transform: translate(-4px, -4px); }
+}
+@media (prefers-reduced-motion: reduce) { .sk-card, .sk-label, .json { transition: none; } }
 
 .footer { display: flex; justify-content: space-between; padding: 24px 0 40px; font-size: 13px; color: var(--muted); border-top: 1px solid var(--hairline); }
 .footer a { text-decoration: none; }

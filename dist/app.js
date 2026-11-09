@@ -9,6 +9,7 @@
       lang: 'zh-CN', title: 'Nook — 一处安静的地方', langLabel: '语言',
       headline: '一处安静的地方，<br>留给少数重要的项目。', lede: 'Mac 上的白板，文件归你。', download: '下载 macOS 版',
       v1t: '收集', v1: '粘贴链接、拖入图片，就是一张卡片。', v2t: '整理', v2: '区域、栏和箭头，让关系一目了然。', v3t: '归你', v3: '白板是你文件夹里的普通文件。没有账号，不收集数据。',
+      sk1: '秋天的京都', sk2r: '第二天', sk2a: '去之前先看', sk2c: '要办', sk3t: '京都',
       trip: '旅行', moving: '规划', research: '研究', reading: '读书', collection: '收藏', scenes: '示例白板', home: '主页',
       labels: {
         trip: '旅行白板“京都”：“第二天 · 东山 → 锦市场”区域里有两张便签，旁边是一张行程清单；右边是清水寺的地点卡片和一段 YouTube 视频，箭头从视频指向清水寺，写着“去之前先看”',
@@ -37,6 +38,7 @@
       lang: 'en', title: 'Nook — a calm place', langLabel: 'Language',
       headline: 'A calm place for the few<br>projects that matter.', lede: 'Boards for your Mac. Your files, your folder.', download: 'Download for Mac',
       v1t: 'Collect', v1: 'Paste a link or drop an image. It becomes a card.', v2t: 'Arrange', v2: 'Regions, columns and arrows show how things relate.', v3t: 'Yours', v3: 'Boards are plain files in your folder. No account, no tracking.',
+      sk1: 'Kyoto in autumn', sk2r: 'Day 2', sk2a: 'Watch first', sk2c: 'To do', sk3t: 'Kyoto',
       trip: 'Trip', moving: 'Planning', research: 'Research', reading: 'Reading', collection: 'Collection', scenes: 'Example boards', home: 'Home',
       labels: {
         trip: 'A trip board, Kyoto: a “Day 2 · Higashiyama → Nishiki” region with two notes, and a trip checklist beside it; on the right a place card for Kiyomizu-dera and a YouTube video, with an arrow from the video to the temple reading “Watch before going”',
@@ -65,6 +67,7 @@
       lang: 'es', title: 'Nook — un lugar tranquilo', langLabel: 'Idioma',
       headline: 'Un lugar tranquilo<br>para lo que importa.', lede: 'Tableros para tu Mac. Tus archivos, tu carpeta.', download: 'Descargar para Mac',
       v1t: 'Reúne', v1: 'Pega un enlace o suelta una imagen. Se convierte en una tarjeta.', v2t: 'Ordena', v2: 'Regiones, columnas y flechas muestran cómo se relacionan las cosas.', v3t: 'Tuyo', v3: 'Los tableros son archivos normales en tu carpeta. Sin cuenta, sin rastreo.',
+      sk1: 'Kioto en otoño', sk2r: 'Día 2', sk2a: 'Verlo antes', sk2c: 'Por hacer', sk3t: 'Kioto',
       trip: 'Viaje', moving: 'Planes', research: 'Investigación', reading: 'Lectura', collection: 'Colección', scenes: 'Tableros de ejemplo', home: 'Inicio',
       labels: {
         trip: 'Un tablero de viaje, Kioto: una región «Día 2 · Higashiyama → Nishiki» con dos notas y, al lado, la lista del viaje; a la derecha, una tarjeta de lugar de Kiyomizu-dera y un vídeo de YouTube, con una flecha del vídeo al templo que dice «Verlo antes de ir»',
@@ -93,6 +96,7 @@
       lang: 'ja', title: 'Nook — 静かな場所', langLabel: '言語',
       headline: '大切なことのための、<br>静かな場所。', lede: 'Mac のためのボード。ファイルは、あなたのフォルダに。', download: 'Mac 版をダウンロード',
       v1t: '集める', v1: 'リンクを貼る、画像を置く。それがカードになる。', v2t: '整える', v2: 'リージョン、カラム、矢印で、つながりが見える。', v3t: '手元に', v3: 'ボードはフォルダの中の普通のファイル。アカウント不要、追跡なし。',
+      sk1: '秋の京都', sk2r: '2日目', sk2a: '行く前に見る', sk2c: 'やること', sk3t: '京都',
       trip: '旅', moving: '計画', research: '研究', reading: '読書', collection: 'コレクション', scenes: 'ボードの例', home: 'ホーム',
       labels: {
         trip: '旅のボード「京都」：「2日目・東山 → 錦市場」のリージョンにメモ2枚、その横に旅のチェックリスト。右に清水寺の場所カードと YouTube 動画、動画から清水寺へ「行く前に見る」の矢印',

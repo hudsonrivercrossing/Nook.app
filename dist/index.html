@@ -13,7 +13,7 @@
 <link rel="icon" href="assets/favicon.png">
 <link rel="preload" as="image" href="assets/nook-icon.png">
 <link rel="preload" as="font" type="font/woff2" href="assets/fonts/wenkai-screen.woff2" crossorigin>
-<link rel="stylesheet" href="style.css?v=1.4.3">
+<link rel="stylesheet" href="style.css?v=1.5.0">
 </head>
 <body>
 <header class="header wrap">
@@ -190,29 +190,38 @@
   <section class="features wrap">
     <article>
       <div class="sketch collect" aria-hidden="true">
-        <span class="target"></span>
-        <span class="mini-card"><span class="mini-media"></span><span class="mini-line"></span><span class="mini-line short"></span></span>
+        <div class="paste"><span class="key">⌘V</span><span class="paste-url">youtube.com/watch?v=…</span></div>
+        <svg class="sk-arrow" viewBox="0 0 60 44"><path d="M6 4 C 8 26, 26 38, 52 38"/><path d="M46 33 L53 38 L46 43"/></svg>
+        <div class="sk-card">
+          <span class="sk-media"><i></i></span>
+          <span class="sk-meta"><b data-t="sk1">秋天的京都</b><span>VIDEO · YouTube</span></span>
+        </div>
       </div>
       <h2 data-t="v1t">收集</h2>
       <p data-t="v1">粘贴链接、拖入图片，就是一张卡片。</p>
     </article>
     <article>
       <div class="sketch arrange" aria-hidden="true">
-        <span class="mini-region"><span class="mini-note"></span><span class="mini-note"></span></span>
-        <svg viewBox="0 0 60 40"><path d="M2 30 C 24 30, 34 10, 54 10"/><path d="M48 5 L56 10 L48 15"/></svg>
-        <span class="mini-note solo"></span>
+        <div class="sk-region"><span class="sk-title"><i></i><span data-t="sk2r">第二天</span></span><span class="sk-note"></span><span class="sk-note short"></span></div>
+        <div class="sk-link"><svg viewBox="0 0 64 30"><path d="M2 15 C 20 15, 40 15, 58 15"/><path d="M52 10 L59 15 L52 20"/></svg><span class="sk-label" data-t="sk2a">去之前先看</span></div>
+        <div class="sk-column"><span class="sk-title plain" data-t="sk2c">要办</span><span class="sk-note"></span><span class="sk-note"></span><span class="sk-note short"></span></div>
       </div>
       <h2 data-t="v2t">整理</h2>
       <p data-t="v2">区域、栏和箭头，让关系一目了然。</p>
     </article>
     <article>
       <div class="sketch keep" aria-hidden="true">
-        <span class="finder">
-          <span class="row folder">Nook</span>
-          <span class="row folder sub">boards</span>
-          <span class="row folder sub">assets</span>
-          <span class="row file sub">workspace.json</span>
-        </span>
+        <div class="finder">
+          <div class="fbar"><i></i><i></i><i></i><span>Dropbox › Nook</span></div>
+          <div class="frow"><span class="ficon folder"></span>boards</div>
+          <div class="frow sub"><span class="ficon file"></span>board.json</div>
+          <div class="frow"><span class="ficon folder"></span>assets</div>
+          <div class="frow"><span class="ficon file"></span>workspace.json</div>
+        </div>
+        <pre class="json">{
+  "title": "<span data-t="sk3t">京都</span>",
+  "cards": [ … ]
+}</pre>
       </div>
       <h2 data-t="v3t">归你</h2>
       <p data-t="v3">白板是你文件夹里的普通文件。没有账号，不收集数据。</p>
@@ -224,6 +233,6 @@
   <span>Nook 1.0.0</span>
   <a href="https://github.com/hudsonrivercrossing/Nook.app">GitHub</a>
 </footer>
-<script src="app.js?v=1.4.3"></script>
+<script src="app.js?v=1.5.0"></script>
 </body>
 </html>
