@@ -30,15 +30,18 @@ a { color: inherit; }
 .header { display: flex; align-items: center; justify-content: space-between; height: 72px; }
 .brand { display: flex; align-items: center; gap: 10px; text-decoration: none; font-weight: 600; font-size: 17px; letter-spacing: -0.2px; }
 .brand img { display: block; border-radius: 7px; }
-.language {
-  font: inherit; font-size: 14px; color: var(--muted); text-decoration: none;
-  padding: 6px 10px; border-radius: 8px; border: 0; background: none; cursor: pointer;
+.language select {
+  appearance: none; -webkit-appearance: none;
+  font: inherit; font-size: 14px; font-weight: 500; color: var(--muted);
+  padding: 6px 26px 6px 10px; border-radius: 8px; border: 0; cursor: pointer;
+  background: no-repeat right 9px center / 9px 6px
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 9 6'%3E%3Cpath d='M1 1l3.5 3.5L8 1' fill='none' stroke='%235F625C' stroke-width='1.4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
   transition: color 150ms ease-out, background-color 150ms ease-out;
 }
-.language { font-weight: 500; }
 @media (hover: hover) and (pointer: fine) {
-  .language:hover { color: var(--ink); background: rgba(30, 32, 31, 0.05); }
+  .language select:hover { color: var(--ink); background-color: rgba(30, 32, 31, 0.05); }
 }
+.visually-hidden { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 :focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
 
 /* Hero */
@@ -55,7 +58,8 @@ h1 { font-size: clamp(32px, 4.2vw, 46px); line-height: 1.22; letter-spacing: -0.
 }
 .button:active { transform: scale(0.97); }
 
-/* The board illustration: Nook's canvas in miniature (code-built, not a screenshot) */
+/* The board illustration: Nook's canvas in miniature (code-built, not a screenshot), in three scenes */
+.scene { margin: 0; }
 .board {
   position: relative; height: 420px; border-radius: 16px; overflow: hidden;
   background: var(--ground);
@@ -70,6 +74,8 @@ h1 { font-size: clamp(32px, 4.2vw, 46px); line-height: 1.22; letter-spacing: -0.
 }
 .crumb { position: absolute; top: 9px; left: 74px; font-size: 12px; color: var(--muted); background: rgba(250, 249, 246, 0.8); padding: 2px 10px; border-radius: 999px; }
 .crumb b { color: var(--ink); font-weight: 600; }
+.canvas, .crumb b { transition: opacity 120ms ease-out; }
+.board.swap .canvas, .board.swap .crumb b { opacity: 0; }
 .canvas { /* region, arrow, link card: one row that keeps its proportions at any width */
   position: absolute; inset: 58px 24px auto 24px;
   display: grid; grid-template-columns: minmax(0, 1.2fr) 52px minmax(0, 0.85fr); align-items: start;
@@ -91,8 +97,12 @@ h1 { font-size: clamp(32px, 4.2vw, 46px); line-height: 1.22; letter-spacing: -0.
 .arrow path { fill: none; stroke: #7A7D78; stroke-width: 1.4; stroke-linecap: round; stroke-linejoin: round; }
 .card.link { margin-top: 58px; overflow: hidden; }
 .media { height: 112px; background: linear-gradient(135deg, #C9A27E, #8E5B3E 55%, #5E3A2A); display: grid; place-items: center; }
-.play { width: 34px; height: 34px; border-radius: 50%; background: rgba(255, 255, 255, 0.92); position: relative; }
-.play::after { content: ""; position: absolute; left: 13px; top: 10px; border-left: 11px solid var(--ink); border-top: 7px solid transparent; border-bottom: 7px solid transparent; }
+.glyph { width: 34px; height: 34px; border-radius: 50%; background: rgba(255, 255, 255, 0.92); position: relative; }
+.glyph::after { content: ""; position: absolute; left: 13px; top: 10px; border-left: 11px solid var(--ink); border-top: 7px solid transparent; border-bottom: 7px solid transparent; }
+[data-scene="project"] .media { background: linear-gradient(135deg, #D9DEE0, #A9B9BF 55%, #6F8A94); }
+[data-scene="project"] .glyph { background: none; }
+[data-scene="project"] .glyph::after { content: "Aa"; position: static; border: 0; display: grid; place-items: center; height: 100%; font: 600 26px/1 Georgia, "Times New Roman", serif; color: rgba(255, 255, 255, 0.95); }
+[data-scene="reading"] .media { background: linear-gradient(135deg, #C8D2C4, #8FA28E 55%, #5D705E); }
 .meta { padding: 8px 11px 10px; display: grid; gap: 2px; }
 .meta b { font-weight: 500; font-size: 12.5px; }
 .meta span { font: 10px ui-monospace, "SF Mono", Menlo, monospace; color: var(--muted); letter-spacing: 0.3px; }
@@ -103,21 +113,27 @@ h1 { font-size: clamp(32px, 4.2vw, 46px); line-height: 1.22; letter-spacing: -0.
 }
 .pill i { width: 14px; height: 12px; border-radius: 3px; border: 1.5px solid rgba(255, 255, 255, 0.85); }
 .pill i:last-child { border-color: rgba(255, 255, 255, 0.35); }
+.tabs { display: flex; justify-content: center; gap: 4px; margin-top: 14px; }
+.tabs button {
+  font: inherit; font-size: 13px; color: var(--muted); background: none; border: 0; cursor: pointer;
+  padding: 5px 12px; border-radius: 999px; transition: color 150ms ease-out, background-color 150ms ease-out;
+}
+.tabs button[aria-selected="true"] { color: var(--ink); background: rgba(30, 32, 31, 0.07); font-weight: 500; }
+@media (hover: hover) and (pointer: fine) { .tabs button:hover { color: var(--ink); } }
 
 /* Features */
 .features { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; padding: 48px 0; border-top: 1px solid var(--hairline); }
 .features p { margin: 0; font-size: 16px; text-wrap: pretty; }
 .footer { display: flex; justify-content: space-between; padding: 24px 0 40px; font-size: 13px; color: var(--muted); border-top: 1px solid var(--hairline); }
-.footer-links { display: flex; gap: 20px; }
 .footer a { text-decoration: none; }
 @media (hover: hover) and (pointer: fine) { .footer a:hover { color: var(--ink); } }
 
 /* One entrance, once per visit (app.js sets .played); none under reduced motion */
 .intro { animation: rise 450ms var(--ease-out) both; }
-.board.intro { animation-delay: 90ms; }
+.scene.intro { animation-delay: 90ms; }
 html.played .intro { animation: none; }
 @keyframes rise { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
-@media (prefers-reduced-motion: reduce) { .intro { animation: none; } .button { transition: none; } }
+@media (prefers-reduced-motion: reduce) { .intro { animation: none; } .button, .canvas, .crumb b { transition: none; } }
 
 @media (max-width: 860px) {
   .hero { grid-template-columns: 1fr; gap: 40px; padding: 40px 0 56px; }
