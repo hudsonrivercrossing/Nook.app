@@ -1,6 +1,7 @@
 /* Nook's own Linen palette (Nook/Theme/Theme.swift): ground, card, ink, muted text, hairline, region hues. */
 :root {
-  --ground: #EAE8E3;
+  --ground: #EAE8E3;   /* the app's Linen ground: the board illustration's window */
+  --page: oklch(0.968 0.005 85);   /* lighter than the ground, same warm hue: the window sits on paper */
   --card: #FAF9F6;
   --ink: #1E201F;
   --muted: #5F625C;
@@ -23,9 +24,9 @@
 html { -webkit-text-size-adjust: 100%; }
 body {
   margin: 0;
-  background: var(--ground);
+  background: var(--page);
   color: var(--ink);
-  font: 16px/1.6 -apple-system, BlinkMacSystemFont, "SF Pro Text", "PingFang SC", "Hiragino Sans GB", "Helvetica Neue", sans-serif;
+  font: 16px/1.6 "Nook WenKai", "PingFang SC", "Hiragino Sans GB", serif;
   -webkit-font-smoothing: antialiased;
 }
 a { color: inherit; }
@@ -33,7 +34,7 @@ a { color: inherit; }
 
 /* Header */
 .header { display: flex; align-items: center; justify-content: space-between; height: 72px; }
-.brand { display: flex; align-items: center; gap: 10px; text-decoration: none; font-weight: 600; font-size: 17px; letter-spacing: -0.2px; }
+.brand { display: flex; align-items: center; gap: 10px; text-decoration: none; font-weight: 500; font-size: 18px; letter-spacing: 0; }
 .brand img { display: block; border-radius: 7px; }
 .language select {
   appearance: none; -webkit-appearance: none;
@@ -51,7 +52,7 @@ a { color: inherit; }
 
 /* Hero */
 .hero { display: grid; grid-template-columns: 1fr 1.05fr; gap: 56px; align-items: center; padding: 72px 0 88px; }
-h1 { font-size: clamp(32px, 4.2vw, 46px); line-height: 1.22; letter-spacing: -0.6px; margin: 0 0 20px; font-weight: 650; text-wrap: balance; }
+h1 { font-size: clamp(32px, 4.2vw, 46px); line-height: 1.3; letter-spacing: 0; margin: 0 0 20px; font-weight: 500; text-wrap: balance; }
 .lede { font-size: 18px; color: var(--muted); margin: 0 0 32px; max-width: 30em; text-wrap: pretty; }
 .button {
   display: inline-flex; align-items: center; gap: 8px; height: 44px; padding: 0 22px; border-radius: 999px;
@@ -66,7 +67,7 @@ h1 { font-size: clamp(32px, 4.2vw, 46px); line-height: 1.22; letter-spacing: -0.
 /* The board illustration: Nook's canvas in miniature (code-built, not a screenshot), in three scenes */
 .scene { margin: 0; }
 .board {
-  position: relative; height: 420px; border-radius: 16px; overflow: hidden;
+  position: relative; height: 440px; border-radius: 16px; overflow: hidden;
   background: var(--ground);
   box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.06), 0 2px 6px rgba(0, 0, 0, 0.05), 0 24px 48px -24px rgba(0, 0, 0, 0.18);
   user-select: none; pointer-events: none;
@@ -78,143 +79,187 @@ h1 { font-size: clamp(32px, 4.2vw, 46px); line-height: 1.22; letter-spacing: -0.
               radial-gradient(circle at 54px 19px, #D7D5D0 5px, transparent 5.5px);
 }
 .crumb { position: absolute; top: 9px; left: 74px; font-size: 12px; color: var(--muted); background: rgba(250, 249, 246, 0.8); padding: 2px 10px; border-radius: 999px; }
-.crumb b { color: var(--ink); font-weight: 600; }
-/* Three scenes, each its own layout; one is on at a time */
-.pane { position: absolute; inset: 58px 24px 70px; visibility: hidden; }
+.crumb b { color: var(--ink); font-weight: 500; }
+/* Three example boards, each built in front of the visitor; one is on at a time */
+.pane { position: absolute; inset: 56px 22px 70px; visibility: hidden; }
 .pane.on { visibility: visible; }
 .pane.leaving { visibility: visible; opacity: 0; transition: opacity 120ms ease-in; }
-.card { background: var(--card); border-radius: 6px; box-shadow: var(--card-shadow); font: 13px/1.55 "Nook WenKai", "PingFang SC", serif; }
-.card.text { padding: 9px 11px; }
+.card { background: var(--card); border-radius: 6px; box-shadow: var(--card-shadow); font: 12.5px/1.55 "Nook WenKai", "PingFang SC", "Hiragino Sans GB", serif; }
+.card.text { padding: 8px 10px; min-height: 35px; }
 .box { width: 12px; height: 12px; border-radius: 3px; border: 1.2px solid var(--sage); display: inline-grid; place-items: center; font-size: 9px; line-height: 1; color: var(--sage); flex: none; }
-.arrow { overflow: visible; }
-.arrow path { fill: none; stroke: #7A7D78; stroke-width: 1.4; stroke-linecap: round; stroke-linejoin: round; }
-.glyph { width: 34px; height: 34px; border-radius: 50%; background: rgba(255, 255, 255, 0.92); position: relative; flex: none; }
-.glyph::after { content: ""; position: absolute; left: 13px; top: 10px; border-left: 11px solid var(--ink); border-top: 7px solid transparent; border-bottom: 7px solid transparent; }
 .meta { display: grid; gap: 2px; min-width: 0; }
-.meta b { font-weight: 500; font-size: 13px; }
-.meta span { font: 10px ui-monospace, "SF Mono", Menlo, monospace; color: var(--muted); letter-spacing: 0.3px; }
+.meta b { font-weight: 500; font-size: 12.5px; }
+.meta > span { font: 9.5px ui-monospace, "SF Mono", Menlo, monospace; color: var(--muted); letter-spacing: 0.3px; }
+.glyph { width: 30px; height: 30px; border-radius: 50%; background: rgba(255, 255, 255, 0.92); position: relative; flex: none; }
+.glyph::after { content: ""; position: absolute; left: 12px; top: 9px; border-left: 9px solid var(--ink); border-top: 6px solid transparent; border-bottom: 6px solid transparent; }
 
-/* Trip: a sage region (a note, a checklist), an arrow to a video */
-.pane.trip { display: grid; grid-template-columns: minmax(0, 1.2fr) 52px minmax(0, 0.85fr); align-items: start; }
-.region { position: relative; display: grid; gap: 8px; padding: 30px 10px 10px; border-radius: 14px; background: rgba(111, 130, 112, 0.05); border: 1px dashed rgba(111, 130, 112, 0.55); }
-.region-title { position: absolute; top: 8px; left: 12px; display: flex; align-items: center; gap: 6px; font-size: 11px; font-weight: 600; color: var(--sage); }
-.region-title i { width: 7px; height: 7px; border-radius: 2px; background: var(--sage); }
-.card.list { padding: 8px 11px; }
-.card.list p { margin: 0; display: flex; align-items: center; gap: 7px; }
-.done span:last-child { text-decoration: line-through; color: var(--muted); }
-.trip .arrow { width: 100%; height: 70px; margin-top: 72px; }
-.card.video { margin-top: 40px; overflow: hidden; }
-.card.video .media { height: 112px; display: grid; place-items: center; background: linear-gradient(135deg, #C9A27E, #8E5B3E 55%, #5E3A2A); }
-.card.video .meta { padding: 8px 11px 10px; }
+/* A step: hidden until the build reaches it, then it settles in (280ms ease-out); a region draws a little larger */
+.step { opacity: 0; transform: translateY(8px) scale(0.98); transition: opacity 420ms ease-out, transform 520ms var(--ease-out); }
+.step.in { opacity: 1; transform: none; }
+.region.step, .column.step { transform: scale(0.97); }
+.region.step.in, .column.step.in { transform: none; }
+.instant .step, .instant .wires path, .instant .wire-label, .instant .pending, .instant .media, .instant .meta, .instant .map,
+.instant .box > span, .instant .palette { transition: none !important; animation: none !important; }
 
-/* Project: two columns, an arrow from To do to Done */
-.pane.project { display: grid; grid-template-columns: minmax(0, 1fr) 56px minmax(0, 1fr); align-items: start; }
-.column { display: grid; gap: 8px; padding: 10px; border-radius: 14px; background: var(--well); }
-.column-title { font-size: 11px; font-weight: 600; color: var(--muted); padding: 0 2px 2px; }
-.done-card { display: flex; align-items: center; gap: 7px; }
-.done-card span:last-child { text-decoration: line-through; color: var(--muted); }
-.project .arrow { width: 100%; height: 70px; margin-top: 36px; }
-.card.shot { height: 86px; padding: 10px; display: grid; gap: 6px; align-content: start; background: linear-gradient(#FAF9F6, #F1EFEA); }
-.card.shot span { height: 6px; border-radius: 3px; background: rgba(30, 32, 31, 0.14); }
-.card.shot span:first-child { height: 26px; border-radius: 4px; background: rgba(111, 138, 148, 0.35); }
-.card.shot span:last-child { width: 60%; }
-
-/* Reading: a quote, a book cover, an arrow to a playlist */
-.pane.reading { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.8fr); grid-template-rows: auto auto; gap: 10px 24px; }
-.card.quote { grid-column: 1; align-self: start; padding: 18px 16px; font-size: 20px; line-height: 1.4; font-weight: 500; }
-.card.cover { grid-column: 2; grid-row: 1 / span 2; justify-self: center; width: 118px; height: 168px; padding: 14px 12px; display: flex; flex-direction: column; justify-content: space-between; color: #F4F1EA; background: linear-gradient(160deg, #5D705E, #3E4E40); box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.06), 0 8px 18px -6px rgba(0, 0, 0, 0.3); border-radius: 4px 6px 6px 4px; }
-.card.cover b { font-size: 18px; line-height: 1.25; font-weight: 500; }
-.card.cover span { font-family: -apple-system, BlinkMacSystemFont, sans-serif; }
-.card.cover span { font-size: 9.5px; letter-spacing: 0.6px; opacity: 0.8; }
-.reading .arrow { position: absolute; left: 36%; top: 92px; width: 120px; height: 70px; }
-.card.music { grid-column: 1; align-self: end; display: flex; align-items: center; gap: 10px; padding: 9px; background: #2E3B33; color: #F4F1EA; }
-.card.music .art { width: 42px; height: 42px; border-radius: 4px; flex: none; background: linear-gradient(135deg, #C8D2C4, #8FA28E 55%, #5D705E); }
-.card.music .meta { flex: 1; }
-.card.music .meta b { color: #F4F1EA; }
-.card.music .meta span { color: rgba(244, 241, 234, 0.65); }
-.card.music .glyph { width: 28px; height: 28px; }
-.card.music .glyph::after { left: 11px; top: 8px; border-left-width: 9px; border-top-width: 6px; border-bottom-width: 6px; }
-
-/* Entering: cards rise in turn (45ms apart, 280ms ease-out), then the arrow draws (320ms) */
-.pane.on [data-a] { animation: card-in 280ms var(--ease-out) both; animation-delay: calc(var(--i, 0) * 45ms); }
-.arrow path { stroke-dasharray: 1; stroke-dashoffset: 1; }
-.arrow.draw path { stroke-dashoffset: 0; animation: draw 320ms var(--ease-out) both; }
-.arrow.draw path + path { animation-delay: 240ms; animation-duration: 120ms; }
-@keyframes card-in { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
-@keyframes draw { from { stroke-dashoffset: 1; } to { stroke-dashoffset: 0; } }
-html.played .pane.on.first [data-a] { animation: none; }
-.pane.on [data-a].moved { animation: none; }
-/* Each scene's story: steps are classes the timeline adds (app.js); at rest every step is on */
-/* Trip: the link card loads its preview, a checklist item ticks */
-.card.video { position: relative; }
-.video .media, .video .meta { opacity: 0; transition: opacity 260ms ease-out; }
-.video.loaded .media, .video.loaded .meta { opacity: 1; }
-.video .pending { position: absolute; inset: 0; display: grid; grid-template-rows: 1fr auto auto; gap: 6px; padding: 0 0 10px; background: var(--card); transition: opacity 200ms ease-out; }
-.video.loaded .pending { opacity: 0; }
-.pending .well { display: grid; place-items: center; background: var(--well); }
-.pending .well .glyph { opacity: 0.35; }
-.pending .url { padding: 0 11px; font: 10.5px -apple-system, BlinkMacSystemFont, sans-serif; color: var(--muted); }
-.pending .skel { height: 6px; margin: 0 11px; width: 55%; border-radius: 3px; background: linear-gradient(90deg, rgba(30, 32, 31, 0.08), rgba(30, 32, 31, 0.16), rgba(30, 32, 31, 0.08)); background-size: 200% 100%; animation: shimmer 900ms linear 2; }
+/* A link card: the pasted address first, then its preview */
+.video, .place, .music { position: relative; overflow: hidden; }
+.video .media, .video .meta, .place .map, .place .meta { opacity: 0; transition: opacity 260ms ease-out; }
+.loaded .media, .loaded .meta, .loaded .map { opacity: 1 !important; }
+.pending { position: absolute; inset: 0; display: grid; grid-template-rows: 1fr auto auto; gap: 6px; padding: 0 0 10px; background: var(--card); transition: opacity 220ms ease-out; }
+.loaded .pending { opacity: 0; pointer-events: none; }
+.pending { transition-duration: 320ms; }
+.pending .well { background: var(--well); display: grid; place-items: center; }
+.pending .well .glyph { opacity: 0.3; }
+.pending .url { padding: 0 10px; font: 10px "Nook WenKai", "PingFang SC", "Hiragino Sans GB", serif; color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.pending .skel { height: 6px; margin: 0 10px; width: 55%; border-radius: 3px; background: linear-gradient(90deg, rgba(30, 32, 31, 0.07), rgba(30, 32, 31, 0.15), rgba(30, 32, 31, 0.07)); background-size: 200% 100%; animation: shimmer 900ms linear infinite; }
+.loaded .pending .skel { animation: none; }
 @keyframes shimmer { from { background-position: 100% 0; } to { background-position: -100% 0; } }
-.box > span { display: inline-block; opacity: 0; transform: scale(0.4); transition: opacity 160ms ease-out, transform 220ms var(--ease-out); }
-.tick.ticked .box > span, .mover.ticked .box > span { opacity: 1; transform: none; }
-.tick span:last-child { transition: color 200ms ease-out; }
-.tick.ticked span:last-child { color: var(--muted); text-decoration: line-through; }
 
-/* Project: a card moves from To do to Done and ticks; then ⌘K finds a card */
-.mover { display: flex; align-items: center; gap: 7px; position: relative; z-index: 2; }
-.mover.lifted { box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.05), 0 10px 22px rgba(0, 0, 0, 0.16); }
-.mover.ticked span:last-child { color: var(--muted); text-decoration: line-through; }
-.slot { height: 0; transition: height 260ms var(--ease-out); }
-.palette {
-  position: absolute; left: 50%; top: 0; width: min(78%, 300px); transform: translate(-50%, -6px) scale(0.98); opacity: 0; pointer-events: none;
-  background: var(--card); border-radius: 12px; padding: 6px; box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.06), 0 16px 32px -8px rgba(0, 0, 0, 0.22);
-  transition: opacity 180ms ease-out, transform 220ms var(--ease-out); z-index: 3;
+/* Checkboxes that tick */
+.box > span { display: inline-block; opacity: 0; transform: scale(0.4); transition: opacity 160ms ease-out, transform 220ms var(--ease-out); }
+.ticked .box > span { opacity: 1; transform: none; }
+.ticked > span:last-child { color: var(--muted); text-decoration: line-through; transition: color 200ms ease-out; }
+
+/* An arrow with its label, drawn from card to card (app.js measures it) */
+.wires { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; pointer-events: none; z-index: 1; }
+.wires path { fill: none; stroke: #7A7D78; stroke-width: 1.4; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 1; stroke-dashoffset: 1; }
+.wires.draw path { stroke-dashoffset: 0; transition: stroke-dashoffset 640ms cubic-bezier(0.65, 0, 0.35, 1); }
+.wires.draw .head { transition-delay: 600ms; transition-duration: 200ms; }
+.wire-label {
+  position: absolute; z-index: 2; transform: translate(-50%, -50%) scale(0.9); opacity: 0;
+  font: 11px/1 "Nook WenKai", "PingFang SC", "Hiragino Sans GB", serif; color: var(--ink); white-space: nowrap;
+  padding: 4px 8px; border-radius: 999px; background: var(--card); box-shadow: 0 0 0 1px var(--hairline);
+  transition: opacity 260ms ease-out 680ms, transform 320ms var(--ease-out) 680ms;
 }
-.palette.open { opacity: 1; transform: translate(-50%, 0) scale(1); }
-.palette.closed { opacity: 0; transform: translate(-50%, -4px) scale(0.98); transition-duration: 140ms; }
-.field { display: flex; align-items: center; gap: 8px; padding: 8px 10px; font: 13px -apple-system, BlinkMacSystemFont, "PingFang SC", sans-serif; border-bottom: 1px solid var(--hairline); }
+.wire-label.labelled { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+
+/* Trip: a region (two notes, a checklist) beside a video and a place */
+.pane.trip { display: grid; grid-template-columns: minmax(0, 1.12fr) minmax(0, 0.88fr); gap: 28px; align-items: start; }
+.region { position: relative; display: grid; gap: 7px; padding: 28px 9px 9px; border-radius: 14px; background: rgba(111, 130, 112, 0.05); border: 1px dashed rgba(111, 130, 112, 0.55); }
+.region-title { position: absolute; top: 8px; left: 11px; display: flex; align-items: center; gap: 6px; font: 600 10.5px "Nook WenKai", "PingFang SC", "Hiragino Sans GB", serif; color: var(--sage); }
+.region-title i { width: 7px; height: 7px; border-radius: 2px; background: var(--sage); }
+.card.list { padding: 7px 10px; display: grid; gap: 1px; }
+.card.list p { margin: 0; display: flex; align-items: center; gap: 7px; }
+.card.list p.done > span:last-child { text-decoration: line-through; color: var(--muted); }
+.side { display: grid; gap: 10px; }
+.pane.trip .side { gap: 46px; }   /* room for the arrow and its label between the place and the video */
+.video .media { height: 80px; display: grid; place-items: center; background: linear-gradient(135deg, #C9A27E, #8E5B3E 55%, #5E3A2A); }
+.video .meta, .place .meta { padding: 7px 10px 9px; }
+.place .map { height: 58px; position: relative; background:
+  linear-gradient(120deg, transparent 46%, rgba(255, 255, 255, 0.9) 46%, rgba(255, 255, 255, 0.9) 50%, transparent 50%),
+  linear-gradient(20deg, transparent 60%, rgba(255, 255, 255, 0.8) 60%, rgba(255, 255, 255, 0.8) 63%, transparent 63%),
+  linear-gradient(160deg, #D9E3D3, #E8E4D8 60%, #D5DFE3); }
+.place .pin { position: absolute; left: 50%; top: 42%; width: 12px; height: 12px; border-radius: 50% 50% 50% 0; background: #C8553D; transform: translate(-50%, -50%) rotate(-45deg); box-shadow: 0 1px 2px rgba(0, 0, 0, 0.25); }
+
+/* Moving: To do and Done columns beside a floor plan and a child board */
+.pane.moving { display: grid; grid-template-columns: minmax(0, 1.45fr) minmax(0, 0.55fr); gap: 14px; align-items: start; }
+.columns { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; align-items: start; }
+.column { display: grid; gap: 7px; padding: 9px; border-radius: 14px; background: var(--well); }
+.column-title { font: 600 10.5px "Nook WenKai", "PingFang SC", "Hiragino Sans GB", serif; color: var(--muted); padding: 0 2px 1px; }
+.mover, .done-card { display: flex; align-items: center; gap: 7px; }
+.done-card > span:last-child { text-decoration: line-through; color: var(--muted); }
+.mover { position: relative; z-index: 3; }
+.mover.lifted { box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.05), 0 12px 24px rgba(0, 0, 0, 0.18); }
+.moved { transition: none !important; }
+.slot { height: 0; margin-bottom: -7px; transition: height 250ms cubic-bezier(0.65, 0, 0.35, 1); }
+.pane.moving .side { gap: 10px; }
+.card.plan { padding: 8px; display: grid; gap: 6px; }
+.floor { position: relative; height: 92px; border-radius: 3px; background: #FDFCFA; border: 2px solid #3E403F; }
+.floor i { position: absolute; border: 1.2px solid #3E403F; }
+.floor .r1 { left: -2px; top: -2px; width: 55%; height: 58%; }
+.floor .r2 { right: -2px; top: -2px; width: 47%; height: 40%; }
+.floor .r3 { right: -2px; bottom: -2px; width: 47%; height: 62%; border-top-style: dashed; }
+.floor .r4 { left: 18%; bottom: -2px; width: 22%; height: 0; border-width: 0 0 4px; border-color: #FDFCFA; }
+.plan .caption { font: 9.5px "Nook WenKai", "PingFang SC", "Hiragino Sans GB", serif; color: var(--muted); }
+.boardcard { padding: 7px; display: grid; gap: 4px; }
+.boardcard .mini { height: 38px; border-radius: 4px; background: var(--ground); display: grid; grid-template-columns: repeat(4, 1fr); gap: 3px; padding: 5px; }
+.boardcard .mini i { border-radius: 2px; background: var(--card); box-shadow: 0 0 0 0.5px rgba(0, 0, 0, 0.08); }
+.boardcard b { font-weight: 500; }
+.boardcard > span:last-child { font: 9.5px "Nook WenKai", "PingFang SC", "Hiragino Sans GB", serif; color: var(--muted); }
+
+/* Research: literature and question; the source and a field plan; an arrow; ⌘K across boards */
+.pane.research { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 76px; align-items: start; }
+.stack { display: grid; gap: 10px; align-content: start; }
+.card.web { position: relative; overflow: hidden; padding: 9px 10px; display: grid; gap: 6px; }
+.web-head { display: flex; align-items: center; gap: 6px; opacity: 0; transition: opacity 200ms ease-out; }
+.loaded .web-head { opacity: 1; }
+.favicon { width: 16px; height: 16px; border-radius: 3px; background: #fff; box-shadow: 0 0 0 1px var(--hairline); display: grid; place-items: center; font: 600 10px Georgia, serif; }
+.web-head .url { font: 9.5px "Nook WenKai", "PingFang SC", "Hiragino Sans GB", serif; color: var(--muted); }
+.card.web .meta { opacity: 0; transition: opacity 200ms ease-out; }
+.card.web .pending { grid-template-rows: 1fr auto; padding: 12px 0; }
+.palette {
+  position: absolute; left: 50%; top: 2px; width: min(92%, 380px); transform: translateX(-50%); opacity: 0; pointer-events: none;
+  background: var(--card); border-radius: 12px; padding: 6px; box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.06), 0 18px 36px -8px rgba(0, 0, 0, 0.24);
+  transition: opacity 120ms ease-out; z-index: 4;
+}
+.palette.open { opacity: 1; }
+/* Searching: the board behind steps back so the results read */
+.pane.research .stack, .pane.research .wires, .pane.research .wire-label { transition: opacity 160ms ease-out; }
+.pane.research.searching .stack, .pane.research.searching .wires, .pane.research.searching .wire-label { opacity: 0.3; }
+.field-row { display: flex; align-items: center; gap: 8px; padding: 7px 9px; font: 13px "Nook WenKai", "PingFang SC", "Hiragino Sans GB", serif; border-bottom: 1px solid var(--hairline); min-height: 34px; }
 .lens { width: 10px; height: 10px; border: 1.6px solid var(--muted); border-radius: 50%; position: relative; flex: none; }
 .lens::after { content: ""; position: absolute; width: 5px; height: 1.6px; background: var(--muted); right: -5px; bottom: -2px; transform: rotate(45deg); }
-.query { display: inline-block; overflow: hidden; white-space: nowrap; clip-path: inset(0 100% 0 0); }
-.palette.typed .query { clip-path: inset(0 0 0 0); transition: clip-path 360ms steps(4, end); }
-.caret { width: 1.5px; height: 14px; background: var(--ink); animation: blink 900ms steps(1) 3; }
+.caret { display: inline-block; width: 1.5px; height: 14px; background: var(--ink); animation: blink 900ms steps(1) infinite; }
 @keyframes blink { 50% { opacity: 0; } }
-.result { display: flex; justify-content: space-between; margin-top: 6px; padding: 7px 10px; border-radius: 6px; font: 12.5px "Nook WenKai", "PingFang SC", serif; opacity: 0; transition: opacity 160ms ease-out, background-color 160ms ease-out; }
-.palette.found .result { opacity: 1; background: rgba(30, 32, 31, 0.07); }
-.result .where { font: 11px -apple-system, BlinkMacSystemFont, sans-serif; color: var(--muted); }
+.result { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-top: 4px; padding: 7px 9px; border-radius: 6px; font: 12px/1.4 "Nook WenKai", "PingFang SC", "Hiragino Sans GB", serif; opacity: 0; transition: opacity 160ms ease-out, background-color 160ms ease-out; }
+.result .what { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.result .where { flex: none; font: 10.5px "Nook WenKai", "PingFang SC", "Hiragino Sans GB", serif; color: var(--muted); }
+.palette.found .result { opacity: 1; }
+.palette.found .result.there { background: rgba(30, 32, 31, 0.08); }
 
-/* Reading: the quote types itself, the cover arrives, the playlist plays */
-.quote .typed { clip-path: inset(0 100% 0 0); }
-.quote.typing .typed { clip-path: inset(0 0 0 0); transition: clip-path 760ms steps(8, end); }
-.quote .caret { display: inline-block; vertical-align: -2px; margin-left: 2px; height: 1.1em; }
-.quote.done-typing .caret { visibility: hidden; }
-.card.music { position: relative; }
-.music .bar { display: block; height: 3px; margin-top: 5px; border-radius: 2px; background: rgba(244, 241, 234, 0.2); overflow: hidden; }
-.music .bar i { display: block; height: 100%; width: 0; background: #F4F1EA; border-radius: 2px; transition: width 1400ms linear; }
-.music.playing .bar i { width: 38%; }
-.music .eq { display: flex; align-items: flex-end; gap: 2px; height: 14px; opacity: 0; transition: opacity 160ms ease-out; }
-.music.playing .eq { opacity: 1; }
-.music .eq i { width: 3px; height: 4px; border-radius: 1px; background: #B9D0B4; }
-.music.playing .eq i { animation: eq 420ms ease-in-out 4 alternate; }
-.music .eq i:nth-child(2) { animation-delay: 120ms; }
-.music .eq i:nth-child(3) { animation-delay: 240ms; }
-@keyframes eq { from { height: 4px; } to { height: 14px; } }
-.music.playing .glyph::after { left: 10px; top: 8px; width: 3px; height: 12px; border: 0; background: var(--ink); box-shadow: 5px 0 0 var(--ink); }
+/* Reading: the book from Goodreads (its real cover, from Open Library), highlights, the reader's own line */
+.card.book { position: relative; overflow: hidden; display: flex; gap: 10px; padding: 9px; }
+.book-cover { position: relative; width: 54px; height: 92px; flex: none; overflow: hidden; border-radius: 2px 3px 3px 2px; background: #2C2B29;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.08), 0 3px 8px -3px rgba(0, 0, 0, 0.35); opacity: 0; transition: opacity 320ms ease-out; }
+.book-cover img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.drawn-title { display: none; }
+.book-cover.drawn img { display: none; }
+.book-cover.drawn .drawn-title { display: block; padding: 6px 5px; font-size: 7.5px; line-height: 1.25; color: #F4F1EA; }
+.card.book .meta { align-content: start; opacity: 0; transition: opacity 320ms ease-out; }
+.card.book.loaded .book-cover, .card.book.loaded .meta { opacity: 1; }
+.meta > span.by { font: 10.5px "Nook WenKai", "PingFang SC", serif; color: var(--muted); letter-spacing: 0; }
+.card.book .pending { grid-template-rows: 1fr auto; padding: 14px 0; }
+/* Reading: the cover and the reader's own line; a region of highlights; an arrow between them */
+.pane.reading { display: grid; grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.08fr); gap: 92px; align-items: start; }
+.card.cover { width: 112px; height: 156px; padding: 13px 11px; display: flex; flex-direction: column; justify-content: space-between; color: #F4F1EA; background: linear-gradient(160deg, #3F5560, #24323A); box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.06), 0 8px 18px -6px rgba(0, 0, 0, 0.3); border-radius: 4px 6px 6px 4px; }
+.card.cover b { font-size: 14px; line-height: 1.3; font-weight: 500; }
+.card.cover span { font: 8.5px "Nook WenKai", "PingFang SC", "Hiragino Sans GB", serif; letter-spacing: 0.4px; opacity: 0.8; }
+.card.hl { border-left: 2.5px solid rgba(111, 130, 112, 0.7); padding-left: 10px; }
+.reading .region { background: rgba(111, 138, 148, 0.05); border-color: rgba(111, 138, 148, 0.55); }
+.reading .region-title { color: var(--slate); }
+.reading .region-title i { background: var(--slate); }
 
-@media (prefers-reduced-motion: reduce) {
-  .pane.on [data-a], .arrow.draw path, .skel, .caret, .music.playing .eq i { animation: none; }
-  .pane.leaving, .video .media, .video .meta, .video .pending, .box > span, .slot, .palette, .result, .music .bar i, .music .eq,
-  .quote.typing .typed, .palette.typed .query { transition: none; }
-}
+/* Collection: four films (their posters from Wikipedia), a region around Nolan's two, a note with an arrow */
+.pane.collection { display: grid; grid-template-rows: auto auto; gap: 46px; align-content: start; padding-top: 22px; }
+.films { position: relative; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
+.films .nolan { position: absolute; left: -8px; top: -26px; width: calc(50% + 10px); bottom: -8px; z-index: 0; padding: 0; }
+.films .film { z-index: 1; }
+.card.film { position: relative; overflow: hidden; }
+.poster { height: 118px; background: #2C2B29; opacity: 0; transition: opacity 320ms ease-out; }
+.poster img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.poster.drawn img { display: none; }
+.card.film .meta { padding: 6px 8px 8px; opacity: 0; transition: opacity 320ms ease-out; }
+.card.film .meta b { font-size: 12px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.card.film.loaded .poster, .card.film.loaded .meta { opacity: 1; }
+.card.film .pending { grid-template-rows: 1fr auto auto; }
+.card.film .pending .url { font-size: 9px; }
+.cnote { justify-self: start; max-width: 62%; }
 
+/* The toolbar: Nook's seven tools; a press shows which one made the next thing */
 .pill {
-  position: absolute; bottom: 18px; left: 50%; transform: translateX(-50%);
-  display: flex; gap: 14px; padding: 11px 18px; border-radius: 999px; background: rgba(30, 32, 31, 0.92);
+  position: absolute; bottom: 16px; left: 50%; transform: translateX(-50%); z-index: 5;
+  display: flex; gap: 2px; padding: 5px 8px; border-radius: 999px; background: rgba(30, 32, 31, 0.92);
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.14);
 }
-.pill i { width: 14px; height: 12px; border-radius: 3px; border: 1.5px solid rgba(255, 255, 255, 0.85); }
-.pill i:last-child { border-color: rgba(255, 255, 255, 0.35); }
+.pill i { width: 30px; height: 26px; border-radius: 8px; display: grid; place-items: center; transition: background-color 160ms ease-out, transform 160ms var(--ease-out); }
+.pill svg { width: 15px; height: 15px; fill: none; stroke: rgba(255, 255, 255, 0.88); stroke-width: 1.3; stroke-linecap: round; stroke-linejoin: round; }
+.pill i.press { background: rgba(255, 255, 255, 0.2); transform: scale(0.9); }
+
+@media (prefers-reduced-motion: reduce) {
+  .step, .pane.leaving, .wires.draw path, .wire-label, .pending, .media, .meta, .map, .box > span, .slot, .palette, .result,
+  .music .bar i, .music .eq, .pill i { transition: none !important; }
+  .skel, .caret, .music.playing .eq i { animation: none !important; }
+}
 .tabs { display: flex; justify-content: center; gap: 4px; margin-top: 14px; }
 .tabs button {
   font: inherit; font-size: 13px; color: var(--muted); background: none; border: 0; cursor: pointer;
@@ -225,7 +270,7 @@ html.played .pane.on.first [data-a] { animation: none; }
 
 /* Collect, Arrange, Yours: a verb, one line, and a small drawing in the board's own vocabulary */
 .features { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; padding: 64px 0 72px; border-top: 1px solid var(--hairline); }
-.features h2 { font-size: 17px; font-weight: 600; letter-spacing: -0.1px; margin: 20px 0 6px; }
+.features h2 { font-size: 17px; font-weight: 500; letter-spacing: -0.1px; margin: 20px 0 6px; }
 .features p { margin: 0; color: var(--muted); font-size: 15px; line-height: 1.6; text-wrap: pretty; max-width: 22em; }
 .sketch {
   position: relative; height: 132px; border-radius: 12px; background: rgba(250, 249, 246, 0.45);
@@ -272,15 +317,17 @@ html.played .intro { animation: none; }
   .hero { grid-template-columns: 1fr; gap: 40px; padding: 40px 0 56px; }
   .features { grid-template-columns: 1fr; gap: 40px; padding: 48px 0 56px; }
   .features p { max-width: none; }
-  .board { height: 400px; }
+  .board { height: 440px; }
 }
 @media (max-width: 520px) {
-  .board { height: 520px; }
-  .pane.trip, .pane.project { grid-template-columns: 1fr; gap: 12px; }
-  .pane .arrow { display: none; }
-  .card.video { margin-top: 0; display: grid; grid-template-columns: 96px 1fr; }
-  .card.video .media { height: auto; min-height: 72px; }
-  .pane.reading { grid-template-columns: 1fr 110px; }
-  .card.cover { width: 100px; height: 146px; }
-  .card.quote { font-size: 16px; padding: 14px 12px; }
+  .board { height: 660px; }
+  .pane.trip, .pane.moving, .pane.research, .pane.reading { grid-template-columns: 1fr; gap: 12px; }
+  .pane.trip .side { gap: 40px; }
+  .card.cover { width: 92px; height: 128px; }
+  .films { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .films .nolan { width: calc(100% + 16px); bottom: auto; height: calc(50% + 30px); }
+  .poster { height: 104px; }
+  .cnote { max-width: none; }
+  .pill { gap: 0; padding: 4px 6px; }
+  .pill i { width: 26px; }
 }
