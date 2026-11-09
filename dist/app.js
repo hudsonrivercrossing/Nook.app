@@ -2,7 +2,7 @@
 (() => {
   const en = {
     headline: 'A calm place for the few<br>projects that matter.',
-    lede: 'Boards for your Mac. Your files stay in your folder.',
+    lede: 'Boards for your Mac. Your files, your folder.',
     download: 'Download for Mac',
     requirements: '1.0 · macOS 15 or later',
     boardLabel: 'A Nook board: a region with a few notes and a checklist, a link card beside it, an arrow joining them',

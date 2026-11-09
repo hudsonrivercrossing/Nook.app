@@ -131,7 +131,7 @@ html.played .intro { animation: none; }
   .board { height: 400px; }
 }
 @media (max-width: 520px) {
-  .board { height: 560px; }
+  .board { height: 500px; }
   .canvas { grid-template-columns: 1fr; gap: 16px; }
   .arrow { display: none; }
   .card.link { margin-top: 0; display: grid; grid-template-columns: 96px 1fr; }
