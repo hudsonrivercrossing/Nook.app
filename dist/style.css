@@ -14,6 +14,11 @@
   color-scheme: light;
 }
 
+/* Card content in LXGW WenKai, as in the app (the interface stays system); subset to this page's text (SIL OFL 1.1,
+   assets/fonts/OFL.txt) */
+@font-face { font-family: "Nook WenKai"; src: url("assets/fonts/wenkai-screen.woff2") format("woff2"); font-weight: 400; font-display: swap; }
+@font-face { font-family: "Nook WenKai"; src: url("assets/fonts/wenkai-medium.woff2") format("woff2"); font-weight: 500 700; font-display: swap; }
+
 * { box-sizing: border-box; }
 html { -webkit-text-size-adjust: 100%; }
 body {
@@ -78,7 +83,7 @@ h1 { font-size: clamp(32px, 4.2vw, 46px); line-height: 1.22; letter-spacing: -0.
 .pane { position: absolute; inset: 58px 24px 70px; visibility: hidden; }
 .pane.on { visibility: visible; }
 .pane.leaving { visibility: visible; opacity: 0; transition: opacity 120ms ease-in; }
-.card { background: var(--card); border-radius: 6px; box-shadow: var(--card-shadow); font-size: 12.5px; line-height: 1.55; }
+.card { background: var(--card); border-radius: 6px; box-shadow: var(--card-shadow); font: 13px/1.55 "Nook WenKai", "PingFang SC", serif; }
 .card.text { padding: 9px 11px; }
 .box { width: 12px; height: 12px; border-radius: 3px; border: 1.2px solid var(--sage); display: inline-grid; place-items: center; font-size: 9px; line-height: 1; color: var(--sage); flex: none; }
 .arrow { overflow: visible; }
@@ -86,7 +91,7 @@ h1 { font-size: clamp(32px, 4.2vw, 46px); line-height: 1.22; letter-spacing: -0.
 .glyph { width: 34px; height: 34px; border-radius: 50%; background: rgba(255, 255, 255, 0.92); position: relative; flex: none; }
 .glyph::after { content: ""; position: absolute; left: 13px; top: 10px; border-left: 11px solid var(--ink); border-top: 7px solid transparent; border-bottom: 7px solid transparent; }
 .meta { display: grid; gap: 2px; min-width: 0; }
-.meta b { font-weight: 500; font-size: 12.5px; }
+.meta b { font-weight: 500; font-size: 13px; }
 .meta span { font: 10px ui-monospace, "SF Mono", Menlo, monospace; color: var(--muted); letter-spacing: 0.3px; }
 
 /* Trip: a sage region (a note, a checklist), an arrow to a video */
@@ -116,9 +121,10 @@ h1 { font-size: clamp(32px, 4.2vw, 46px); line-height: 1.22; letter-spacing: -0.
 
 /* Reading: a quote, a book cover, an arrow to a playlist */
 .pane.reading { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.8fr); grid-template-rows: auto auto; gap: 10px 24px; }
-.card.quote { grid-column: 1; align-self: start; padding: 18px 16px; font: 500 19px/1.4 Georgia, "Songti SC", "Hiragino Mincho ProN", serif; letter-spacing: 0.2px; }
+.card.quote { grid-column: 1; align-self: start; padding: 18px 16px; font-size: 20px; line-height: 1.4; font-weight: 500; }
 .card.cover { grid-column: 2; grid-row: 1 / span 2; justify-self: center; width: 118px; height: 168px; padding: 14px 12px; display: flex; flex-direction: column; justify-content: space-between; color: #F4F1EA; background: linear-gradient(160deg, #5D705E, #3E4E40); box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.06), 0 8px 18px -6px rgba(0, 0, 0, 0.3); border-radius: 4px 6px 6px 4px; }
-.card.cover b { font: 600 17px/1.25 Georgia, "Songti SC", "Hiragino Mincho ProN", serif; }
+.card.cover b { font-size: 18px; line-height: 1.25; font-weight: 500; }
+.card.cover span { font-family: -apple-system, BlinkMacSystemFont, sans-serif; }
 .card.cover span { font-size: 9.5px; letter-spacing: 0.6px; opacity: 0.8; }
 .reading .arrow { position: absolute; left: 36%; top: 92px; width: 120px; height: 70px; }
 .card.music { grid-column: 1; align-self: end; display: flex; align-items: center; gap: 10px; padding: 9px; background: #2E3B33; color: #F4F1EA; }
@@ -131,12 +137,76 @@ h1 { font-size: clamp(32px, 4.2vw, 46px); line-height: 1.22; letter-spacing: -0.
 
 /* Entering: cards rise in turn (45ms apart, 280ms ease-out), then the arrow draws (320ms) */
 .pane.on [data-a] { animation: card-in 280ms var(--ease-out) both; animation-delay: calc(var(--i, 0) * 45ms); }
-.pane.on .arrow path { stroke-dasharray: 1; animation: draw 320ms var(--ease-out) both; animation-delay: 200ms; }
-.pane.on .arrow path + path { animation-delay: 420ms; animation-duration: 120ms; }
+.arrow path { stroke-dasharray: 1; stroke-dashoffset: 1; }
+.arrow.draw path { stroke-dashoffset: 0; animation: draw 320ms var(--ease-out) both; }
+.arrow.draw path + path { animation-delay: 240ms; animation-duration: 120ms; }
 @keyframes card-in { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
 @keyframes draw { from { stroke-dashoffset: 1; } to { stroke-dashoffset: 0; } }
-html.played .pane.on.first [data-a], html.played .pane.on.first .arrow path { animation: none; }
-@media (prefers-reduced-motion: reduce) { .pane.on [data-a], .pane.on .arrow path { animation: none; } .pane.leaving { transition: none; } }
+html.played .pane.on.first [data-a] { animation: none; }
+.pane.on [data-a].moved { animation: none; }
+/* Each scene's story: steps are classes the timeline adds (app.js); at rest every step is on */
+/* Trip: the link card loads its preview, a checklist item ticks */
+.card.video { position: relative; }
+.video .media, .video .meta { opacity: 0; transition: opacity 260ms ease-out; }
+.video.loaded .media, .video.loaded .meta { opacity: 1; }
+.video .pending { position: absolute; inset: 0; display: grid; grid-template-rows: 1fr auto auto; gap: 6px; padding: 0 0 10px; background: var(--card); transition: opacity 200ms ease-out; }
+.video.loaded .pending { opacity: 0; }
+.pending .well { display: grid; place-items: center; background: var(--well); }
+.pending .well .glyph { opacity: 0.35; }
+.pending .url { padding: 0 11px; font: 10.5px -apple-system, BlinkMacSystemFont, sans-serif; color: var(--muted); }
+.pending .skel { height: 6px; margin: 0 11px; width: 55%; border-radius: 3px; background: linear-gradient(90deg, rgba(30, 32, 31, 0.08), rgba(30, 32, 31, 0.16), rgba(30, 32, 31, 0.08)); background-size: 200% 100%; animation: shimmer 900ms linear 2; }
+@keyframes shimmer { from { background-position: 100% 0; } to { background-position: -100% 0; } }
+.box > span { display: inline-block; opacity: 0; transform: scale(0.4); transition: opacity 160ms ease-out, transform 220ms var(--ease-out); }
+.tick.ticked .box > span, .mover.ticked .box > span { opacity: 1; transform: none; }
+.tick span:last-child { transition: color 200ms ease-out; }
+.tick.ticked span:last-child { color: var(--muted); text-decoration: line-through; }
+
+/* Project: a card moves from To do to Done and ticks; then ⌘K finds a card */
+.mover { display: flex; align-items: center; gap: 7px; position: relative; z-index: 2; }
+.mover.lifted { box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.05), 0 10px 22px rgba(0, 0, 0, 0.16); }
+.mover.ticked span:last-child { color: var(--muted); text-decoration: line-through; }
+.slot { height: 0; transition: height 260ms var(--ease-out); }
+.palette {
+  position: absolute; left: 50%; top: 0; width: min(78%, 300px); transform: translate(-50%, -6px) scale(0.98); opacity: 0; pointer-events: none;
+  background: var(--card); border-radius: 12px; padding: 6px; box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.06), 0 16px 32px -8px rgba(0, 0, 0, 0.22);
+  transition: opacity 180ms ease-out, transform 220ms var(--ease-out); z-index: 3;
+}
+.palette.open { opacity: 1; transform: translate(-50%, 0) scale(1); }
+.palette.closed { opacity: 0; transform: translate(-50%, -4px) scale(0.98); transition-duration: 140ms; }
+.field { display: flex; align-items: center; gap: 8px; padding: 8px 10px; font: 13px -apple-system, BlinkMacSystemFont, "PingFang SC", sans-serif; border-bottom: 1px solid var(--hairline); }
+.lens { width: 10px; height: 10px; border: 1.6px solid var(--muted); border-radius: 50%; position: relative; flex: none; }
+.lens::after { content: ""; position: absolute; width: 5px; height: 1.6px; background: var(--muted); right: -5px; bottom: -2px; transform: rotate(45deg); }
+.query { display: inline-block; overflow: hidden; white-space: nowrap; clip-path: inset(0 100% 0 0); }
+.palette.typed .query { clip-path: inset(0 0 0 0); transition: clip-path 360ms steps(4, end); }
+.caret { width: 1.5px; height: 14px; background: var(--ink); animation: blink 900ms steps(1) 3; }
+@keyframes blink { 50% { opacity: 0; } }
+.result { display: flex; justify-content: space-between; margin-top: 6px; padding: 7px 10px; border-radius: 6px; font: 12.5px "Nook WenKai", "PingFang SC", serif; opacity: 0; transition: opacity 160ms ease-out, background-color 160ms ease-out; }
+.palette.found .result { opacity: 1; background: rgba(30, 32, 31, 0.07); }
+.result .where { font: 11px -apple-system, BlinkMacSystemFont, sans-serif; color: var(--muted); }
+
+/* Reading: the quote types itself, the cover arrives, the playlist plays */
+.quote .typed { clip-path: inset(0 100% 0 0); }
+.quote.typing .typed { clip-path: inset(0 0 0 0); transition: clip-path 760ms steps(8, end); }
+.quote .caret { display: inline-block; vertical-align: -2px; margin-left: 2px; height: 1.1em; }
+.quote.done-typing .caret { visibility: hidden; }
+.card.music { position: relative; }
+.music .bar { display: block; height: 3px; margin-top: 5px; border-radius: 2px; background: rgba(244, 241, 234, 0.2); overflow: hidden; }
+.music .bar i { display: block; height: 100%; width: 0; background: #F4F1EA; border-radius: 2px; transition: width 1400ms linear; }
+.music.playing .bar i { width: 38%; }
+.music .eq { display: flex; align-items: flex-end; gap: 2px; height: 14px; opacity: 0; transition: opacity 160ms ease-out; }
+.music.playing .eq { opacity: 1; }
+.music .eq i { width: 3px; height: 4px; border-radius: 1px; background: #B9D0B4; }
+.music.playing .eq i { animation: eq 420ms ease-in-out 4 alternate; }
+.music .eq i:nth-child(2) { animation-delay: 120ms; }
+.music .eq i:nth-child(3) { animation-delay: 240ms; }
+@keyframes eq { from { height: 4px; } to { height: 14px; } }
+.music.playing .glyph::after { left: 10px; top: 8px; width: 3px; height: 12px; border: 0; background: var(--ink); box-shadow: 5px 0 0 var(--ink); }
+
+@media (prefers-reduced-motion: reduce) {
+  .pane.on [data-a], .arrow.draw path, .skel, .caret, .music.playing .eq i { animation: none; }
+  .pane.leaving, .video .media, .video .meta, .video .pending, .box > span, .slot, .palette, .result, .music .bar i, .music .eq,
+  .quote.typing .typed, .palette.typed .query { transition: none; }
+}
 
 .pill {
   position: absolute; bottom: 18px; left: 50%; transform: translateX(-50%);

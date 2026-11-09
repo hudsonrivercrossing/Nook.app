@@ -98,6 +98,7 @@
     const t = T[lang];
     document.querySelectorAll('[data-t]').forEach(n => { if (t[n.dataset.t] != null) n.innerHTML = t[n.dataset.t]; });
     board.querySelectorAll('[data-s]').forEach(n => { n.textContent = t.s[n.dataset.s]; });
+    board.querySelectorAll('[data-board]').forEach(n => { n.textContent = t.boards[n.dataset.board]; });
     document.documentElement.lang = t.lang;
     document.title = t.title;
     tablist.setAttribute('aria-label', t.scenes);
@@ -105,12 +106,90 @@
     labelBoard();
   }
 
-  // The visitor picked a scene: the old one fades out (120ms), then the new one's cards rise in turn and its arrow
-  // draws (CSS, on `.on`). Under reduced motion the swap is instant.
+  // Each scene's story, after its cards have risen: [ms, selector, class] (or a function), played once per pick.
+  const STORY = {
+    trip: [[1250, '.video', 'loaded'], [1650, '.tick', 'ticked'], [1900, '.arrow', 'draw']],
+    project: [[560, '.slot', 'open'], [600, '.mover', 'lifted'], [620, moveCard], [1260, '.mover', 'ticked'],
+              [1600, '.palette', 'open'], [1780, '.palette', 'typed'], [2240, '.palette', 'found'], [3500, '.palette', 'closed']],
+    reading: [[0, '.quote', 'typing'], [820, '.quote', 'done-typing'], [1050, '.arrow', 'draw'], [1700, '.music', 'playing']]
+  };
+  const STEP_CLASSES = ['loaded', 'ticked', 'draw', 'lifted', 'open', 'typed', 'found', 'closed', 'typing', 'done-typing', 'playing', 'moved'];
+  let timers = [];
+
+  // Project: the card slides from To do into the space opening at the top of Done, then belongs there.
+  function moveCard(pane, instant) {
+    const card = pane.querySelector('.mover'), slot = pane.querySelector('.slot');
+    let settled = false;
+    const settle = () => {
+      if (settled) return;
+      settled = true;
+      slot.style.transition = 'none';
+      slot.style.height = '0px';
+      card.classList.add('moved');   // re-inserting an element would replay its entrance
+      slot.parentNode.insertBefore(card, slot);
+      card.classList.remove('lifted');
+      card.style.transform = '';
+      requestAnimationFrame(() => { slot.style.transition = ''; });
+    };
+    if (instant || !card.animate) { settle(); return; }
+    const from = card.getBoundingClientRect(), to = slot.getBoundingClientRect();
+    const dx = to.left - from.left, dy = to.top - from.top;
+    const move = card.animate([
+      { transform: 'translate(0, 0) rotate(0deg) scale(1)' },
+      { transform: `translate(${dx * 0.5}px, ${dy * 0.5 - 14}px) rotate(-2deg) scale(1.03)`, offset: 0.5 },
+      { transform: `translate(${dx}px, ${dy}px) rotate(0deg) scale(1)` }
+    ], { duration: 560, easing: 'cubic-bezier(0.65, 0, 0.35, 1)', fill: 'forwards' });
+    const done = () => { settle(); move.cancel(); };
+    move.onfinish = done;
+    timers.push(setTimeout(done, 620));   // lands even where frames are paused (a background tab)
+  }
+
+  function step(pane, [ms, sel, cls], instant) {
+    if (typeof sel === 'function') { sel(pane, instant); return; }
+    if (sel === '.slot') {   // open a card-sized space at the top of Done
+      const card = pane.querySelector('.mover');
+      pane.querySelector('.slot').style.height = card.offsetHeight + 'px';
+      return;
+    }
+    pane.querySelectorAll(sel).forEach(n => n.classList.add(cls));
+  }
+
+  // Back to the scene's first frame (the moved card goes home, every step off).
+  function reset(pane) {
+    timers.forEach(clearTimeout);
+    timers = [];
+    pane.querySelectorAll('.' + STEP_CLASSES.join(',.')).forEach(n => n.classList.remove(...STEP_CLASSES));
+    const card = pane.querySelector('.mover');
+    if (card) {
+      const home = pane.querySelector('.column');
+      home.appendChild(card);
+      card.getAnimations().forEach(x => x.cancel());
+      card.style.transform = '';
+      const slot = pane.querySelector('.slot');
+      slot.style.transition = 'none';
+      slot.style.height = '0px';
+      requestAnimationFrame(() => { slot.style.transition = ''; });
+    }
+  }
+
+  // The finished frame at once (reduced motion, or a scene already seen this visit).
+  function finish(pane) {
+    reset(pane);
+    STORY[pane.dataset.pane].forEach(x => step(pane, x, true));
+  }
+
+  function play(pane) {
+    reset(pane);
+    if (reduce.matches) { finish(pane); return; }
+    timers = STORY[pane.dataset.pane].map(x => setTimeout(() => step(pane, x, false), x[0]));
+  }
+
+  // The visitor picked a scene (or picked the one on screen again: it replays). The old one fades out (120ms), then
+  // the new one's cards rise in turn and its story plays.
   function show(next) {
-    if (next === scene) return;
     const from = panes[scene], to = panes[next];
     from.classList.remove('first');
+    if (next === scene) { to.classList.remove('on'); void to.offsetWidth; to.classList.add('on'); play(to); return; }
     scene = next;
     tabs.forEach(b => {
       const on = b.dataset.scene === scene;
@@ -118,11 +197,13 @@
       b.tabIndex = on ? 0 : -1;
     });
     clearTimeout(swapTimer);
+    timers.forEach(clearTimeout);
     Object.values(panes).forEach(p => { if (p !== from) p.classList.remove('on', 'leaving'); });
     const enter = () => {
       from.classList.remove('on', 'leaving');
       to.classList.add('on');
       labelBoard();
+      play(to);
     };
     if (reduce.matches) { enter(); return; }
     from.classList.add('leaving');
@@ -150,8 +231,11 @@
   lang = pickLanguage();
   render();
 
+  let seen = false;
   try {
-    if (sessionStorage.getItem('nook-intro')) document.documentElement.classList.add('played');
+    seen = !!sessionStorage.getItem('nook-intro');
+    if (seen) document.documentElement.classList.add('played');
     else sessionStorage.setItem('nook-intro', '1');
   } catch (_) {}
+  if (seen) finish(panes[scene]); else play(panes[scene]);   // the first scene's story, once per visit
 })();

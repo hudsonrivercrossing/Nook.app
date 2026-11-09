@@ -12,7 +12,8 @@
 <title>Nook — 一处安静的地方</title>
 <link rel="icon" href="assets/favicon.png">
 <link rel="preload" as="image" href="assets/nook-icon.png">
-<link rel="stylesheet" href="style.css?v=1.0.4">
+<link rel="preload" as="font" type="font/woff2" href="assets/fonts/wenkai-screen.woff2" crossorigin>
+<link rel="stylesheet" href="style.css?v=1.0.7">
 </head>
 <body>
 <header class="header wrap">
@@ -51,14 +52,15 @@
             <div class="card text" data-a style="--i:1" data-s="trip.note">7:00 伏见稻荷，赶在人多之前。</div>
             <div class="card list" data-a style="--i:2">
               <p class="done"><span class="box">✓</span><span data-s="trip.todo1">订民宿</span></p>
-              <p><span class="box"></span><span data-s="trip.todo2">JR Pass</span></p>
+              <p class="tick"><span class="box"><span>✓</span></span><span data-s="trip.todo2">JR Pass</span></p>
               <p><span class="box"></span><span data-s="trip.todo3">岚山竹林</span></p>
             </div>
           </div>
           <svg class="arrow" viewBox="0 0 120 70" aria-hidden="true"><path pathLength="1" d="M4 60 C 50 60, 70 12, 112 12"/><path pathLength="1" d="M104 6 L114 12 L104 18"/></svg>
-          <div class="card link video" data-a style="--i:3">
+          <div class="card link video" data-a style="--i:7">
             <div class="media"><span class="glyph"></span></div>
             <div class="meta"><b data-s="trip.link">秋天的京都</b><span>VIDEO · YouTube</span></div>
+            <div class="pending"><span class="well"><span class="glyph"></span></span><span class="url">youtube.com/watch?v=…</span><span class="skel"></span></div>
           </div>
         </div>
 
@@ -66,23 +68,28 @@
           <div class="column" data-a style="--i:0">
             <div class="column-title" data-s="project.todo">要做</div>
             <div class="card text" data-a style="--i:1" data-s="project.a">首页文案</div>
-            <div class="card text" data-a style="--i:2" data-s="project.b">打包 DMG</div>
+            <div class="card text mover" data-a style="--i:2"><span class="box"><span>✓</span></span><span data-s="project.b">打包 DMG</span></div>
           </div>
-          <svg class="arrow" viewBox="0 0 120 70" aria-hidden="true"><path pathLength="1" d="M4 30 C 40 30, 70 30, 112 30"/><path pathLength="1" d="M104 24 L114 30 L104 36"/></svg>
-          <div class="column" data-a style="--i:3">
+          <div class="column done-col" data-a style="--i:3">
             <div class="column-title" data-s="project.done">完成</div>
+            <div class="slot" aria-hidden="true"></div>
             <div class="card text done-card" data-a style="--i:4"><span class="box">✓</span><span data-s="project.c">截图</span></div>
             <div class="card shot" data-a style="--i:5"><span></span><span></span><span></span></div>
+          </div>
+          <div class="palette" aria-hidden="true">
+            <div class="field"><span class="lens"></span><span class="query" data-s="project.c">截图</span><span class="caret"></span></div>
+            <div class="result"><span data-s="project.c">截图</span><span class="where" data-board="project">新 app</span></div>
           </div>
         </div>
 
         <div class="pane reading" data-pane="reading">
-          <div class="card quote" data-a style="--i:0" data-s="reading.quote">少一些，深一些。</div>
-          <div class="card cover" data-a style="--i:1"><b data-s="reading.book">瓦尔登湖</b><span>H. D. Thoreau</span></div>
+          <div class="card quote" data-a style="--i:0"><span class="typed" data-s="reading.quote">少一些，深一些。</span><span class="caret"></span></div>
+          <div class="card cover" data-a style="--i:17"><b data-s="reading.book">瓦尔登湖</b><span>H. D. Thoreau</span></div>
           <svg class="arrow" viewBox="0 0 120 70" aria-hidden="true"><path pathLength="1" d="M6 10 C 30 40, 70 58, 112 58"/><path pathLength="1" d="M104 52 L114 58 L104 64"/></svg>
-          <div class="card music" data-a style="--i:2">
+          <div class="card music" data-a style="--i:26">
             <span class="art"></span>
-            <span class="meta"><b data-s="reading.music">清晨专注</b><span>MUSIC · Spotify</span></span>
+            <span class="meta"><b data-s="reading.music">清晨专注</b><span>MUSIC · Spotify</span><span class="bar"><i></i></span></span>
+            <span class="eq"><i></i><i></i><i></i></span>
             <span class="glyph"></span>
           </div>
         </div>
@@ -134,6 +141,6 @@
   <span>Nook 1.0.0</span>
   <a href="https://github.com/hudsonrivercrossing/Nook.app">GitHub</a>
 </footer>
-<script src="app.js?v=1.0.4"></script>
+<script src="app.js?v=1.0.8"></script>
 </body>
 </html>
