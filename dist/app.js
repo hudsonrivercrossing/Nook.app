@@ -65,7 +65,7 @@
     },
     es: {
       lang: 'es', title: 'Nook — un lugar tranquilo', langLabel: 'Idioma', blog: 'Blog',
-      headline: 'Un lugar tranquilo<br>para lo que importa.', lede: 'Tableros visuales para tu Mac, guardados en una carpeta que elijas.', download: 'Descargar para Mac',
+      headline: 'Un lugar tranquilo<br>para lo que importa.', lede: 'Un tablero para cada cosa que tienes entre manos.', download: 'Descargar para Mac',
       v1t: 'Reúne', v1: 'Pega un enlace o suelta una imagen. Se convierte en una tarjeta.', v2t: 'Ordena', v2: 'Regiones, columnas y flechas muestran cómo se relacionan las cosas.', v3t: 'Tuyo', v3: 'Los tableros son archivos normales en tu carpeta. Sin cuenta, sin rastreo.',
       sk1: 'Kioto en otoño', sk2r: 'Día 2', sk2a: 'Verlo antes', sk2c: 'Por hacer', sk3t: 'Kioto',
       trip: 'Viaje', moving: 'Planes', research: 'Investigación', reading: 'Lectura', collection: 'Colección', scenes: 'Tableros de ejemplo', home: 'Inicio',
@@ -94,7 +94,7 @@
     },
     ja: {
       lang: 'ja', title: 'Nook — 静かな場所', langLabel: '言語', blog: 'ブログ',
-      headline: '大切なことのための、<br>静かな場所。', lede: 'Mac のためのビジュアルボード。ファイルは、あなたの選んだフォルダに。', download: 'Mac 版をダウンロード',
+      headline: '大切なことのための、<br>静かな場所。', lede: '取り組んでいることごとに、ボードを一枚。', download: 'Mac 版をダウンロード',
       v1t: '集める', v1: 'リンクを貼る、画像を置く。それがカードになる。', v2t: '整える', v2: 'リージョン、カラム、矢印で、つながりが見える。', v3t: '手元に', v3: 'ボードはフォルダの中の普通のファイル。アカウント不要、追跡なし。',
       sk1: '秋の京都', sk2r: '2日目', sk2a: '行く前に見る', sk2c: 'やること', sk3t: '京都',
       trip: '旅', moving: '計画', research: '研究', reading: '読書', collection: 'コレクション', scenes: 'ボードの例', home: 'ホーム',
