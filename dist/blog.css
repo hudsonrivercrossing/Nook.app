@@ -1,0 +1,108 @@
+/* Field notes: the blog. It builds on style.css (tokens, fonts, header, board cards) and adds the reading column. */
+
+/* The reading column: 18px body, about 65 characters a line; figures may go wider */
+.post { padding: 56px 0 88px; }
+.post article { max-width: 640px; margin: 0 auto; font-size: 18px; line-height: 1.65; }
+.post article > p, .post .steps { margin: 0 0 1.1em; text-wrap: pretty; }
+.post-head { margin-bottom: 36px; }
+.kicker { margin: 0 0 14px; font-size: 14px; color: var(--muted); }
+.kicker a { color: var(--sage); text-decoration: none; font-weight: 600; }
+.post h1 { font-size: clamp(34px, 5vw, 46px); line-height: 1.12; margin: 0 0 18px; }
+.byline { display: flex; flex-wrap: wrap; gap: 6px 14px; margin: 0; font-size: 14px; color: var(--muted); }
+.byline span + span::before { content: "·"; margin-right: 14px; color: var(--muted-mark); }
+.lead { font-size: 21px; line-height: 1.5; }
+.post em { font-style: normal; font-weight: 600; }
+.steps { padding-left: 1.3em; }
+.steps li { margin-bottom: 0.6em; padding-left: 0.2em; }
+.steps li::marker { color: var(--sage); font-weight: 600; }
+.steps strong { font-weight: 620; }
+.ask { font-weight: 560; }
+.next { margin-top: 48px; padding-top: 28px; border-top: 1px solid var(--hairline); display: grid; gap: 18px; justify-items: start; }
+.next p { margin: 0; font-size: 16px; color: var(--muted); }
+
+/* A board in the text: wider than the column, built when it scrolls into view (blog.js) */
+.demo { margin: 36px -60px 40px; }
+.demo .board { height: 360px; }
+.demo figcaption { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; padding: 12px 4px 0; font-size: 14px; line-height: 1.45; color: var(--muted); }
+.replay { flex: none; font: inherit; font-size: 14px; font-weight: 500; color: var(--ink); background: none; border: 0; padding: 4px 10px; border-radius: 999px; cursor: pointer;
+  transition: background-color 150ms ease-out, transform 150ms ease-out; }
+.replay::before { content: "↺"; margin-right: 5px; color: var(--muted); }
+.replay:active { transform: scale(0.97); }
+@media (hover: hover) and (pointer: fine) { .replay:hover { background: rgba(30, 32, 31, 0.06); } }
+
+/* Listings: a pasted address first, then the photo and price */
+.card.listing { position: relative; overflow: hidden; display: grid; z-index: 1; }
+.listing .photo { display: block; height: 92px; opacity: 0; transition: opacity 260ms ease-out;
+  --win: repeating-linear-gradient(90deg, transparent 0 14px, rgba(255, 255, 255, 0.34) 14px 22px, transparent 22px 30px);
+  background: linear-gradient(transparent 70%, rgba(0, 0, 0, 0.14)), var(--win), var(--win), var(--photo);
+  background-size: 100% 100%, 100% 16%, 100% 16%, 100% 100%; background-position: 0 0, 0 24%, 0 64%, 0 0; background-repeat: no-repeat; }
+.listing .meta { padding: 7px 10px 9px; opacity: 0; transition: opacity 260ms ease-out; }
+.listing.loaded .photo, .listing.loaded .meta { opacity: 1; }
+.listing .pending .well { height: 92px; }
+.l1 { --photo: linear-gradient(160deg, #C27A5C, #8A4433); }
+.l2 { --photo: linear-gradient(160deg, #D8C6A8, #A48D6C); }
+.l3 { --photo: linear-gradient(160deg, #A7B4B9, #67777E); }
+
+/* Board one: three listings in a row; the region is drawn around the first two */
+.pane.listings { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; align-items: start; align-content: start; padding: 34px 14px 0; }
+.listings .region { grid-column: 1 / 3; grid-row: 1; align-self: stretch; margin: -32px -10px -10px; z-index: 0; }
+.listings .l1 { grid-column: 1; grid-row: 1; }
+.listings .l2 { grid-column: 2; grid-row: 1; }
+.listings .l3 { grid-column: 3; grid-row: 1; }
+
+/* Board two: To do and Done, and the listing with its note */
+.pane.plan { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; align-items: start; align-content: start; }
+.plan .column { display: grid; gap: 7px; padding: 9px; border-radius: 14px; background: var(--well); }
+.plan .column-title { font: 600 10.5px var(--content); color: var(--muted); padding: 0 2px 1px; }
+.plan .mover, .plan .done-card { display: flex; align-items: center; gap: 7px; }
+.plan .done-card > span:last-child { text-decoration: line-through; color: var(--muted); }
+.plan .mover { position: relative; z-index: 3; }
+.plan .mover.in { transition: opacity 420ms ease-out, transform 150ms ease-out, box-shadow 150ms ease-out; }
+.plan .mover.lifted { transform: scale(1.03); box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.05), 0 12px 24px rgba(0, 0, 0, 0.18); }
+/* Replay: the finished board steps out (160ms) before it builds again */
+.demo .pane.out { opacity: 0; transition: opacity 160ms ease-in; }
+.plan .stack { display: grid; gap: 52px; align-content: start; }
+.plan .listing .photo, .plan .listing .pending .well { height: 70px; }
+
+/* The blog's index */
+.blog-index { padding: 56px 0 88px; max-width: 760px; }
+.index-head h1 { font-size: clamp(34px, 5vw, 46px); line-height: 1.12; margin: 0 0 10px; }
+.index-head p { margin: 0 0 40px; font-size: 18px; color: var(--muted); }
+.posts { list-style: none; margin: 0; padding: 0; display: grid; gap: 16px; }
+.post-card { display: grid; grid-template-columns: 168px 1fr; gap: 24px; align-items: center; padding: 16px; border-radius: 16px; text-decoration: none;
+  background: var(--card); box-shadow: var(--card-shadow); transition: box-shadow 150ms ease-out, transform 150ms ease-out; }
+.post-card:active { transform: scale(0.99); }
+@media (hover: hover) and (pointer: fine) {
+  .post-card:hover { box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.07), 0 2px 4px rgba(0, 0, 0, 0.06), 0 10px 22px -8px rgba(0, 0, 0, 0.14); }
+}
+.thumb-board { position: relative; height: 112px; border-radius: 10px; background: var(--ground); }
+.thumb-board i { position: absolute; top: 30px; width: 40px; height: 50px; border-radius: 3px; background: var(--card); box-shadow: 0 0 0 0.5px rgba(0, 0, 0, 0.08);
+  background-image: linear-gradient(160deg, #C27A5C, #8A4433); background-size: 100% 55%; background-repeat: no-repeat; }
+.thumb-board i:nth-child(2) { left: 18px; }
+.thumb-board i:nth-child(3) { left: 64px; background-image: linear-gradient(160deg, #D8C6A8, #A48D6C); }
+.thumb-board i:nth-child(4) { left: 112px; background-image: linear-gradient(160deg, #A7B4B9, #67777E); }
+.thumb-board .r { left: 11px; top: 18px; width: 100px; height: 70px; background: rgba(111, 130, 112, 0.06); border: 1px dashed rgba(111, 130, 112, 0.6); border-radius: 8px; box-shadow: none; }
+.post-text { display: grid; gap: 6px; }
+.post-meta { font-size: 13px; color: var(--muted); }
+.post-title { font-size: 22px; line-height: 1.25; font-weight: 600; }
+.post-dek { font-size: 16px; line-height: 1.5; color: var(--muted); text-wrap: pretty; }
+
+@media (max-width: 760px) {
+  .demo { margin-left: 0; margin-right: 0; }
+}
+@media (max-width: 520px) {
+  .post { padding-top: 32px; }
+  .post article { font-size: 17px; }
+  .lead { font-size: 19px; }
+  .demo .board { height: 520px; }
+  .pane.listings { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: 22px; }
+  .listings .region { grid-column: 1 / 3; }
+  .listings .l3 { grid-column: 1; grid-row: 2; }
+  .pane.plan { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .demo[data-demo="done"] .board { height: 560px; }
+  .plan .stack { grid-column: 1 / 3; gap: 44px; padding: 0 12%; }
+  .plan .listing .photo, .plan .listing .pending .well { height: 56px; }
+  .demo figcaption { flex-direction: column; gap: 6px; }
+  .post-card { grid-template-columns: 1fr; }
+  .site-nav .nav-download { display: none; }
+}

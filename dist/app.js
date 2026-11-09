@@ -6,7 +6,7 @@
 (() => {
   const T = {
     zh: {
-      lang: 'zh-CN', title: 'Nook — 一处安静的地方', langLabel: '语言',
+      lang: 'zh-CN', title: 'Nook — 一处安静的地方', langLabel: '语言', blog: '博客',
       headline: '一处安静的地方，<br>留给少数重要的项目。', lede: 'Mac 上的白板，文件归你。', download: '下载 macOS 版',
       v1t: '收集', v1: '粘贴链接、拖入图片，就是一张卡片。', v2t: '整理', v2: '区域、栏和箭头，让关系一目了然。', v3t: '归你', v3: '白板是你文件夹里的普通文件。没有账号，不收集数据。',
       sk1: '秋天的京都', sk2r: '第二天', sk2a: '去之前先看', sk2c: '要办', sk3t: '京都',
@@ -35,7 +35,7 @@
       }
     },
     en: {
-      lang: 'en', title: 'Nook — a calm place', langLabel: 'Language',
+      lang: 'en', title: 'Nook — a calm place', langLabel: 'Language', blog: 'Blog',
       headline: 'A calm place for the few<br>projects that matter.', lede: 'Visual boards for your Mac, kept in a folder you choose.', download: 'Download for Mac',
       v1t: 'Collect', v1: 'Paste a link or drop an image. It becomes a card.', v2t: 'Arrange', v2: 'Regions, columns and arrows show how things relate.', v3t: 'Yours', v3: 'Boards are plain files in your folder. No account, no tracking.',
       sk1: 'Kyoto in autumn', sk2r: 'Day 2', sk2a: 'Watch first', sk2c: 'To do', sk3t: 'Kyoto',
@@ -64,7 +64,7 @@
       }
     },
     es: {
-      lang: 'es', title: 'Nook — un lugar tranquilo', langLabel: 'Idioma',
+      lang: 'es', title: 'Nook — un lugar tranquilo', langLabel: 'Idioma', blog: 'Blog',
       headline: 'Un lugar tranquilo<br>para lo que importa.', lede: 'Tableros visuales para tu Mac, guardados en una carpeta que elijas.', download: 'Descargar para Mac',
       v1t: 'Reúne', v1: 'Pega un enlace o suelta una imagen. Se convierte en una tarjeta.', v2t: 'Ordena', v2: 'Regiones, columnas y flechas muestran cómo se relacionan las cosas.', v3t: 'Tuyo', v3: 'Los tableros son archivos normales en tu carpeta. Sin cuenta, sin rastreo.',
       sk1: 'Kioto en otoño', sk2r: 'Día 2', sk2a: 'Verlo antes', sk2c: 'Por hacer', sk3t: 'Kioto',
@@ -93,7 +93,7 @@
       }
     },
     ja: {
-      lang: 'ja', title: 'Nook — 静かな場所', langLabel: '言語',
+      lang: 'ja', title: 'Nook — 静かな場所', langLabel: '言語', blog: 'ブログ',
       headline: '大切なことのための、<br>静かな場所。', lede: 'Mac のためのビジュアルボード。ファイルは、あなたの選んだフォルダに。', download: 'Mac 版をダウンロード',
       v1t: '集める', v1: 'リンクを貼る、画像を置く。それがカードになる。', v2t: '整える', v2: 'リージョン、カラム、矢印で、つながりが見える。', v3t: '手元に', v3: 'ボードはフォルダの中の普通のファイル。アカウント不要、追跡なし。',
       sk1: '秋の京都', sk2r: '2日目', sk2a: '行く前に見る', sk2c: 'やること', sk3t: '京都',
