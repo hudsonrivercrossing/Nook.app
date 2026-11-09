@@ -201,14 +201,3 @@
 @media (prefers-reduced-motion: reduce) {
   .corner-board i, .corner-board .ridge path, .river .field { transition: none; }
 }
-
-/* Letters: the founder's own pieces, given room; In use stays a compact list below */
-.posts.essays { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; }
-.post-card.letter { grid-template-columns: 1fr; gap: 16px; align-items: start; align-content: start; padding: 12px 12px 22px; }
-.letter-art { display: block; width: 100%; aspect-ratio: 16 / 10; height: auto; object-fit: cover; border-radius: 10px; background: #E6E1D6; outline: 1px solid rgb(0 0 0 / 0.1); outline-offset: -1px; }
-.post-card.letter .post-text { padding: 0 8px; gap: 8px; }
-.post-card.letter .post-title { font-size: 26px; line-height: 1.2; }
-.post-card.letter .post-dek { font-size: 17px; }
-@media (max-width: 640px) {
-  .posts.essays { grid-template-columns: 1fr; }
-}
