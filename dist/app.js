@@ -181,6 +181,65 @@
   const EXIT_MS = 120;
   let lang = 'zh', scene = 'trip', swapTimer = 0, timers = [];
 
+  // Autoplay: each board builds, holds its finished frame for a moment, then the next one comes in. The active tab's
+  // hairline shows the time left. It holds while the pointer rests on the board or the tabs, while the board is off
+  // screen or the page is hidden; once the visitor picks a board themselves, it stops for good. None under reduced
+  // motion.
+  const ORDER = ['trip', 'moving', 'research', 'reading', 'collection'];
+  const HOLD = 2600;
+  const TAIL = { wire: 1300, palette: 700, tick: 600, type: 1900, load: 600, add: 700 };
+  const figure = document.querySelector('.scene');
+  let autoplay = false, autoTimer = 0, autoStart = 0, autoLeft = 0;
+  const holds = new Set();
+
+  function boardLength(name) {
+    const last = STORY[name][STORY[name].length - 1];
+    return last[0] + (TAIL[last[1]] || 800);
+  }
+
+  function progress(ms) {   // restart the active tab's hairline over `ms`; 0 clears it
+    tabs.forEach(b => { b.classList.remove('timing'); b.style.removeProperty('--auto'); });
+    if (!ms) return;
+    const active = tabs.find(b => b.dataset.scene === scene);
+    void active.offsetWidth;
+    active.style.setProperty('--auto', ms + 'ms');
+    active.classList.add('timing');
+  }
+
+  function runAuto() {
+    clearTimeout(autoTimer);
+    if (!autoplay || holds.size) return;
+    autoStart = performance.now();
+    autoTimer = setTimeout(() => show(ORDER[(ORDER.indexOf(scene) + 1) % ORDER.length], true), autoLeft);
+  }
+
+  function startAuto(ms) {
+    if (!autoplay) return;
+    autoLeft = ms;
+    progress(ms);
+    tablist.classList.toggle('held', holds.size > 0);
+    runAuto();
+  }
+
+  function hold(reason) {
+    if (holds.has(reason)) return;
+    if (!holds.size && autoplay) { clearTimeout(autoTimer); autoLeft = Math.max(0, autoLeft - (performance.now() - autoStart)); }
+    holds.add(reason);
+    tablist.classList.add('held');
+  }
+
+  function release(reason) {
+    if (!holds.delete(reason) || holds.size) return;
+    tablist.classList.remove('held');
+    runAuto();
+  }
+
+  function stopAuto() {
+    autoplay = false;
+    clearTimeout(autoTimer);
+    progress(0);
+  }
+
   function pickLanguage() {
     try { const saved = localStorage.getItem('nook-lang'); if (T[saved]) return saved; } catch (_) {}
     const wanted = (navigator.languages || [navigator.language || 'en']).map(l => l.toLowerCase().slice(0, 2));
@@ -353,7 +412,8 @@
 
   // The visitor picked a board (or the one on screen again: it replays). The old one fades out (120ms), then the new
   // one builds.
-  function show(next) {
+  function show(next, auto = false) {
+    if (!auto) stopAuto();   // the visitor picked: autoplay stops for good
     const from = panes[scene], to = panes[next];
     if (next === scene) { play(to); return; }
     scene = next;
@@ -370,6 +430,7 @@
       to.classList.add('on');
       labelBoard();
       play(to);
+      startAuto(boardLength(next) + HOLD);
     };
     if (reduce.matches || still) { enter(); return; }
     from.classList.add('leaving');
@@ -406,4 +467,14 @@
     else sessionStorage.setItem('nook-intro', '1');
   } catch (_) {}
   if (seen) finish(panes[scene]); else play(panes[scene]);   // the first board builds once per visit
+  autoplay = !reduce.matches && !still;
+  startAuto(seen ? HOLD : boardLength(scene) + HOLD);
+
+  // Holds: a pointer resting on the board or the tabs, the board off screen, the page hidden.
+  figure.addEventListener('pointerenter', e => { if (e.pointerType === 'mouse') hold('pointer'); });
+  figure.addEventListener('pointerleave', e => { if (e.pointerType === 'mouse') release('pointer'); });
+  if ('IntersectionObserver' in window) {
+    new IntersectionObserver(([entry]) => { entry.isIntersecting ? release('offscreen') : hold('offscreen'); }, { threshold: 0.35 }).observe(figure);
+  }
+  document.addEventListener('visibilitychange', () => { document.hidden ? hold('hidden') : release('hidden'); });
 })();
