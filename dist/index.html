@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Nook，Mac 上的白板。把链接、图片和文字放在一起，用区域和箭头理清楚。白板存在你选的文件夹里，不需要账号。">
+<meta name="description" content="Nook，Mac 上的白板，文件归你。">
 <meta name="theme-color" content="#EAE8E3">
 <meta name="color-scheme" content="light">
 <meta property="og:title" content="Nook — 一处安静的地方，留给少数真正重要的项目">
@@ -20,25 +20,18 @@
     <img src="assets/nook-icon.png" width="32" height="32" alt="">
     <span>Nook</span>
   </a>
-  <nav aria-label="主导航" data-i18n-attr="aria-label:nav">
-    <a href="#install" data-i18n="navInstall">安装</a>
-    <a href="https://github.com/hudsonrivercrossing/Nook.app/releases" data-i18n="navReleases">版本</a>
-    <button id="language" class="language" type="button" aria-label="Switch to English">EN</button>
-  </nav>
+  <button id="language" class="language" type="button" aria-label="Switch to English">EN</button>
 </header>
 
 <main>
   <section class="hero wrap">
     <div class="hero-copy intro">
       <h1 data-i18n="headline">一处安静的地方，<br>留给少数重要的项目。</h1>
-      <p class="lede" data-i18n="lede">Mac 上的白板。把链接、图片和文字放在一起，用区域和箭头理清楚。白板就存在你选的文件夹里，不需要账号。</p>
-      <div class="downloads">
-        <a class="button" href="https://github.com/hudsonrivercrossing/Nook.app/releases/latest/download/Nook.dmg">
-          <span data-i18n="download">下载 macOS 版</span><span aria-hidden="true">↓</span>
-        </a>
-        <a class="button secondary" href="#install" data-i18n="howTo">安装说明</a>
-      </div>
-      <p class="hero-note" data-i18n="requirements">版本 1.0.0 · macOS 15 或更高 · Apple 芯片与 Intel</p>
+      <p class="lede" data-i18n="lede">Mac 上的白板，文件归你。</p>
+      <a class="button" href="https://github.com/hudsonrivercrossing/Nook.app/releases/latest/download/Nook.dmg">
+        <span data-i18n="download">下载 macOS 版</span><span aria-hidden="true">↓</span>
+      </a>
+      <p class="hero-note" data-i18n="requirements">1.0 · macOS 15 或更高</p>
     </div>
 
     <div class="board intro" role="img" aria-label="一块 Nook 白板：一个区域里有几张文字卡片和一张清单，旁边是一张链接卡片，箭头把它们连起来" data-i18n-attr="aria-label:boardLabel">
@@ -68,34 +61,24 @@
   </section>
 
   <section class="features wrap" aria-label="功能" data-i18n-attr="aria-label:features">
-    <div>
-      <h2 data-i18n="f1t">什么都能放</h2>
-      <p data-i18n="f1">粘贴链接，它就变成卡片：网页、视频、音乐、地点、帖子。拖进图片，写下文字。</p>
-    </div>
-    <div>
-      <h2 data-i18n="f2t">慢慢理清楚</h2>
-      <p data-i18n="f2">区域、栏和箭头把东西分好、连起来；白板里还能放白板。按 ⌘K，搜索所有白板。</p>
-    </div>
-    <div>
-      <h2 data-i18n="f3t">文件归你</h2>
-      <p data-i18n="f3">每块白板都是你文件夹里的普通文件。放进 Dropbox，就能在多台 Mac 上用。Nook 不收集任何数据。</p>
-    </div>
+    <p data-i18n="f1">粘贴链接，就是一张卡片。</p>
+    <p data-i18n="f2">区域、栏和箭头，把东西理清楚。</p>
+    <p data-i18n="f3">没有账号，不收集数据。放进 Dropbox，多台 Mac 一起用。</p>
   </section>
 
   <section id="install" class="install wrap">
     <h2 data-i18n="installTitle">安装</h2>
     <ol>
-      <li data-i18n="step1">下载并打开 <b>Nook.dmg</b>，把 Nook 拖进「应用程序」。</li>
-      <li data-i18n="step2">第一次打开时，macOS 会拦下它：Nook 没有经过 Apple 公证。打开「系统设置 › 隐私与安全性」，在「安全性」里点「仍要打开」，然后按提示确认。</li>
-      <li data-i18n="step3">之后就能直接打开了。有新版本时，下载新的 DMG，把 Nook 拖进「应用程序」替换旧的；你的白板不受影响。</li>
+      <li data-i18n="step1">打开 Nook.dmg，把 Nook 拖进「应用程序」。</li>
+      <li data-i18n="step2">第一次打开会被拦下：到「系统设置 › 隐私与安全性」，点「仍要打开」。</li>
+      <li data-i18n="step3">更新时，下载新版替换即可。白板不受影响。</li>
     </ol>
-    <p class="checksum"><span data-i18n="checksum">想核对下载的文件？</span> <a href="https://github.com/hudsonrivercrossing/Nook.app/releases/latest/download/Nook.dmg.sha256">Nook.dmg.sha256</a></p>
   </section>
 </main>
 
 <footer class="footer wrap">
   <span>Nook 1.0.0</span>
-  <a href="https://github.com/hudsonrivercrossing/Nook.app" data-i18n="source">GitHub</a>
+  <span class="footer-links"><a href="https://github.com/hudsonrivercrossing/Nook.app/releases/latest/download/Nook.dmg.sha256">SHA-256</a><a href="https://github.com/hudsonrivercrossing/Nook.app">GitHub</a></span>
 </footer>
 <script src="app.js?v=1.0.0"></script>
 </body>
