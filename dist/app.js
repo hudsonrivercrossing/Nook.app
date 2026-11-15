@@ -7,8 +7,8 @@
   const T = {
     zh: {
       lang: 'zh-CN', title: 'Nook — 一处安静的地方', langLabel: '语言', blog: '博客',
-      headline: '一处安静的地方，<br>留给少数重要的项目。', lede: '手头的每件事，各有一块白板。', download: '下载 macOS 版',
-      v1t: '收集', v1: '粘贴链接、拖入图片，就是一张卡片。', v2t: '整理', v2: '区域、栏和箭头，让关系一目了然。', v3t: '归你', v3: '白板是你文件夹里的普通文件。没有账号，不收集数据。',
+      headline: '一处安静的地方，<br>留给少数重要的项目。', lede: '手头的每件事，各有一块白板。', download: '下载 macOS 版', news: '新增表格，以及更多',
+      v1t: '收集', v1: '粘贴链接、拖入图片，就是一张卡片。', v2t: '整理', v2: '区域、栏、箭头和表格，让关系一目了然。', v3t: '归你', v3: '白板是你文件夹里的普通文件。没有账号，不收集数据。',
       sk1: '秋天的京都', sk2r: '第二天', sk2a: '去之前先看', sk2c: '要办', sk3t: '京都',
       trip: '旅行', moving: '规划', research: '研究', reading: '读书', collection: '收藏', scenes: '示例白板', home: '主页',
       labels: {
@@ -36,8 +36,8 @@
     },
     en: {
       lang: 'en', title: 'Nook — a calm place', langLabel: 'Language', blog: 'Blog',
-      headline: 'A calm place for the few<br>projects that matter.', lede: 'A board for each thing you’re in the middle of.', download: 'Download for Mac',
-      v1t: 'Collect', v1: 'Paste a link or drop an image. It becomes a card.', v2t: 'Arrange', v2: 'Regions, columns and arrows show how things relate.', v3t: 'Yours', v3: 'Boards are plain files in your folder. No account, no tracking.',
+      headline: 'A calm place for the few<br>projects that matter.', lede: 'A board for each thing you’re in the middle of.', download: 'Download for Mac', news: 'Tables, and more',
+      v1t: 'Collect', v1: 'Paste a link or drop an image. It becomes a card.', v2t: 'Arrange', v2: 'Regions, columns, arrows and tables show how things relate.', v3t: 'Yours', v3: 'Boards are plain files in your folder. No account, no tracking.',
       sk1: 'Kyoto in autumn', sk2r: 'Day 2', sk2a: 'Watch first', sk2c: 'To do', sk3t: 'Kyoto',
       trip: 'Trip', moving: 'Planning', research: 'Research', reading: 'Reading', collection: 'Collection', scenes: 'Example boards', home: 'Home',
       labels: {
@@ -65,8 +65,8 @@
     },
     es: {
       lang: 'es', title: 'Nook — un lugar tranquilo', langLabel: 'Idioma', blog: 'Blog',
-      headline: 'Un lugar tranquilo<br>para lo que importa.', lede: 'Un tablero para cada cosa que tienes entre manos.', download: 'Descargar para Mac',
-      v1t: 'Reúne', v1: 'Pega un enlace o suelta una imagen. Se convierte en una tarjeta.', v2t: 'Ordena', v2: 'Regiones, columnas y flechas muestran cómo se relacionan las cosas.', v3t: 'Tuyo', v3: 'Los tableros son archivos normales en tu carpeta. Sin cuenta, sin rastreo.',
+      headline: 'Un lugar tranquilo<br>para lo que importa.', lede: 'Un tablero para cada cosa que tienes entre manos.', download: 'Descargar para Mac', news: 'Tablas, y más',
+      v1t: 'Reúne', v1: 'Pega un enlace o suelta una imagen. Se convierte en una tarjeta.', v2t: 'Ordena', v2: 'Regiones, columnas, flechas y tablas muestran cómo se relacionan las cosas.', v3t: 'Tuyo', v3: 'Los tableros son archivos normales en tu carpeta. Sin cuenta, sin rastreo.',
       sk1: 'Kioto en otoño', sk2r: 'Día 2', sk2a: 'Verlo antes', sk2c: 'Por hacer', sk3t: 'Kioto',
       trip: 'Viaje', moving: 'Planes', research: 'Investigación', reading: 'Lectura', collection: 'Colección', scenes: 'Tableros de ejemplo', home: 'Inicio',
       labels: {
@@ -94,8 +94,8 @@
     },
     ja: {
       lang: 'ja', title: 'Nook — 静かな場所', langLabel: '言語', blog: 'ブログ',
-      headline: '大切なことのための、<br>静かな場所。', lede: '取り組んでいることごとに、ボードを一枚。', download: 'Mac 版をダウンロード',
-      v1t: '集める', v1: 'リンクを貼る、画像を置く。それがカードになる。', v2t: '整える', v2: 'リージョン、カラム、矢印で、つながりが見える。', v3t: '手元に', v3: 'ボードはフォルダの中の普通のファイル。アカウント不要、追跡なし。',
+      headline: '大切なことのための、<br>静かな場所。', lede: '取り組んでいることごとに、ボードを一枚。', download: 'Mac 版をダウンロード', news: '表が使えるように、ほかにも',
+      v1t: '集める', v1: 'リンクを貼る、画像を置く。それがカードになる。', v2t: '整える', v2: 'リージョン、カラム、矢印、表で、つながりが見える。', v3t: '手元に', v3: 'ボードはフォルダの中の普通のファイル。アカウント不要、追跡なし。',
       sk1: '秋の京都', sk2r: '2日目', sk2a: '行く前に見る', sk2c: 'やること', sk3t: '京都',
       trip: '旅', moving: '計画', research: '研究', reading: '読書', collection: 'コレクション', scenes: 'ボードの例', home: 'ホーム',
       labels: {
