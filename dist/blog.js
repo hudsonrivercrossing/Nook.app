@@ -70,6 +70,23 @@
       [2600, 'tool', 'connect'], [2750, 'wire', '.hl2', '.own']
     ],
     films: FILMS,
+    // What's new in 1.1: ⌘V pastes cells as a table card; a double-click opens its editor, a cell is retyped, Done.
+    table: [
+      [300, 'key', '.keys'], [650, 'add', '.qt-card'],
+      [1900, 'click', '.c-rent'], [2040, 'click', '.c-rent'],
+      [2200, 'class', '.sheet-dim', 'open'], [2200, 'class', '.sheet', 'open'],
+      [2700, 'type', '.typed'],
+      [4300, 'click', '.c-done'],
+      [4450, 'unclass', '.sheet', 'open'], [4450, 'unclass', '.sheet-dim', 'open'], [4450, 'set', '.rent .val']
+    ],
+    // One click selects (and the card can be dragged); a double-click opens it in the browser.
+    open: [
+      [500, 'click', '.c-card'], [520, 'class', '.web-link', 'selected'],
+      [1200, 'class', '.web-link', 'lifted'], [1300, 'class', '.web-link', 'moved'], [1800, 'unclass', '.web-link', 'lifted'],
+      [2700, 'click', '.c-card'], [2840, 'click', '.c-card'], [3000, 'class', '.browser', 'open']
+    ],
+    // ⇧⌘0: the cards are back in the middle at once, at the same size (the app doesn't animate it either).
+    center: [[700, 'key', '.keys'], [820, 'class', '.cluster', 'centered']],
     note: [
       ...already(FILMS),
       [300, 'tool', 'text'], [450, 'add', '.cnote'], [500, 'type', '.cnote'],
@@ -156,6 +173,23 @@
           return;
         }
         case 'add': all(a).forEach(n => n.classList.add('in')); return;
+        case 'class': all(a).forEach(n => n.classList.add(b)); return;
+        case 'unclass': all(a).forEach(n => n.classList.remove(b)); return;
+        case 'set': all(a).forEach(n => { n.textContent = n.dataset.set; }); return;
+        case 'click': {   // a ring where the pointer clicks (twice, 140ms apart, for a double-click)
+          if (instant) return;
+          all(a).forEach(n => { n.classList.remove('go'); void n.offsetWidth; n.classList.add('go'); });
+          return;
+        }
+        case 'key': {   // the keys pressed, shown for a moment
+          if (instant) return;
+          all(a).forEach(n => {
+            n.classList.add('shown', 'down');
+            timers.push(setTimeout(() => n.classList.remove('down'), 140));
+            timers.push(setTimeout(() => n.classList.remove('shown'), 1300));
+          });
+          return;
+        }
         case 'load': all(a).forEach(n => n.classList.add('loaded')); return;
         case 'tick': all(a).forEach(n => n.classList.add('ticked')); return;
         case 'type': all(a).forEach(n => type(n, instant, timers)); return;

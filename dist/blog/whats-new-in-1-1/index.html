@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#F5F4F0">
+<meta name="color-scheme" content="light">
+<title>Nook 1.1 — Nook</title>
+<meta name="description" content="Tables, link cards that click like Finder, and one key that brings your cards back.">
+<meta property="og:type" content="article">
+<meta property="article:published_time" content="2026-11-14">
+<meta property="og:title" content="Nook 1.1">
+<meta property="og:description" content="Tables, link cards that click like Finder, and one key that brings your cards back.">
+<meta property="og:url" content="https://hudsonrivercrossing.github.io/Nook.app/blog/whats-new-in-1-1/">
+<meta property="og:image" content="https://hudsonrivercrossing.github.io/Nook.app/assets/nook-icon.png">
+<link rel="icon" href="../../assets/favicon.png">
+<link rel="preload" as="font" type="font/woff2" href="../../assets/fonts/ysabeau-office.woff2" crossorigin>
+<link rel="stylesheet" href="../../style.css?v=1.11.0">
+<link rel="stylesheet" href="../../blog.css?v=1.11.0">
+</head>
+<body class="blog">
+<header class="header wrap">
+  <a class="brand" href="../../" aria-label="Nook home">
+    <img src="../../assets/nook-icon.png" width="40" height="40" alt="">
+    <span>Nook</span>
+  </a>
+  <nav class="site-nav"><a href="../../blog/">Blog</a><a class="nav-download" href="https://github.com/hudsonrivercrossing/Nook.app/releases/latest/download/Nook.dmg">Download</a></nav>
+</header>
+
+<main class="post wrap">
+  <article>
+    <header class="post-head">
+      <p class="kicker"><a href="../">What’s new</a> · 1.1</p>
+      <h1>Nook 1.1</h1>
+      <p class="byline"><span>DJ, founder</span><span><time datetime="2026-11-14">November 14, 2026</time></span><span>2 min read</span></p>
+    </header>
+
+    <p class="lead">Three changes, each one asked for by someone using Nook every day.</p>
+
+    <h2>Tables</h2>
+
+    <p>Some things on a board are comparisons: three apartments by rent and commute, a trip by day and city. Copy the cells from Numbers, Excel or Google Sheets and paste them on a board. They arrive as a table, in a card just wide enough for it. Double-click it to change a cell in a plain grid, where Tab moves along and Return adds a row.</p>
+
+    <figure class="demo" data-demo="table">
+      <div class="board" role="img" aria-label="A board called Moving. ⌘V pastes three apartments as a small table card: Place, Rent, Commute. A double-click on Astoria’s rent opens a grid editor over the board; $2,950 is typed over with $2,875; Done closes it and the card shows the new rent.">
+        <div class="stage">
+        <div class="crumb">Home / <b>Moving</b></div>
+        <div class="pane on tables">
+          <div class="card text note">Leaning Greenpoint. Ask about the radiator.</div>
+          <div class="card qt-card step">
+            <div class="qt">
+              <span class="h">Place</span><span class="h">Rent</span><span class="h">Commute</span>
+              <span>Greenpoint</span><span>$3,400</span><span>12 min</span>
+              <span>Astoria</span><span class="rent"><span class="val" data-set="$2,875">$2,950</span><span class="click c-rent" aria-hidden="true"></span></span><span>25 min</span>
+              <span>Clinton Hill</span><span>$3,150</span><span>18 min</span>
+            </div>
+          </div>
+        </div>
+        <div class="sheet-dim"></div>
+        <div class="sheet" aria-hidden="true">
+          <div class="sheet-head"><span>Table</span><span class="done-btn">Done<span class="click c-done"></span></span></div>
+          <div class="grid">
+            <span class="n"></span><span class="h">Place</span><span class="h">Rent</span><span class="h">Commute</span>
+            <span class="n">1</span><span>Greenpoint</span><span>$3,400</span><span>12 min</span>
+            <span class="n">2</span><span>Astoria</span><span class="focus"><span class="typed" data-type="$2,875">$2,950</span></span><span>25 min</span>
+            <span class="n">3</span><span>Clinton Hill</span><span>$3,150</span><span>18 min</span>
+          </div>
+          <div class="sheet-foot">+ Row&nbsp;&nbsp;&nbsp;+ Column</div>
+        </div>
+        <div class="keys" aria-hidden="true">⌘V</div>
+        </div>
+        <div class="pill" aria-hidden="true">
+          <i data-tool="text"><svg viewBox="0 0 16 16"><path d="M3 4h10M3 8h10M3 12h6"/></svg></i>
+          <i data-tool="table"><svg viewBox="0 0 16 16"><rect x="2.5" y="3" width="11" height="10" rx="1.5"/><path d="M2.5 6.5h11M6.5 6.5v6.5"/></svg></i>
+          <i data-tool="link"><svg viewBox="0 0 16 16"><path d="M7 9.5a3 3 0 0 0 4.2 0l2-2a3 3 0 0 0-4.2-4.2l-.8.8M9 6.5a3 3 0 0 0-4.2 0l-2 2a3 3 0 0 0 4.2 4.2l.8-.8"/></svg></i>
+          <i data-tool="image"><svg viewBox="0 0 16 16"><rect x="2.5" y="3" width="11" height="10" rx="1.5"/><path d="M3 12l3.5-3.5 2.5 2.5 1.5-1.5 2.5 2.5"/></svg></i>
+          <i data-tool="region"><svg viewBox="0 0 16 16"><rect x="2.5" y="3" width="11" height="10" rx="1.5" stroke-dasharray="2 1.6"/></svg></i>
+          <i data-tool="column"><svg viewBox="0 0 16 16"><rect x="3" y="2.5" width="10" height="4.5" rx="1"/><rect x="3" y="9" width="10" height="4.5" rx="1"/></svg></i>
+          <i data-tool="board"><svg viewBox="0 0 16 16"><rect x="2.5" y="4.5" width="8.5" height="9" rx="1.2"/><path d="M5 2.5h7a1.5 1.5 0 0 1 1.5 1.5v7"/></svg></i>
+          <i data-tool="connect"><svg viewBox="0 0 16 16"><path d="M4 12L12 4M7 4h5v5"/></svg></i>
+        </div>
+      </div>
+      <figcaption><span>Paste the cells. Double-click to change one.</span><button type="button" class="replay">Replay</button></figcaption>
+    </figure>
+
+    <p>The table is plain Markdown inside the card, so the file still opens in any text editor. There are no formulas, on purpose.</p>
+
+    <h2>One click selects, a double-click opens</h2>
+
+    <p>Link cards used to open the moment you clicked them, which made them awkward to move. Now they work like files in Finder: click to select, drag to move, double-click to open. To edit a link’s note, click the note of the selected card.</p>
+
+    <figure class="demo" data-demo="open">
+      <div class="board" role="img" aria-label="A link card for an article is clicked once and gets a selection ring, then dragged a little to the right. A double-click on it opens the article in a browser window that grows from the card.">
+        <div class="stage">
+        <div class="crumb">Home / <b>Reading</b></div>
+        <div class="pane on opening">
+          <div class="card text note">Read before Sunday.</div>
+          <div class="card web-link">
+            <span class="cover"></span>
+            <span class="meta"><b>How linen is woven</b><span>example.com</span></span>
+            <span class="click c-card" aria-hidden="true"></span>
+          </div>
+        </div>
+        <div class="browser" aria-hidden="true">
+          <div class="browser-bar"><i></i><i></i><i></i><span>example.com/articles/linen</span></div>
+          <div class="browser-page"><b>How linen is woven</b><span></span><span></span><span class="short"></span></div>
+        </div>
+        </div>
+        <div class="pill" aria-hidden="true">
+          <i data-tool="text"><svg viewBox="0 0 16 16"><path d="M3 4h10M3 8h10M3 12h6"/></svg></i>
+          <i data-tool="table"><svg viewBox="0 0 16 16"><rect x="2.5" y="3" width="11" height="10" rx="1.5"/><path d="M2.5 6.5h11M6.5 6.5v6.5"/></svg></i>
+          <i data-tool="link"><svg viewBox="0 0 16 16"><path d="M7 9.5a3 3 0 0 0 4.2 0l2-2a3 3 0 0 0-4.2-4.2l-.8.8M9 6.5a3 3 0 0 0-4.2 0l-2 2a3 3 0 0 0 4.2 4.2l.8-.8"/></svg></i>
+          <i data-tool="image"><svg viewBox="0 0 16 16"><rect x="2.5" y="3" width="11" height="10" rx="1.5"/><path d="M3 12l3.5-3.5 2.5 2.5 1.5-1.5 2.5 2.5"/></svg></i>
+          <i data-tool="region"><svg viewBox="0 0 16 16"><rect x="2.5" y="3" width="11" height="10" rx="1.5" stroke-dasharray="2 1.6"/></svg></i>
+          <i data-tool="column"><svg viewBox="0 0 16 16"><rect x="3" y="2.5" width="10" height="4.5" rx="1"/><rect x="3" y="9" width="10" height="4.5" rx="1"/></svg></i>
+          <i data-tool="board"><svg viewBox="0 0 16 16"><rect x="2.5" y="4.5" width="8.5" height="9" rx="1.2"/><path d="M5 2.5h7a1.5 1.5 0 0 1 1.5 1.5v7"/></svg></i>
+          <i data-tool="connect"><svg viewBox="0 0 16 16"><path d="M4 12L12 4M7 4h5v5"/></svg></i>
+        </div>
+      </div>
+      <figcaption><span>Click to pick it up. Double-click to read it.</span><button type="button" class="replay">Replay</button></figcaption>
+    </figure>
+
+    <h2>Center Content</h2>
+
+    <p>After a long scroll it’s easy to lose your cards. Press ⇧⌘0 and they come back to the middle of the window, at the zoom you were using. With a card selected, that card comes to the middle instead.</p>
+
+    <figure class="demo" data-demo="center">
+      <div class="board" role="img" aria-label="A board scrolled so far that its cards sit at the bottom-right edge, half out of view. ⇧⌘0 is pressed and the cards are in the middle of the window at once, at the same size.">
+        <div class="stage">
+        <div class="crumb">Home / <b>Trip · Kyoto</b></div>
+        <div class="pane on centering">
+          <div class="cluster">
+            <div class="region"><div class="region-title"><i></i><span>Day 1 · Higashiyama</span></div>
+              <div class="card text">Kiyomizu-dera before 8</div>
+              <div class="card text">Lunch: Omen udon</div>
+            </div>
+            <div class="card text side-note">Ryokan check-in after 3</div>
+          </div>
+        </div>
+        <div class="keys" aria-hidden="true">⇧⌘0</div>
+        </div>
+        <div class="pill" aria-hidden="true">
+          <i data-tool="text"><svg viewBox="0 0 16 16"><path d="M3 4h10M3 8h10M3 12h6"/></svg></i>
+          <i data-tool="table"><svg viewBox="0 0 16 16"><rect x="2.5" y="3" width="11" height="10" rx="1.5"/><path d="M2.5 6.5h11M6.5 6.5v6.5"/></svg></i>
+          <i data-tool="link"><svg viewBox="0 0 16 16"><path d="M7 9.5a3 3 0 0 0 4.2 0l2-2a3 3 0 0 0-4.2-4.2l-.8.8M9 6.5a3 3 0 0 0-4.2 0l-2 2a3 3 0 0 0 4.2 4.2l.8-.8"/></svg></i>
+          <i data-tool="image"><svg viewBox="0 0 16 16"><rect x="2.5" y="3" width="11" height="10" rx="1.5"/><path d="M3 12l3.5-3.5 2.5 2.5 1.5-1.5 2.5 2.5"/></svg></i>
+          <i data-tool="region"><svg viewBox="0 0 16 16"><rect x="2.5" y="3" width="11" height="10" rx="1.5" stroke-dasharray="2 1.6"/></svg></i>
+          <i data-tool="column"><svg viewBox="0 0 16 16"><rect x="3" y="2.5" width="10" height="4.5" rx="1"/><rect x="3" y="9" width="10" height="4.5" rx="1"/></svg></i>
+          <i data-tool="board"><svg viewBox="0 0 16 16"><rect x="2.5" y="4.5" width="8.5" height="9" rx="1.2"/><path d="M5 2.5h7a1.5 1.5 0 0 1 1.5 1.5v7"/></svg></i>
+          <i data-tool="connect"><svg viewBox="0 0 16 16"><path d="M4 12L12 4M7 4h5v5"/></svg></i>
+        </div>
+      </div>
+      <figcaption><span>⇧⌘0 brings everything back.</span><button type="button" class="replay">Replay</button></figcaption>
+    </figure>
+
+    <h2>Also in 1.1</h2>
+
+    <ul class="steps also">
+      <li>Text is larger at every size, there’s a new Extra Large, and region and column names grow with it.</li>
+      <li>YouTube videos open in your browser.</li>
+      <li>Place cards show the whole map, with the name and the area under it.</li>
+      <li>⌘Z undoes a delete again.</li>
+      <li>Pasting an image’s address makes an image card.</li>
+    </ul>
+
+    <aside class="next">
+      <p>Nook updates by replacing the app: your boards stay where they are. <a href="https://github.com/hudsonrivercrossing/Nook.app/releases/tag/v1.1.0">Full release notes</a>.</p>
+      <a class="button" href="https://github.com/hudsonrivercrossing/Nook.app/releases/latest/download/Nook.dmg">Download Nook 1.1 <span aria-hidden="true">↓</span></a>
+    </aside>
+  </article>
+</main>
+
+<footer class="footer wrap">
+  <span>Nook 1.1.0</span>
+  <a href="https://github.com/hudsonrivercrossing/Nook.app">GitHub</a>
+</footer>
+<script src="../../blog.js?v=1.11.0"></script>
+</body>
+</html>
